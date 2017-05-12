@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1494603468 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
+	<iostream>
+	"TripleMatrix.h"
+
+1494578438 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.h
+
+1494576865 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.cpp
+	"Triple.h"
+	<iostream>
+
+1494603683 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triplematrix.cpp
+	"TripleMatrix.h"
+	"Triple.h"
+	<iostream>
+
+1494602824 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triplematrix.h
+	"Triple.h"
+
+1494603909 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.cpp
+	"Triple.h"
+	<iostream>
+
+1494594724 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triple.h
+
