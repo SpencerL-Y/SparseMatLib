@@ -30,5 +30,7 @@ int main()
     mat.insertTripleToMatrix(a);
     mat.displayTable();
     mat.printMatrix();
+    mat.destroyMatrix();
+    mat.displayTable();
     return 0;
 }

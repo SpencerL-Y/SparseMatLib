@@ -1,4 +1,4 @@
-# Sparse Matrix Library For Students
+# Sparse Matrix Library For Demonstration
 - IDE: Codeblocks
 - Status: Under development
 

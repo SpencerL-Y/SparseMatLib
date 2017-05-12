@@ -34,6 +34,7 @@ class Triple
 
         void displayTriple();
         void modifyTriple(unsigned int newRow, unsigned int newCol, int newVal);
+        void setZero();
     protected:
         unsigned int rowNum;
         unsigned int colNum;

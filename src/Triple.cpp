@@ -40,6 +40,12 @@ void Triple::modifyTriple(unsigned int newRow, unsigned int newCol, int newVal)
     rowNum = newRow; colNum = newCol;
     value = newVal;
 }
+
+void Triple::setZero()
+{
+    rowNum = 0; colNum = 0;
+    value = 0;
+}
 //destructor
 Triple::~Triple()
 {

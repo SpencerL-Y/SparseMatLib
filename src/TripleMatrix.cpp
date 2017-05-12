@@ -26,6 +26,10 @@ void TripleMatrix::destroyMatrix()
 {
     matrixWidth = 0; matrixHeight = 0;
     nonZeroNum = 0;
+    for(int i = 0; i < MAXSIZE && data[i].getRowNum()!= 0; i++)
+    {
+       data[i].setZero();
+    }
 }
 
 void TripleMatrix::insertTripleToMatrix(Triple insertTriple)
