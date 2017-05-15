@@ -5,7 +5,7 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 5/12/2017
- * Last Modified: 5/12/2017
+ * Last Modified: 5/14/2017
  -----------------------------------------------------------------------------------------------*/
 
 
@@ -28,13 +28,17 @@ class Triple
          * 0 means the end of the list.
          */
         virtual ~Triple();
-        unsigned int getRowNum();
-        unsigned int getColNum();
-        int getValue();
+        // Methods that do no change to instance: add const qualifier.
+        unsigned int getRowNum() const;
+        unsigned int getColNum() const;
+        int getValue() const;
+        void displayTriple() const;
 
-        void displayTriple();
         void modifyTriple(unsigned int newRow, unsigned int newCol, int newVal);
         void setZero();
+        void operator=(const Triple &T);
+        bool operator==(const Triple &T) const;
+        Triple operator+(const Triple &T);
     protected:
         unsigned int rowNum;
         unsigned int colNum;

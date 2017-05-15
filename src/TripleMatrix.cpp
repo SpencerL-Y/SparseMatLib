@@ -9,12 +9,14 @@ namespace TripleStore
 {
 
 //constructor
+//li
 TripleMatrix::TripleMatrix()
 {
     matrixWidth = 0; matrixHeight = 0;
     nonZeroNum = 0;
     //std::cout<< "TripleMatrix Constructed!" << '\n';
 }
+
 
 void TripleMatrix::createMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
 {
@@ -56,10 +58,17 @@ void TripleMatrix::insertTripleToMatrix(Triple insertTriple)
     }
 
     data[j] = insertTriple;
+    nonZeroUpdate();
 }
 
+void TripleMatrix::nonZeroUpdate()
+{
+    unsigned int i;
+    for(i = 0; i < MAXSIZE && data[i].getRowNum()!=0 ;i++){;}
+    nonZeroNum = i;
+}
 
-void TripleMatrix::displayTable()
+void TripleMatrix::displayTable() const
 {
     /*
      * TODO: Display triple table of a matrix
@@ -72,7 +81,7 @@ void TripleMatrix::displayTable()
     }
 }
 
-void TripleMatrix::printMatrix()
+void TripleMatrix::printMatrix() const
 {
     /*
      * TODO: Print matrix.
@@ -100,7 +109,128 @@ void TripleMatrix::printMatrix()
     }
 
 }
+
+unsigned int TripleMatrix::getMatrixWidth() const
+{
+    return matrixWidth;
+}
+unsigned int TripleMatrix::getMatrixHeight() const
+{
+    return matrixHeight;
+}
+unsigned int TripleMatrix::getMatrixNonZeroNum() const
+{
+    return nonZeroNum;
+}
+
+
+// Operators Overload
+
+void TripleMatrix::operator=(const TripleMatrix &M)
+{
+    matrixWidth = M.getMatrixWidth(); matrixHeight = M.getMatrixHeight();
+    nonZeroNum = M.getMatrixNonZeroNum();
+    int i;
+    for( i = 0; i < MAXSIZE && M.data[i].getRowNum(); i++)
+    {
+        data[i] = M.data[i];
+    }
+    while(data[i].getRowNum()!=0)
+    {
+        data[i].modifyTriple(0,0,0);
+    }
+
+}
+
+bool TripleMatrix::operator==(const TripleMatrix &M) const
+{
+    if((matrixHeight == M.getMatrixHeight()) && (matrixWidth == M.getMatrixWidth())){;}
+    else return false;
+    int i;
+    for(i = 0; i<MAXSIZE && (data[i].getRowNum() || M.data[i].getRowNum()); i++)
+    {
+        if(!(data[i] == M.data[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+    //lixie
+}
+
+TripleMatrix TripleMatrix::operator+(const TripleMatrix &M)
+{
+    if(this->matrixWidth != M.matrixWidth || this->matrixHeight != M.matrixHeight)
+    {
+        std::cout << "Unable To Add" << '\n';
+        return *this;
+    }
+    TripleMatrix Temp; Temp.createMatrix(this->matrixWidth, this->matrixHeight, 0);
+    unsigned int i = 0;  unsigned int j = 0; unsigned int k = 0;
+    while((this->data[i].getRowNum()!=0) && (M.data[j].getRowNum()!=0))
+    {
+        if(this->data[i].getRowNum() < M.data[j].getRowNum())
+        {
+            Temp.data[k] = this->data[i];
+            i++;
+        }
+        else if(this->data[i].getRowNum() == M.data[j].getRowNum())
+        {
+            if(this->data[i].getColNum() < M.data[j].getColNum() )
+            {
+                Temp.data[k] = this->data[i];
+                i++;
+            }
+            else if(this->data[i].getColNum() == M.data[j].getColNum())
+            {
+                Temp.data[k] = this->data[i] + M.data[j];
+                i++; j++;
+            }
+            else if(this->data[i].getColNum() > M.data[j].getColNum())
+            {
+                Temp.data[k] = M.data[j];
+                j++;
+            }
+            else {std::cout << "ERROR" << '\n';}
+        }
+        else if(this->data[i].getRowNum() > M.data[j].getRowNum())
+        {
+            Temp.data[k] = M.data[j];
+            j++;
+        }
+        else {std::cout << "ERROR" << '\n';}
+        k++;
+    }
+    while((this->data[i].getRowNum()!=0) && i<MAXSIZE)
+    {
+        Temp.data[k] = this->data[i];
+        i++; k++;
+    }
+    while(M.data[j].getRowNum()!=0 && j<MAXSIZE)
+    {
+
+        Temp.data[k] = M.data[j];
+        j++; k++;
+    }
+    Temp.nonZeroUpdate();
+    return Temp;
+
+}
+
+TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
+{
+    if(this->getMatrixWidth() != M.getMatrixWidth() || this->getMatrixHeight() != M.getMatrixHeight())
+    {
+        std::cout << "ERROR: Unable to Sub" << '\n';
+        return *this;
+    }
+    TripleMatrix Temp;
+    Temp.createMatrix(this->getMatrixWidth(), this->getMatrixHeight(), 0);
+
+    return *this;
+}
 //destructor
+//xie
 TripleMatrix::~TripleMatrix()
 {
     //std::cout << "TripleMatrix Destructed." << '\n';
