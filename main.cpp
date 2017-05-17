@@ -43,7 +43,7 @@ int main()
     //b.displayTriple();
     a+b;
 
-    b.modifyTriple(3,3,9);
+    b.modifyTriple(3,2,-6);
     what.insertTripleToMatrix(b);
     b.modifyTriple(1,2,19);
     what.insertTripleToMatrix(b);

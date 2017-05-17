@@ -39,6 +39,7 @@ class Triple
         void operator=(const Triple &T);
         bool operator==(const Triple &T) const;
         Triple operator+(const Triple &T);
+        Triple operator-(const Triple &T);
     protected:
         unsigned int rowNum;
         unsigned int colNum;

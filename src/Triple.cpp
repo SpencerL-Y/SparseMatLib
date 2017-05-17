@@ -78,6 +78,10 @@ Triple Triple::operator+(const Triple &T)
     return Temp;
 }
 
+Triple Triple::operator-(const Triple &T)
+{
+
+}
 //destructor
 Triple::~Triple()
 {

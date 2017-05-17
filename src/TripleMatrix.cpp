@@ -172,34 +172,38 @@ TripleMatrix TripleMatrix::operator+(const TripleMatrix &M)
         if(this->data[i].getRowNum() < M.data[j].getRowNum())
         {
             Temp.data[k] = this->data[i];
-            i++;
+            i++; k++;
         }
         else if(this->data[i].getRowNum() == M.data[j].getRowNum())
         {
             if(this->data[i].getColNum() < M.data[j].getColNum() )
             {
                 Temp.data[k] = this->data[i];
-                i++;
+                i++; k++;
             }
             else if(this->data[i].getColNum() == M.data[j].getColNum())
             {
-                Temp.data[k] = this->data[i] + M.data[j];
+                if(this->data[i].getValue()+M.data[j].getValue() != 0)
+                {
+                    Temp.data[k] = this->data[i] + M.data[j];
+                    k++;
+                }
                 i++; j++;
             }
             else if(this->data[i].getColNum() > M.data[j].getColNum())
             {
                 Temp.data[k] = M.data[j];
-                j++;
+                j++; k++;
             }
             else {std::cout << "ERROR" << '\n';}
         }
         else if(this->data[i].getRowNum() > M.data[j].getRowNum())
         {
             Temp.data[k] = M.data[j];
-            j++;
+            j++; k++;
         }
         else {std::cout << "ERROR" << '\n';}
-        k++;
+
     }
     while((this->data[i].getRowNum()!=0) && i<MAXSIZE)
     {
@@ -226,6 +230,7 @@ TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
     }
     TripleMatrix Temp;
     Temp.createMatrix(this->getMatrixWidth(), this->getMatrixHeight(), 0);
+    unsigned int i; unsigned int j; unsigned int k;
 
     return *this;
 }
