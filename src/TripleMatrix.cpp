@@ -221,18 +221,22 @@ TripleMatrix TripleMatrix::operator+(const TripleMatrix &M)
 
 }
 
+TripleMatrix TripleMatrix::getNegMatrix() const
+{
+    TripleMatrix NegMat;
+    NegMat.createMatrix(this->getMatrixWidth(), this->getMatrixHeight(), this->getMatrixNonZeroNum());
+    for(int i = 0; i < MAXSIZE && (this->data[i].getColNum()!=0); i++)
+    {
+        NegMat.data[i].modifyTriple(this->data[i].getRowNum(),data[i].getColNum(),-(this->data[i].getValue()));
+    }
+    return NegMat;
+}
+
 TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
 {
-    if(this->getMatrixWidth() != M.getMatrixWidth() || this->getMatrixHeight() != M.getMatrixHeight())
-    {
-        std::cout << "ERROR: Unable to Sub" << '\n';
-        return *this;
-    }
     TripleMatrix Temp;
-    Temp.createMatrix(this->getMatrixWidth(), this->getMatrixHeight(), 0);
-    unsigned int i; unsigned int j; unsigned int k;
-
-    return *this;
+    Temp = *this+M.getNegMatrix();
+    return Temp;
 }
 //destructor
 //xie

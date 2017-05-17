@@ -30,9 +30,11 @@ class TripleMatrix
         unsigned int getMatrixWidth() const;
         unsigned int getMatrixHeight() const;
         unsigned int getMatrixNonZeroNum() const;
+        TripleMatrix getNegMatrix() const;
         // Instance Modifying
         void createMatrix(unsigned int width, unsigned int height, unsigned int nonZero);
         void insertTripleToMatrix(Triple insertTriple);
+
         void destroyMatrix();
         void nonZeroUpdate();
         // Operators Overload

@@ -49,9 +49,10 @@ int main()
     what.insertTripleToMatrix(b);
     what.printMatrix();
     what.displayTable();
-    mat = mat+what;
+    mat = mat-what;
     mat.displayTable();
     mat.printMatrix();
+    mat.getNegMatrix().printMatrix();
     std::cout << mat.getMatrixNonZeroNum() << '\n';
     //std::cout << (what == mat) << '\n';
     return 0;
