@@ -1,6 +1,8 @@
 #include "TripleMatrix.h"
 #include "Triple.h"
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 
 namespace MatLib
 {
@@ -234,14 +236,62 @@ TripleMatrix TripleMatrix::getNegMatrix() const
 
 TripleMatrix TripleMatrix::operator*(const TripleMatrix &M)
 {
+    TripleMatrix Temp;
+    if(this->getMatrixHeight() != M.getMatrixWidth() || this->getMatrixWidth() == 0 || M.getMatrixHeight() == 0)
+    {
+        std::cout<< "ERROR in Multiplication." << '\n';
+        return *this;
+    }
+    Temp.createMatrix(this->getMatrixWidth(), M.getMatrixHeight(), 0);
+    //array used to store intermediate result
+    int *heightArray;
+    heightArray = (int *)malloc((M.getMatrixHeight()+1)*sizeof(int ));
 
-    return *this;
+    int tableRow = 0;
+    while(this->data[tableRow].getRowNum()!=0)//Traverse the index of Triple matrix
+    {
+        for(unsigned int i = 0; i <= M.getMatrixHeight(); i++)
+        {
+            heightArray[i] = 0;
+        }
+        unsigned int x = this->data[tableRow].getRowNum();
+        while(x == this->data[tableRow].getRowNum())
+        {
+            for(int j = 0; j < MAXSIZE && M.data[j].getRowNum()!=0; j++)
+            {
+                if(this->data[tableRow].getColNum() == M.data[j].getRowNum())
+                {
+                    //Multiply corresponding unit
+                    heightArray[M.data[j].getColNum()] += (this->data[tableRow].getValue()*M.data[j].getValue());
+
+                }
+                else {;}
+            }
+            tableRow++;
+
+        }
+        for(unsigned int k = 1; k <= M.getMatrixHeight(); k++)
+        {
+
+            if(heightArray[k]!= 0)
+            {
+                Triple ins; ins.modifyTriple(x, k, heightArray[k]);
+                Temp.insertTripleToMatrix(ins);
+            }
+        }
+
+    }
+
+    free(heightArray);
+    return Temp;
 }
 
 TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
 {
     TripleMatrix Temp;
     Temp = *this+M.getNegMatrix();
+
+
     return Temp;
 }
 //destructor

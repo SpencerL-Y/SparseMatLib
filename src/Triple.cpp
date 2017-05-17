@@ -1,6 +1,7 @@
 #include "Triple.h"
 #include <iostream>
-
+#include <stdlib.h>
+#include <stdio.h>
 namespace MatLib
 {
 
