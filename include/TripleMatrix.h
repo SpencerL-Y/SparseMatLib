@@ -42,6 +42,8 @@ class TripleMatrix
         bool operator==(const TripleMatrix &M) const;
         TripleMatrix operator+(const TripleMatrix &M);
         TripleMatrix operator-(const TripleMatrix &M);
+        TripleMatrix operator*(const TripleMatrix &M);
+
     protected:
         unsigned int matrixWidth; unsigned int matrixHeight;
         unsigned int nonZeroNum;

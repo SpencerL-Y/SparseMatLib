@@ -232,6 +232,12 @@ TripleMatrix TripleMatrix::getNegMatrix() const
     return NegMat;
 }
 
+TripleMatrix TripleMatrix::operator*(const TripleMatrix &M)
+{
+
+    return *this;
+}
+
 TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
 {
     TripleMatrix Temp;
