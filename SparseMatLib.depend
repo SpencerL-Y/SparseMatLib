@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1495130455 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
+1495134309 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
 	<iostream>
 	"TripleMatrix.h"
+	"CRSMatrix.h"
 
 1494578438 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.h
 
@@ -9,14 +10,14 @@
 	"Triple.h"
 	<iostream>
 
-1495130455 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triplematrix.cpp
+1495132410 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triplematrix.cpp
 	"TripleMatrix.h"
 	"Triple.h"
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 
-1495130455 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triplematrix.h
+1495132542 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triplematrix.h
 	"Triple.h"
 
 1495039164 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.cpp
@@ -26,4 +27,16 @@
 	<stdio.h>
 
 1494838809 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triple.h
+
+1495134621 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\crsmatrix.h
+	"CSRTuple.h"
+
+1495134298 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\csrtuple.h
+
+1495134137 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\crsmatrix.cpp
+	"CRSMatrix.h"
+
+1495134303 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\csrtuple.cpp
+	"CSRTuple.h"
+	<iostream>
 

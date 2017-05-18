@@ -34,9 +34,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/CRSMatrix.h" />
+		<Unit filename="include/CSRTuple.h" />
+		<Unit filename="include/PrintMatrix.h">
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="include/Triple.h" />
 		<Unit filename="include/TripleMatrix.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/CRSMatrix.cpp" />
+		<Unit filename="src/CSRTuple.cpp" />
+		<Unit filename="src/PrintMatrix.cpp">
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="src/Triple.cpp" />
 		<Unit filename="src/TripleMatrix.cpp" />
 		<Extensions>

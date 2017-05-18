@@ -5,7 +5,7 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 5/12/2017
- * Last Modified: 5/14/2017
+ * Last Modified: 5/19/2017
  -----------------------------------------------------------------------------------------------*/
 #ifndef TRIPLEMATRIX_H
 #include "Triple.h"

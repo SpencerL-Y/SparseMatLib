@@ -1,12 +1,13 @@
 #include <iostream>
 #include "TripleMatrix.h"
+#include "CRSMatrix.h"
 //using namespace std;
 
 using namespace MatLib::TripleStore;
 
 int main()
 {
-    Triple a;
+    /*Triple a;
     Triple b;
     TripleMatrix mat1;
     TripleMatrix mat2;
@@ -32,6 +33,12 @@ int main()
     result.createMatrix(3,3,0);
     result = mat1*mat2;
     result.printMatrix();
-    result.displayTable();
+    result.displayTable();*/
+
+    CSRTuple a;
+    a.modifyTuple(1,1);
+    a.printTuple();
+    a.destroyTuple();
+    a.printTuple();
     return 0;
 }

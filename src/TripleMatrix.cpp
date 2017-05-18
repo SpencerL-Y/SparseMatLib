@@ -90,7 +90,7 @@ void TripleMatrix::printMatrix() const
      */
     unsigned int i, j, k, flag;
     k = 0;
-    std::cout << "Matrix Print:" << '\n';
+    std::cout << "TripleMatrix Print:" << '\n';
     for(i = 0; i < matrixWidth; i++)
     {
         for(j = 0; j < matrixHeight; j++)
