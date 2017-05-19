@@ -1,35 +1,35 @@
 #include <iostream>
-#include "MatLib/TripleStore/TripleMatrix.h"
-#include "MatLib/CSRStore/CRSMatrix.h"
+#include "MatLib/TripletStore/TripletMatrix.h"
+#include "MatLib/CSRStore/CSRMatrix.h"
 //using namespace std;
 
-using namespace MatLib::TripleStore;
+using namespace MatLib::TripletStore;
 
 int main()
 {
-    Triple a;
-    Triple b;
-    TripleMatrix mat1;
-    TripleMatrix mat2;
+    Triplet a;
+    Triplet b;
+    TripletMatrix mat1;
+    TripletMatrix mat2;
     mat1.createMatrix(3,3,3);
     mat2.createMatrix(3,3,3);
-    a.modifyTriple(1,1,2);
-    mat1.insertTripleToMatrix(a);
-    a.modifyTriple(1,2,4);
-    mat1.insertTripleToMatrix(a);
-    a.modifyTriple(2,3,1);
-    mat1.insertTripleToMatrix(a);
-    a.modifyTriple(2,1,3);
-    mat2.insertTripleToMatrix(a);
-    a.modifyTriple(1,1,3);
-    mat2.insertTripleToMatrix(a);
-    a.modifyTriple(3,2,1);
-    mat2.insertTripleToMatrix(a);
+    a.modifyTriplet(1,1,2);
+    mat1.insertTripletToMatrix(a);
+    a.modifyTriplet(1,2,4);
+    mat1.insertTripletToMatrix(a);
+    a.modifyTriplet(2,3,1);
+    mat1.insertTripletToMatrix(a);
+    a.modifyTriplet(2,1,3);
+    mat2.insertTripletToMatrix(a);
+    a.modifyTriplet(1,1,3);
+    mat2.insertTripletToMatrix(a);
+    a.modifyTriplet(3,2,1);
+    mat2.insertTripletToMatrix(a);
     mat1.printMatrix();
     mat1.displayTable();
     mat2.printMatrix();
     mat2.displayTable();
-    TripleMatrix result;
+    TripletMatrix result;
     result.createMatrix(3,3,0);
     result = mat1*mat2;
     result.printMatrix();

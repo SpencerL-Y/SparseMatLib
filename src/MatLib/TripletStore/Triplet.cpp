@@ -1,48 +1,48 @@
-#include "MatLib/TripleStore/Triple.h"
+#include "MatLib/TripletStore/Triplet.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+
 namespace MatLib
 {
 
-namespace TripleStore
+namespace TripletStore
 {
 
-//constructor
-Triple::Triple()
+Triplet::Triplet()
 {
     rowNum = 0; colNum = 0;
-    value = 0;
+    value = 0;//ctor
 }
 
-unsigned int Triple::getRowNum() const
+unsigned int Triplet::getRowNum() const
 {
     return rowNum;
 }
 
-unsigned int Triple::getColNum() const
+unsigned int Triplet::getColNum() const
 {
     return colNum;
 }
 
-void Triple::displayTriple() const
+void Triplet::displayTriplet() const
 {
     //std::cout << "Triple Print:" << '\n';
     std::cout << rowNum <<'\t'<< colNum << '\t' << value << '\n';
 }
 
-int Triple::getValue() const
+int Triplet::getValue() const
 {
     return value;
 }
 
-void Triple::modifyTriple(unsigned int newRow, unsigned int newCol, int newVal)
+void Triplet::modifyTriplet(unsigned int newRow, unsigned int newCol, int newVal)
 {
     rowNum = newRow; colNum = newCol;
     value = newVal;
 }
 
-void Triple::setZero()
+void Triplet::setZero()
 {
     rowNum = 0; colNum = 0;
     value = 0;
@@ -50,14 +50,14 @@ void Triple::setZero()
 
 
 //Operators Overload
-void Triple::operator=(const Triple &T)
+void Triplet::operator=(const Triplet &T)
 {
     rowNum = T.getRowNum();
     colNum = T.getColNum();
     value = T.getValue();
 }
 
-bool Triple::operator==(const Triple &T) const
+bool Triplet::operator==(const Triplet &T) const
 {
     if(rowNum == T.getRowNum() && colNum == T.getColNum() && value == T.getValue())
     {
@@ -66,29 +66,29 @@ bool Triple::operator==(const Triple &T) const
     else return false;
 }
 
-Triple Triple::operator+(const Triple &T)
+Triplet Triplet::operator+(const Triplet &T)
 {
     if(this->getRowNum() != T.getRowNum() || this->getColNum() != T.getColNum())
     {
         std::cout << "ERROR: Unable to add Triple" << '\n';
         return *this;
     }
-    Triple Temp;
+    Triplet Temp;
     Temp.rowNum = this->getRowNum(); Temp.colNum = this->getColNum();
     Temp.value = this->getValue() + T.getValue();
     if(Temp.getValue() == 0)
     {
-        Temp.modifyTriple(0,0,0);
+        Temp.modifyTriplet(0,0,0);
     }
     return Temp;
 }
 
-//destructor
-Triple::~Triple()
+
+Triplet::~Triplet()
 {
     //dtor
 }
 
-}//End Namespace Triple
+}
 
-}//End Namespace MatLib
+}

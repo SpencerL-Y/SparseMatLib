@@ -1,6 +1,6 @@
 
 /*-----------------------------------------------------------------------------------------------
- * CLASS NAME: Triple
+ * CLASS NAME: TripletMatrix
  *
  * Author: Clexma
  * Institute: UCAS

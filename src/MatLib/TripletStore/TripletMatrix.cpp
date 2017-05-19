@@ -1,5 +1,6 @@
-#include "MatLib/TripleStore/TripleMatrix.h"
-#include "MatLib/TripleStore/Triple.h"
+
+#include "MatLib/TripletStore/TripletMatrix.h"
+#include "MatLib/TripletStore/Triplet.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
@@ -7,12 +8,12 @@
 namespace MatLib
 {
 
-namespace TripleStore
+namespace TripletStore
 {
 
 //constructor
 //li
-TripleMatrix::TripleMatrix()
+TripletMatrix::TripletMatrix()
 {
     matrixWidth = 0; matrixHeight = 0;
     nonZeroNum = 0;
@@ -20,13 +21,13 @@ TripleMatrix::TripleMatrix()
 }
 
 
-void TripleMatrix::createMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
+void TripletMatrix::createMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
 {
     matrixWidth = width; matrixHeight = height;
     nonZeroNum = nonZero;
 }
 
-void TripleMatrix::destroyMatrix()
+void TripletMatrix::destroyMatrix()
 {
     matrixWidth = 0; matrixHeight = 0;
     nonZeroNum = 0;
@@ -36,17 +37,17 @@ void TripleMatrix::destroyMatrix()
     }
 }
 
-void TripleMatrix::insertTripleToMatrix(Triple insertTriple)
+void TripletMatrix::insertTripletToMatrix(Triplet insertTriplet)
 {
     /* TODO: Insert a Triple into the right place of matrix table
      * if the position is not 0, return ERROR
      */
     int i, j;
     for(i = 0; i < MAXSIZE && data[i].getRowNum()!= 0 &&
-    ((data[i].getRowNum() < insertTriple.getRowNum())|| (data[i].getRowNum() == insertTriple.getRowNum() && data[i].getColNum() <= insertTriple.getColNum()))\
+    ((data[i].getRowNum() < insertTriplet.getRowNum())|| (data[i].getRowNum() == insertTriplet.getRowNum() && data[i].getColNum() <= insertTriplet.getColNum()))\
     ; i++)
     {
-        if((data[i].getRowNum() == insertTriple.getRowNum() && data[i].getColNum() == insertTriple.getColNum()))
+        if((data[i].getRowNum() == insertTriplet.getRowNum() && data[i].getColNum() == insertTriplet.getColNum()))
         {
             std::cout << "Element Exists. Insert Failed."<< '\n';
             return;
@@ -59,18 +60,18 @@ void TripleMatrix::insertTripleToMatrix(Triple insertTriple)
         data[j] = data[j-1];
     }
 
-    data[j] = insertTriple;
+    data[j] = insertTriplet;
     nonZeroUpdate();
 }
 
-void TripleMatrix::nonZeroUpdate()
+void TripletMatrix::nonZeroUpdate()
 {
     unsigned int i;
     for(i = 0; i < MAXSIZE && data[i].getRowNum()!=0 ;i++){;}
     nonZeroNum = i;
 }
 
-void TripleMatrix::displayTable() const
+void TripletMatrix::displayTable() const
 {
     /*
      * TODO: Display triple table of a matrix
@@ -79,11 +80,11 @@ void TripleMatrix::displayTable() const
     std::cout << "Matrix Table Print:" << '\n';
     for(i = 0; i<MAXSIZE && data[i].getRowNum()!= 0; i++)
     {
-        data[i].displayTriple();
+        data[i].displayTriplet();
     }
 }
 
-void TripleMatrix::printMatrix() const
+void TripletMatrix::printMatrix() const
 {
     /*
      * TODO: Print matrix.
@@ -112,15 +113,15 @@ void TripleMatrix::printMatrix() const
 
 }
 
-unsigned int TripleMatrix::getMatrixWidth() const
+unsigned int TripletMatrix::getMatrixWidth() const
 {
     return matrixWidth;
 }
-unsigned int TripleMatrix::getMatrixHeight() const
+unsigned int TripletMatrix::getMatrixHeight() const
 {
     return matrixHeight;
 }
-unsigned int TripleMatrix::getMatrixNonZeroNum() const
+unsigned int TripletMatrix::getMatrixNonZeroNum() const
 {
     return nonZeroNum;
 }
@@ -128,7 +129,7 @@ unsigned int TripleMatrix::getMatrixNonZeroNum() const
 
 // Operators Overload
 
-void TripleMatrix::operator=(const TripleMatrix &M)
+void TripletMatrix::operator=(const TripletMatrix &M)
 {
     matrixWidth = M.getMatrixWidth(); matrixHeight = M.getMatrixHeight();
     nonZeroNum = M.getMatrixNonZeroNum();
@@ -139,12 +140,12 @@ void TripleMatrix::operator=(const TripleMatrix &M)
     }
     while(data[i].getRowNum()!=0)
     {
-        data[i].modifyTriple(0,0,0);
+        data[i].modifyTriplet(0,0,0);
     }
 
 }
 
-bool TripleMatrix::operator==(const TripleMatrix &M) const
+bool TripletMatrix::operator==(const TripletMatrix &M) const
 {
     if((matrixHeight == M.getMatrixHeight()) && (matrixWidth == M.getMatrixWidth())){;}
     else return false;
@@ -160,14 +161,14 @@ bool TripleMatrix::operator==(const TripleMatrix &M) const
     //lixie
 }
 
-TripleMatrix TripleMatrix::operator+(const TripleMatrix &M)
+TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
 {
     if(this->matrixWidth != M.matrixWidth || this->matrixHeight != M.matrixHeight)
     {
         std::cout << "Unable To Add" << '\n';
         return *this;
     }
-    TripleMatrix Temp; Temp.createMatrix(this->matrixWidth, this->matrixHeight, 0);
+    TripletMatrix Temp; Temp.createMatrix(this->matrixWidth, this->matrixHeight, 0);
     unsigned int i = 0;  unsigned int j = 0; unsigned int k = 0;
     while((this->data[i].getRowNum()!=0) && (M.data[j].getRowNum()!=0))
     {
@@ -223,20 +224,20 @@ TripleMatrix TripleMatrix::operator+(const TripleMatrix &M)
 
 }
 
-TripleMatrix TripleMatrix::getNegMatrix() const
+TripletMatrix TripletMatrix::getNegMatrix() const
 {
-    TripleMatrix NegMat;
+    TripletMatrix NegMat;
     NegMat.createMatrix(this->getMatrixWidth(), this->getMatrixHeight(), this->getMatrixNonZeroNum());
     for(int i = 0; i < MAXSIZE && (this->data[i].getColNum()!=0); i++)
     {
-        NegMat.data[i].modifyTriple(this->data[i].getRowNum(),data[i].getColNum(),-(this->data[i].getValue()));
+        NegMat.data[i].modifyTriplet(this->data[i].getRowNum(),data[i].getColNum(),-(this->data[i].getValue()));
     }
     return NegMat;
 }
 
-TripleMatrix TripleMatrix::operator*(const TripleMatrix &M)
+TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
 {
-    TripleMatrix Temp;
+    TripletMatrix Temp;
     if(this->getMatrixHeight() != M.getMatrixWidth() || this->getMatrixWidth() == 0 || M.getMatrixHeight() == 0)
     {
         std::cout<< "ERROR in Multiplication." << '\n';
@@ -275,8 +276,8 @@ TripleMatrix TripleMatrix::operator*(const TripleMatrix &M)
 
             if(heightArray[k]!= 0)
             {
-                Triple ins; ins.modifyTriple(x, k, heightArray[k]);
-                Temp.insertTripleToMatrix(ins);
+                Triplet ins; ins.modifyTriplet(x, k, heightArray[k]);
+                Temp.insertTripletToMatrix(ins);
             }
         }
 
@@ -286,9 +287,9 @@ TripleMatrix TripleMatrix::operator*(const TripleMatrix &M)
     return Temp;
 }
 
-TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
+TripletMatrix TripletMatrix::operator-(const TripletMatrix &M)
 {
-    TripleMatrix Temp;
+    TripletMatrix Temp;
     Temp = *this+M.getNegMatrix();
 
 
@@ -296,7 +297,7 @@ TripleMatrix TripleMatrix::operator-(const TripleMatrix &M)
 }
 //destructor
 //xie
-TripleMatrix::~TripleMatrix()
+TripletMatrix::~TripletMatrix()
 {
     //std::cout << "TripleMatrix Destructed." << '\n';
 }

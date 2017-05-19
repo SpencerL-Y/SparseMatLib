@@ -1,72 +1,73 @@
 # depslib dependency file v1.0
-1495161417 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
+1495196165 source:c:\users\my-pc\desktop\sparsematlib\sparsematlib\main.cpp
 	<iostream>
-	"MatLib/TripleStore/TripleMatrix.h"
-	"MatLib/CSRStore/CRSMatrix.h"
+	"MatLib/TripletStore/TripletMatrix.h"
+	"MatLib/CSRStore/CSRMatrix.h"
 
-1494578438 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.h
-
-1494576865 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.cpp
-	"Triple.h"
-	<iostream>
-
-1495132410 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triplematrix.cpp
-	"TripleMatrix.h"
-	"Triple.h"
+1495192130 source:c:\users\my-pc\desktop\sparsematlib\sparsematlib\src\matlib\tripletstore\triplet.cpp
+	"MatLib/TripletStore/Triplet.h"
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 
-1495132542 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triplematrix.h
-	"Triple.h"
+1495191824 c:\users\my-pc\desktop\sparsematlib\sparsematlib\include\matlib\tripletstore\triplet.h
 
-1495039164 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.cpp
-	"Triple.h"
+1495192948 source:c:\users\my-pc\desktop\sparsematlib\sparsematlib\src\matlib\tripletstore\tripletmatrix.cpp
+	"MatLib/TripletStore/TripletMatrix.h"
+	"MatLib/TripletStore/Triplet.h"
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 
-1494838809 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\triple.h
+1495192617 c:\users\my-pc\desktop\sparsematlib\sparsematlib\include\matlib\tripletstore\tripletmatrix.h
+	"Triplet.h"
 
-1495134621 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\crsmatrix.h
-	"CSRTuple.h"
-
-1495159277 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\csrtuple.h
-
-1495134137 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\crsmatrix.cpp
-	"CRSMatrix.h"
-
-1495159261 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\csrtuple.cpp
-	"CSRTuple.h"
+1495164146 source:c:\users\my-pc\desktop\sparsematlib\sparsematlib\src\matlib\csrstore\csrmatrix.cpp
+	"MatLib/CSRStore/CSRMatrix.h"
 	<iostream>
 
-1495160682 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\csrstore\crsmatrix.cpp
-	"MatLib/CSRStore/CRSMatrix.h"
+1495164123 c:\users\my-pc\desktop\sparsematlib\sparsematlib\include\matlib\csrstore\csrmatrix.h
+	"CSRTuple.h"
 
-1495134621 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\csrstore\crsmatrix.h
+1495159277 c:\users\my-pc\desktop\sparsematlib\sparsematlib\include\matlib\csrstore\csrtuple.h
+
+1495161686 source:c:\users\my-pc\desktop\sparsematlib\sparsematlib\src\matlib\csrstore\csrtuple.cpp
+	"MatLib/CSRStore/CSRTuple.h"
+	<iostream>
+
+1495196165 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
+	<iostream>
+	"MatLib/TripletStore/TripletMatrix.h"
+	"MatLib/CSRStore/CSRMatrix.h"
+
+1495192617 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\tripletstore\tripletmatrix.h
+	"Triplet.h"
+
+1495191824 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\tripletstore\triplet.h
+
+1495164123 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\csrstore\csrmatrix.h
 	"CSRTuple.h"
 
 1495159277 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\csrstore\csrtuple.h
+
+1495164146 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\csrstore\csrmatrix.cpp
+	"MatLib/CSRStore/CSRMatrix.h"
+	<iostream>
 
 1495161686 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\csrstore\csrtuple.cpp
 	"MatLib/CSRStore/CSRTuple.h"
 	<iostream>
 
-1495160706 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\triplestore\triple.cpp
-	"MatLib/TripleStore/Triple.h"
+1495192130 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\tripletstore\triplet.cpp
+	"MatLib/TripletStore/Triplet.h"
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 
-1494838809 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\triplestore\triple.h
-
-1495160725 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\triplestore\triplematrix.cpp
-	"MatLib/TripleStore/TripleMatrix.h"
-	"MatLib/TripleStore/Triple.h"
+1495192948 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\tripletstore\tripletmatrix.cpp
+	"MatLib/TripletStore/TripletMatrix.h"
+	"MatLib/TripletStore/Triplet.h"
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
-
-1495132542 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\triplestore\triplematrix.h
-	"Triple.h"
 

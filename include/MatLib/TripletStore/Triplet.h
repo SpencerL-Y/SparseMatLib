@@ -1,6 +1,6 @@
 
 /*-----------------------------------------------------------------------------------------------
- * CLASS NAME: Triple
+ * CLASS NAME: Triplet
  *
  * Author: Clexma
  * Institute: UCAS
@@ -8,38 +8,38 @@
  * Last Modified: 5/14/2017
  -----------------------------------------------------------------------------------------------*/
 
+#ifndef TRIPLET_H
+#define TRIPLET_H
 
-#ifndef TRIPLE_H
-#define TRIPLE_H
 
 namespace MatLib
 {
 
-namespace TripleStore
+namespace TripletStore
 {
 
 
-class Triple
+class Triplet
 {
     public:
-        Triple();
+        Triplet();
         /* ATTENTION:
          * row number of first row is 1
          * 0 means the end of the list.
          */
-        virtual ~Triple();
+        virtual ~Triplet();
         // Methods that do no change to instance: add const qualifier.
         unsigned int getRowNum() const;
         unsigned int getColNum() const;
         int getValue() const;
-        void displayTriple() const;
+        void displayTriplet() const;
 
-        void modifyTriple(unsigned int newRow, unsigned int newCol, int newVal);
+        void modifyTriplet(unsigned int newRow, unsigned int newCol, int newVal);
         void setZero();
-        void operator=(const Triple &T);
-        bool operator==(const Triple &T) const;
-        Triple operator+(const Triple &T);
-        Triple operator-(const Triple &T);
+        void operator=(const Triplet &T);
+        bool operator==(const Triplet &T) const;
+        Triplet operator+(const Triplet &T);
+        Triplet operator-(const Triplet &T);
     protected:
         unsigned int rowNum;
         unsigned int colNum;
@@ -51,4 +51,4 @@ class Triple
 }
 
 }
-#endif // TRIPLE_H
+#endif // TRIPLET_H
