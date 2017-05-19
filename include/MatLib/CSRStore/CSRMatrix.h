@@ -1,9 +1,9 @@
-#ifndef CRSMATRIX_H
+#ifndef CSRMATRIX_H
 #include "CSRTuple.h"
-#define CRSMATRIX_H
+#define CSRMATRIX_H
 #define MAXSIZE 1000
 /*-----------------------------------------------------------------------------------------------
- * CLASS NAME: CRSMatrix
+ * CLASS NAME: CSRMatrix
  *
  * Author: Clexma
  * Institute: UCAS
@@ -17,28 +17,30 @@ namespace CSRStore
 {
 
 
-class CRSMatrix
+class CSRMatrix
 {
     public:
-        CRSMatrix();
-        virtual ~CRSMatrix();
+        CSRMatrix();
+        virtual ~CSRMatrix();
         void printMatrix() const;
         void displayTable() const;
 
         unsigned int getMatrixWidth() const;
         unsigned int getMatrixHeight() const;
         unsigned int getMatrixNonZeroNum() const;
-        CRSMatrix getNegMat(const CRSMatrix &M) const;
+        CSRMatrix getNegMat(const CSRMatrix &M) const;
         //instance modifying
+        void createCSRMatrix(unsigned int matWid, unsigned int matHgt);
         void insertTupleToMatrix(unsigned int rowNum);
         void destroyMatrix();
         //operator overload
-        void operator=(const CRSMatrix &M);
-        bool operator==(const CRSMatrix &M) const;
-        CRSMatrix operator+(const CRSMatrix &M);
-        CRSMatrix operator-(const CRSMatrix &M);
-        CRSMatrix operator*(const CRSMatrix &M);
+        void operator=(const CSRMatrix &M);
+        bool operator==(const CSRMatrix &M) const;
+        CSRMatrix operator+(const CSRMatrix &M);
+        CSRMatrix operator-(const CSRMatrix &M);
+        CSRMatrix operator*(const CSRMatrix &M);
     protected:
+        unsigned int matrixWidth; unsigned int matrixHeight;
         unsigned int rowPtr[MAXSIZE];
         CSRTuple data[MAXSIZE];
     private:
@@ -47,4 +49,4 @@ class CRSMatrix
 }
 
 }
-#endif // CRSMATRIX_H
+#endif // CSRMATRIX_H

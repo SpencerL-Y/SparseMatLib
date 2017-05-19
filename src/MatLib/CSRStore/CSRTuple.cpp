@@ -62,6 +62,25 @@ CSRTuple CSRTuple::operator+(const CSRTuple &T)
 
 
 }
+
+CSRTuple CSRTuple::operator-(const CSRTuple &M)
+{
+    if(colNum != M.getColNum())
+    {
+        std::cout << "ERROR Sub CSRTuples" << '\n';
+        return *this;
+    }
+    CSRTuple Temp;
+    if(this->getVal() == M.getVal())
+    {
+        Temp.modifyTuple(0,0);
+    }
+    else
+    {
+        Temp.modifyTuple(this->getColNum(), this->getVal() - M.getVal());
+    }
+    return Temp;
+}
 CSRTuple::~CSRTuple()
 {
     //dtor
