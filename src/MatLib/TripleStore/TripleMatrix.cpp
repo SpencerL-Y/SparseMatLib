@@ -1,5 +1,5 @@
-#include "TripleMatrix.h"
-#include "Triple.h"
+#include "MatLib/TripleStore/TripleMatrix.h"
+#include "MatLib/TripleStore/Triple.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,4 +1,4 @@
-#include "CSRTuple.h"
+#include "MatLib/CSRStore/CSRTuple.h"
 #include <iostream>
 CSRTuple::CSRTuple()
 {
@@ -36,7 +36,32 @@ void CSRTuple::operator=(const CSRTuple &T)
     colNum = T.getColNum(); value = T.getVal();
 }
 
+bool CSRTuple::operator==(const CSRTuple &M) const
+{
+    if(colNum == M.getColNum() && value == M.getVal())
+    {
+        return true;
+    }
+    return false;
+}
 
+CSRTuple CSRTuple::operator+(const CSRTuple &T)
+{
+    if(colNum != T.getColNum())
+    {
+        std::cout << "ERROR Adding CSRTuples" << '\n';
+        return *this;
+    }
+    CSRTuple Temp;
+    Temp.modifyTuple(this->getColNum(), this->getVal() + T.getVal());
+    if(Temp.getVal() == 0)
+    {
+        Temp.modifyTuple(0,0);
+    }
+    return Temp;
+
+
+}
 CSRTuple::~CSRTuple()
 {
     //dtor

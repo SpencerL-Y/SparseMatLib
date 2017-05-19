@@ -1,4 +1,4 @@
-#include "Triple.h"
+#include "MatLib/TripleStore/Triple.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
@@ -70,12 +70,16 @@ Triple Triple::operator+(const Triple &T)
 {
     if(this->getRowNum() != T.getRowNum() || this->getColNum() != T.getColNum())
     {
-        std::cout << "ERROR: Unable to add" << '\n';
+        std::cout << "ERROR: Unable to add Triple" << '\n';
         return *this;
     }
     Triple Temp;
     Temp.rowNum = this->getRowNum(); Temp.colNum = this->getColNum();
     Temp.value = this->getValue() + T.getValue();
+    if(Temp.getValue() == 0)
+    {
+        Temp.modifyTriple(0,0,0);
+    }
     return Temp;
 }
 
