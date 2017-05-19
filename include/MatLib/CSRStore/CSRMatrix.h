@@ -31,7 +31,7 @@ class CSRMatrix
         CSRMatrix getNegMat(const CSRMatrix &M) const;
         //instance modifying
         void createCSRMatrix(unsigned int matWid, unsigned int matHgt);
-        void insertTupleToMatrix(unsigned int rowNum);
+        void insertTupleToMatrix(unsigned int rowNum, CSRTuple ins);
         void destroyMatrix();
         //operator overload
         void operator=(const CSRMatrix &M);
