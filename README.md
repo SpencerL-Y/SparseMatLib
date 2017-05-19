@@ -8,12 +8,12 @@
 - Yinan Xu
 
 ## Message Board
-<<<<<<< HEAD
+
 Are you OK?
 
-##What about you
-=======
+## What about you
+
 Everything is gonna be alright
 
 ## Fuck this thing
->>>>>>> d15defef9e9c942711de3017b4321f9273ef9ebc
+
