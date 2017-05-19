@@ -17,7 +17,13 @@ class CSRTuple
         virtual ~CSRTuple();
         void modifyTuple(unsigned int col, int val);
         void destroyTuple();
-        void printTuple();
+        void printTuple() const;
+        unsigned int getColNum() const;
+        int getVal() const;
+        void operator=(const CSRTuple &T);
+        bool operator==(const CSRTuple &T) const;
+        CSRTuple operator+(const CSRTuple &T);
+        CSRTuple operator-(const CSRTuple &T);
     protected:
         unsigned int colNum;
         int value;
