@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1495134309 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
+1495161417 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
 	<iostream>
-	"TripleMatrix.h"
-	"CRSMatrix.h"
+	"MatLib/TripleStore/TripleMatrix.h"
+	"MatLib/CSRStore/CRSMatrix.h"
 
 1494578438 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\triple.h
 
