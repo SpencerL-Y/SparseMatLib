@@ -9,3 +9,5 @@
 
 ## Message Board
 Everything is gonna be alright
+
+## Fuck this thing
