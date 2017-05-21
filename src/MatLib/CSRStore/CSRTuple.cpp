@@ -67,7 +67,7 @@ CSRTuple CSRTuple::operator-(const CSRTuple &M)
 {
     if(colNum != M.getColNum())
     {
-        std::cout << "ERROR Sub CSRTuples" << '\n';
+        std::cout << "ERROR Sub CSRTuples." << '\n';
         return *this;
     }
     CSRTuple Temp;

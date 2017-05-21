@@ -3,11 +3,11 @@
 #include "MatLib/CSRStore/CSRMatrix.h"
 //using namespace std;
 
-using namespace MatLib::TripletStore;
+using namespace MatLib::CSRStore;
 
 int main()
 {
-    Triplet a;
+    /*Triplet a;
     Triplet b;
     TripletMatrix mat1;
     TripletMatrix mat2;
@@ -33,7 +33,7 @@ int main()
     result.createMatrix(3,3,0);
     result = mat1*mat2;
     result.printMatrix();
-    result.displayTable();
+    result.displayTable();*/
 
     /*CSRTuple a;
     a.modifyTuple(1,1);
@@ -41,4 +41,22 @@ int main()
     a.destroyTuple();
     a.printTuple();
     return 0;*/
+    CSRMatrix M;
+    CSRTuple a;
+    M.createCSRMatrix(3,3);
+    a.modifyTuple(1,1);
+    M.insertTupleToMatrix(1,a);
+    M.displayTable();
+    a.modifyTuple(3,3);
+    M.insertTupleToMatrix(1,a);
+    M.displayTable();
+    a.modifyTuple(2,2);
+    M.insertTupleToMatrix(1,a);
+    M.displayTable();
+    a.modifyTuple(2,2);
+    M.insertTupleToMatrix(3,a);
+    M.displayTable();
+    a.modifyTuple(1,12);
+    M.insertTupleToMatrix(2,a);
+    M.displayTable();
 }
