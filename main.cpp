@@ -60,6 +60,6 @@ int main()
     M.insertTupleToMatrix(2,a);
     M.displayTable();
     M.printMatrix();
-    std::cout << (M == M);
+    //std::cout << (M == M);
     return 0;
 }
