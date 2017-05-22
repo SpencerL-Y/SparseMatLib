@@ -30,6 +30,7 @@ void CSRMatrix::displayTable() const
     {
         std::cout << rowPtr[i] << '\t';
     }
+    std::cout << '\n';
 }
 
 
@@ -114,7 +115,26 @@ void CSRMatrix::insertTupleToMatrix(unsigned int rowNum, CSRTuple ins)
 
 void CSRMatrix::printMatrix() const
 {
+    unsigned int i = 1;
+    while(rowPtr[i]!=0)
+    {
+        unsigned int colNow = 1;
+        for(unsigned int j = rowPtr[i];colNow <= matrixWidth; colNow++)
+        {
+            if(colNow == data[j].getColNum())
+            {
+                std::cout << data[j].getVal() << '\t';
+                j++;
+            }
+            else
+            {
+                std::cout << 0 << '\t';
+            }
 
+        }
+        std::cout << '\n';
+        i++;
+    }
 }
 
 CSRMatrix::~CSRMatrix()

@@ -59,4 +59,5 @@ int main()
     a.modifyTuple(1,12);
     M.insertTupleToMatrix(2,a);
     M.displayTable();
+    M.printMatrix();
 }
