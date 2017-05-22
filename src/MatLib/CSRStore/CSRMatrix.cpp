@@ -116,6 +116,7 @@ void CSRMatrix::insertTupleToMatrix(unsigned int rowNum, CSRTuple ins)
 void CSRMatrix::printMatrix() const
 {
     unsigned int i = 1;
+    std::cout << "CSRMatrix Print:" << '\n';
     while(rowPtr[i]!=0)
     {
         unsigned int colNow = 1;
@@ -136,6 +137,50 @@ void CSRMatrix::printMatrix() const
         i++;
     }
 }
+
+
+void CSRMatrix::destroyMatrix()
+{
+    matrixWidth = 0; matrixHeight = 0;
+    for(unsigned int i = 0; i < MAXSIZE; i++)
+    {
+        data[i].modifyTuple(0, 0);
+        rowPtr[i] = 0;
+    }
+}
+
+void CSRMatrix::operator=(const CSRMatrix &M)
+{
+    this->matrixWidth = M.matrixWidth;
+    this->matrixHeight = M.matrixHeight;
+    for(unsigned int i = 1; i < MAXSIZE; i++)
+    {
+        this->rowPtr[i] = M.rowPtr[i];
+        this->data[i] = M.data[i];
+    }
+}
+
+
+bool CSRMatrix::operator==(const CSRMatrix &M) const
+{
+    if(matrixHeight != M.getMatrixHeight() || matrixWidth != M.getMatrixWidth())
+    {
+        std::cout << "Compare Size Error." << '\n';
+        return 0;
+    }
+    else
+    {
+        for(unsigned int i = 0; i < MAXSIZE; i++)
+        {
+            if(!(data[i] == M.data[i]) || rowPtr[i] != M.rowPtr[i])
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+
 
 CSRMatrix::~CSRMatrix()
 {
