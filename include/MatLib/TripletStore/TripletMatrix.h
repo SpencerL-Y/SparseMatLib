@@ -5,14 +5,14 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 5/12/2017
- * Last Modified: 5/19/2017
+ * Last Modified: 6/1/2017
  -----------------------------------------------------------------------------------------------*/
 #ifndef TRIPLETMATRIX_H
 #include "Triplet.h"
 #define TRIPLETMATRIX_H
+using namespace std;
+#include <vector>
 
-
-#define MAXSIZE 1000
 
 namespace MatLib
 {
@@ -33,10 +33,8 @@ class TripletMatrix
         unsigned int getMatrixNonZeroNum() const;
         TripletMatrix getNegMatrix() const;
         // Instance Modifying
-        void createMatrix(unsigned int width, unsigned int height, unsigned int nonZero);
+        void resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero);
         void insertTripletToMatrix(Triplet insertTriplet);
-
-        void destroyMatrix();
         void nonZeroUpdate();
         // Operators Overload
         void operator=(const TripletMatrix &M);
@@ -44,11 +42,11 @@ class TripletMatrix
         TripletMatrix operator+(const TripletMatrix &M);
         TripletMatrix operator-(const TripletMatrix &M);
         TripletMatrix operator*(const TripletMatrix &M);
-
+        vector<Triplet> data;
     protected:
         unsigned int matrixWidth; unsigned int matrixHeight;
         unsigned int nonZeroNum;
-        Triplet data[MAXSIZE];
+
     private:
 };
 

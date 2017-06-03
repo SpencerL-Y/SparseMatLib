@@ -15,6 +15,7 @@
 					<Add option="-g" />
 					<Add directory="include" />
 					<Add directory="include/MatLib/TripletStore" />
+					<Add directory="include/MatLib/ArrayStore" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -26,6 +27,7 @@
 					<Add option="-O2" />
 					<Add directory="include" />
 					<Add directory="include/MatLib/TripletStore" />
+					<Add directory="include/MatLib/ArrayStore" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -36,12 +38,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/MatLib/ArrayStore/Array1d.h" />
 		<Unit filename="include/MatLib/CSRStore/CSRMatrix.h" />
 		<Unit filename="include/MatLib/CSRStore/CSRTuple.h" />
-		<Unit filename="include/MatLib/TripletMatrix.h" />
 		<Unit filename="include/MatLib/TripletStore/Triplet.h" />
 		<Unit filename="include/MatLib/TripletStore/TripletMatrix.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/MatLib/ArrayStore/Array1d.cpp" />
 		<Unit filename="src/MatLib/CSRStore/CSRMatrix.cpp" />
 		<Unit filename="src/MatLib/CSRStore/CSRTuple.cpp" />
 		<Unit filename="src/MatLib/TripletStore/Triplet.cpp" />

@@ -1,10 +1,12 @@
-#include <iostream>
+ #include <iostream>
+
+using namespace std;
+#include <vector>
+
+
 #include "MatLib/TripletStore/TripletMatrix.h"
 #include "MatLib/CSRStore/CSRMatrix.h"
-//using namespace std;
-
-using namespace MatLib::CSRStore;
-
+using namespace MatLib::TripletStore;
 int main()
 {
     /*Triplet a;
@@ -41,7 +43,7 @@ int main()
     a.destroyTuple();
     a.printTuple();
     return 0;*/
-    CSRMatrix M;
+    /*CSRMatrix M;
     CSRTuple a;
     M.createCSRMatrix(3,3);
     a.modifyTuple(1,1);
@@ -61,5 +63,42 @@ int main()
     M.displayTable();
     M.printMatrix();
     //std::cout << (M == M);
+    */
+    TripletMatrix M;
+    cout << M.data[0].getValue();
+    M.resizeMatrix(3,3,3);
+    cout << M.getMatrixHeight() << M.getMatrixWidth() << M.getMatrixNonZeroNum();
+    Triplet a;
+    a.modifyTriplet(1,1,1);
+    M.insertTripletToMatrix(a);
+    a.modifyTriplet(1,2,1);
+    M.insertTripletToMatrix(a);
+    a.modifyTriplet(2,1,1);
+    M.insertTripletToMatrix(a);
+    a.modifyTriplet(1,3,1);
+    M.insertTripletToMatrix(a);
+    M.nonZeroUpdate();
+    std::cout << '\n';
+    M.displayTable();
+    M.printMatrix();
+    TripletMatrix temp;
+    temp = M;
+
+    a.modifyTriplet(2,3,1);
+    temp.insertTripletToMatrix(a);
+    temp.printMatrix();
+    (temp+M).printMatrix();
+    TripletMatrix my = temp.getNegMatrix();
+    my.printMatrix();
+    (my*temp).printMatrix();
+    //std::cout << (temp == M);
+    /*vector<int> vec(4);
+    vec[0] = 1; vec[1] = 2; vec[2] = 3; vec[3] = 4;
+    vec.insert(vec.begin()+1, 10);
+    for(int i =0; vec[i];i++)
+    {
+        cout << vec[i];
+    }
+*/
     return 0;
 }

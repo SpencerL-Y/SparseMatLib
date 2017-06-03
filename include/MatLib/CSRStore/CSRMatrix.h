@@ -10,6 +10,8 @@
  * Created: 5/19/2017
  * Last Modified: 5/22/2017
  -----------------------------------------------------------------------------------------------*/
+ using namespace std;
+#include <vector>
 namespace MatLib
 {
 
@@ -28,7 +30,7 @@ class CSRMatrix
         unsigned int getMatrixWidth() const;
         unsigned int getMatrixHeight() const;
         unsigned int getMatrixNonZeroNum() const;
-        CSRMatrix getNegMat(const CSRMatrix &M) const;
+        CSRMatrix getNegMat() const;
         //instance modifying
         void createCSRMatrix(unsigned int matWid, unsigned int matHgt);
         void insertTupleToMatrix(unsigned int rowNum, CSRTuple ins);

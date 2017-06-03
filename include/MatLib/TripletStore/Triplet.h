@@ -35,7 +35,6 @@ class Triplet
         void displayTriplet() const;
 
         void modifyTriplet(unsigned int newRow, unsigned int newCol, int newVal);
-        void setZero();
         void operator=(const Triplet &T);
         bool operator==(const Triplet &T) const;
         Triplet operator+(const Triplet &T);

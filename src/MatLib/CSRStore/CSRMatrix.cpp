@@ -180,7 +180,185 @@ bool CSRMatrix::operator==(const CSRMatrix &M) const
         return 1;
     }
 }
+//Not Debugged
+CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
+{
+    if(this->getMatrixWidth() != M.getMatrixWidth() || this->getMatrixHeight()!=M.getMatrixHeight())
+    {
+        std::cout << "Unable to Add." << '\n';
+        return *this;
+    }
+    CSRMatrix temp; unsigned int now = 1; unsigned int i = 0;
+    unsigned int first = 0; unsigned int second = 0;
+    for(i = 1; i < this->getMatrixWidth(); i++)
+    {
+        first = this->rowPtr[i]; second = M.rowPtr[i];
+        if(first == 0 && second == 0) {continue;}
+        if(first != 0 && second == 0)
+        {
+            while(first < this->rowPtr[i+1])
+            {
+                temp.data[now] = this->data[first];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                now++; first ++;
+            }
+            continue;
+        }
+        if(first == 0 && second != 0)
+        {
+            while(second < M.rowPtr[i+1])
+            {
+                temp.data[now] = M.data[second];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                now++; second++;
+            }
+            continue;
+        }
+        while(first < this->rowPtr[i+1] && second < M.rowPtr[i+1] && first && second)
+        {
+            if(this->data[first].getColNum() < M.data[second].getColNum())
+            {
+                temp.data[now] = this->data[first];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                first++; now++;
+            }
+            else if(this->data[first].getColNum() == M.data[second].getColNum())
+            {
+                temp.data[now] = this->data[first] + M.data[second];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                first++; second++; now++;
+            }
+            else if(this->data[first].getColNum() > M.data[second].getColNum())
+            {
+                temp.data[now] = M.data[second];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                second++; now++;
+            }
+            else
+            {
+                ;
+            }
 
+        }
+        while(first < this->rowPtr[i+1])
+        {
+            temp.data[now] = this->data[first];
+            now++; first++;
+        }
+        while(second < M.rowPtr[i+1])
+        {
+            temp.data[now] = M.data[second];
+            now++; first++;
+        }
+
+    }
+    if(i == this->getMatrixWidth())
+    {
+        first = this->rowPtr[i]; second = M.rowPtr[i];
+        if(first == 0 && second == 0) {return temp;}
+        if(first != 0 && second == 0)
+        {
+            while(this->data[first].getColNum())
+            {
+                temp.data[now] = this->data[first];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                now++; first ++;
+            }
+            return temp;
+        }
+        if(first == 0 && second != 0)
+        {
+            while(M.data[second].getColNum())
+            {
+                temp.data[now] = M.data[second];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                now++; second++;
+            }
+            return temp;
+        }
+
+        while(this->data[first].getColNum() && M.data[second].getColNum() && first && second)
+        {
+            if(this->data[first].getColNum() < M.data[second].getColNum())
+            {
+                temp.data[now] = this->data[first];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                first++; now++;
+            }
+            else if(this->data[first].getColNum() == M.data[second].getColNum())
+            {
+                temp.data[now] = this->data[first] + M.data[second];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                first++; second++; now++;
+            }
+            else if(this->data[first].getColNum() > M.data[second].getColNum())
+            {
+                temp.data[now] = M.data[second];
+                if(first == this->rowPtr[i] && second == M.rowPtr[i])
+                {
+                    temp.rowPtr[i] = now;
+                }
+                second++; now++;
+            }
+            else
+            {
+                ;
+            }
+
+        }
+        while(this->data[first].getColNum())
+        {
+            temp.data[now] = this->data[first];
+            now++; first++;
+        }
+        while(M.data[second].getColNum())
+        {
+            temp.data[now] = M.data[second];
+            now++; first++;
+        }
+
+    }
+    return temp;
+}
+
+CSRMatrix CSRMatrix::getNegMat() const
+{
+    CSRMatrix temp;
+    temp.matrixWidth = this->matrixWidth;
+    temp.matrixHeight = this->matrixHeight;
+    for(unsigned int i = 1; i < MAXSIZE; i++)
+    {
+        temp.data[i].modifyTuple(this->data[i].getColNum(), -(this->data[i].getVal()));
+    }
+    return temp;
+}
 
 CSRMatrix::~CSRMatrix()
 {

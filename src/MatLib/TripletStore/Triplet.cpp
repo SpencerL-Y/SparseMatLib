@@ -1,6 +1,7 @@
 #include "MatLib/TripletStore/Triplet.h"
 #include <iostream>
 #include <stdlib.h>
+
 #include <stdio.h>
 
 namespace MatLib
@@ -42,11 +43,6 @@ void Triplet::modifyTriplet(unsigned int newRow, unsigned int newCol, int newVal
     value = newVal;
 }
 
-void Triplet::setZero()
-{
-    rowNum = 0; colNum = 0;
-    value = 0;
-}
 
 
 //Operators Overload
@@ -82,6 +78,8 @@ Triplet Triplet::operator+(const Triplet &T)
     }
     return Temp;
 }
+
+
 
 
 Triplet::~Triplet()
