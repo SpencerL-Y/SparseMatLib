@@ -8,7 +8,7 @@ using namespace std;
 using namespace MatLib::TripletStore;
 int main()
 {
-
+//TripletMatrix
     /*
     TripletMatrix M;
     cout << M.data[0].getValue();
@@ -38,7 +38,7 @@ int main()
     my.printMatrix();
     (my*temp).printMatrix();
     */
-    //std::cout << (temp == M);
+//vector
     /*vector<int> vec(4);
     vec[0] = 1; vec[1] = 2; vec[2] = 3; vec[3] = 4;
     vec.insert(vec.begin()+1, 10);
@@ -47,6 +47,8 @@ int main()
         cout << vec[i];
     }
 */
+//RowLinkTriMat
+/*
     RowLinkTriMat M;
     M.resizeMatrix(3,3,3);
     M.displayTable();
@@ -68,5 +70,8 @@ int main()
     RowLinkTriMat multi = M+MM;
     (multi*multi).displayTable();
     (multi*multi).printMatrix();
+    */
+
+
     return 0;
 }

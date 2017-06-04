@@ -111,7 +111,12 @@ RowLinkTriMat RowLinkTriMat::operator+(const RowLinkTriMat &M)
             }
             else if(data[i].getColNum() == M.data[j].getColNum())
             {
-                Temp.data.push_back(data[i] + M.data[j]); i++; j++;
+                Triplet sum = data[i] + M.data[j];
+                if(sum.getValue())
+                {
+                    Temp.data.push_back(sum); i++; j++;
+                }
+                i++; j++;
             }
             else if(data[i].getColNum() > M.data[j].getColNum())
             {
