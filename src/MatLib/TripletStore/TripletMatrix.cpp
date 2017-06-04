@@ -202,9 +202,9 @@ TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
                 Triplet sum = data[i] + M.data[j];
                 if(sum.getValue())
                 {
-                    Temp.data.push_back(sum); i++; j++;
+                    Temp.data.push_back(sum);
                 }
-
+                i++; j++;
             }
             else if(data[i].getColNum() > M.data[j].getColNum())
             {
