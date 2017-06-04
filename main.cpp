@@ -48,7 +48,7 @@ int main()
     }
 */
 //RowLinkTriMat
-/*
+
     RowLinkTriMat M;
     M.resizeMatrix(3,3,3);
     M.displayTable();
@@ -70,7 +70,7 @@ int main()
     RowLinkTriMat multi = M+MM;
     (multi*multi).displayTable();
     (multi*multi).printMatrix();
-    */
+
 
 
     return 0;

@@ -266,8 +266,8 @@ TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
     }
     Temp.resizeMatrix(this->getMatrixWidth(), M.getMatrixHeight(), 0);
     //array used to store intermediate result
-    int *heightArray;
-    heightArray = (int *)malloc((M.getMatrixHeight()+1)*sizeof(int ));
+    vector<int> heightArray(M.getMatrixHeight()+1, 0);
+
 
     for(unsigned int tableRow = 1; tableRow <= this->getMatrixWidth(); tableRow++)// Each row
     {
@@ -301,7 +301,7 @@ TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
     }
 
 
-    free(heightArray);
+
     Temp.nonZeroUpdate();
     return Temp;
 }
