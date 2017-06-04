@@ -1,11 +1,11 @@
 
-#include "MatLib/TripletStore/TripletMatrix.h"
-#include "MatLib/TripletStore/Triplet.h"
+
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 
-
+#include "MatLib/TripletStore/TripletMatrix.h"
+#include "MatLib/TripletStore/Triplet.h"
 
 
 namespace MatLib
@@ -31,7 +31,7 @@ TripletMatrix::TripletMatrix()
 }
 
 
-void TripletMatrix::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
+inline void TripletMatrix::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
 {
     /* TODO: resize Matrix */
     matrixWidth = width; matrixHeight = height;
@@ -193,7 +193,7 @@ TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
 
         if(data[i].getRowNum() == M.data[j].getRowNum())
         {
-            if(data[i].getColNum() < M.data[i].getColNum())
+            if(data[i].getColNum() < M.data[j].getColNum())
             {
                 Temp.data.push_back(data[i]) ; i++;
             }
@@ -227,6 +227,7 @@ TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
         Temp.data.push_back(M.data[j]);
         j++;
     }
+    Temp.nonZeroUpdate();
     return Temp;
 
 }
@@ -249,6 +250,9 @@ TripletMatrix TripletMatrix::getNegMatrix() const
 
 TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
 {
+    /* TODO: Multiply
+     * Debugged
+     */
     TripletMatrix Temp;
     if(this->getMatrixHeight() != M.getMatrixWidth() || this->getMatrixWidth() == 0 || M.getMatrixHeight() == 0)
     {
@@ -293,6 +297,7 @@ TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
 
 
     free(heightArray);
+    Temp.nonZeroUpdate();
     return Temp;
 }
 
@@ -300,8 +305,6 @@ TripletMatrix TripletMatrix::operator-(const TripletMatrix &M)
 {
     TripletMatrix Temp;
     Temp = *this+M.getNegMatrix();
-
-
     return Temp;
 }
 //destructor

@@ -1,5 +1,6 @@
-#include "MatLib/CSRStore/CSRTuple.h"
+
 #include <iostream>
+#include "MatLib/CSRStore/CSRTuple.h"
 CSRTuple::CSRTuple()
 {
     //ctor

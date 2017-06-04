@@ -5,7 +5,7 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 5/12/2017
- * Last Modified: 5/14/2017
+ * Last Modified: 6/3/2017
  -----------------------------------------------------------------------------------------------*/
 
 #ifndef TRIPLET_H

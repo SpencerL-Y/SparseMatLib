@@ -1,5 +1,6 @@
-#include "MatLib/CSRStore/CSRMatrix.h"
 #include <iostream>
+
+#include "MatLib/CSRStore/CSRMatrix.h"
 
 namespace MatLib
 {

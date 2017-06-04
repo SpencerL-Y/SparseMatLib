@@ -5,7 +5,7 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 5/12/2017
- * Last Modified: 6/1/2017
+ * Last Modified: 6/3/2017
  -----------------------------------------------------------------------------------------------*/
 #ifndef TRIPLETMATRIX_H
 #include "Triplet.h"

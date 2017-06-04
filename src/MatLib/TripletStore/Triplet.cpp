@@ -1,9 +1,9 @@
-#include "MatLib/TripletStore/Triplet.h"
+
 #include <iostream>
 #include <stdlib.h>
-
 #include <stdio.h>
 
+#include "MatLib/TripletStore/Triplet.h"
 namespace MatLib
 {
 

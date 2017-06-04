@@ -41,12 +41,14 @@
 		<Unit filename="include/MatLib/ArrayStore/Array1d.h" />
 		<Unit filename="include/MatLib/CSRStore/CSRMatrix.h" />
 		<Unit filename="include/MatLib/CSRStore/CSRTuple.h" />
+		<Unit filename="include/MatLib/TripletStore/RowLinkTriMat.h" />
 		<Unit filename="include/MatLib/TripletStore/Triplet.h" />
 		<Unit filename="include/MatLib/TripletStore/TripletMatrix.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/MatLib/ArrayStore/Array1d.cpp" />
 		<Unit filename="src/MatLib/CSRStore/CSRMatrix.cpp" />
 		<Unit filename="src/MatLib/CSRStore/CSRTuple.cpp" />
+		<Unit filename="src/MatLib/TripletStore/RowLinkTriMat.cpp" />
 		<Unit filename="src/MatLib/TripletStore/Triplet.cpp" />
 		<Unit filename="src/MatLib/TripletStore/TripletMatrix.cpp" />
 		<Extensions>
