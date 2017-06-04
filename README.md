@@ -7,10 +7,22 @@
 - Yuan-Hang Zhang
 - Yinan Xu
 
+
+## Architecture
+
+### MatLib
+#### ArrayStore
+ In schedule
+#### CSRStore
+ In schedule
+#### TripletStore
+##### TripletMatrix (No Transpose) 
+ finished
+##### RowLinkTriMat : public TripletMatrix (No Transpose)
+ finished
+#### CrossList
+ Under Development
+
 ## Message Board
 
-
-Everything is gonna be alright
-
-No, it's not.
 
