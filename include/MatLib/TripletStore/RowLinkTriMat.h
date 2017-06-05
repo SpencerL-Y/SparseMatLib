@@ -1,3 +1,11 @@
+/*-----------------------------------------------------------------------------------------------
+ * CLASS NAME: RowLinkTriMat
+ *
+ * Author: Clexma
+ * Institute: UCAS
+ * Created: 6/4/2017
+ * Last Modified: 6/6/2017
+ -----------------------------------------------------------------------------------------------*/
 #ifndef ROWLINKTRIMAT_H
 #define ROWLINKTRIMAT_H
 

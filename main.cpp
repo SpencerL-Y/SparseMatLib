@@ -4,12 +4,13 @@ using namespace std;
 #include <vector>
 
 
-#include <MatLib/ArrayStore/Array1d.h>
-using namespace MatLib::ArrayStore;
+//#include <MatLib/ArrayStore/Array1d.h>
+#include <MatLib/TripletStore/TripletMatrix.h>
+using namespace MatLib::TripletStore;
 int main()
 {
 //TripletMatrix
-    /*
+
     TripletMatrix M;
     cout << M.data[0].getValue();
     M.resizeMatrix(3,3,3);
@@ -37,7 +38,7 @@ int main()
     TripletMatrix my = temp.getNegMatrix();
     my.printMatrix();
     (my*temp).printMatrix();
-    */
+    (my*temp).transposeMatrix().printMatrix();
 //vector
 /*
     vector<int> vec(4);
@@ -74,6 +75,7 @@ int main()
     (multi*multi).printMatrix();
 */
 //Array1d
+/*
     Array1d ary1(6);
     Array1d ary2(6);
     for(unsigned int i = 1; i <= ary1.getSize(); i++)
@@ -84,5 +86,7 @@ int main()
     ary1.arrayPrint();
     ary2.arrayPrint();
     std::cout << ary1.dotProduct(ary2);
+*/
+
     return 0;
 }

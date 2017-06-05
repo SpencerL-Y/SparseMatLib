@@ -253,6 +253,24 @@ TripletMatrix TripletMatrix::getNegMatrix() const
     return NegMat;
 }
 
+TripletMatrix TripletMatrix::transposeMatrix() const
+{
+    /* TODO: transpose
+     * Debugged
+     */
+    TripletMatrix Temp;
+    Temp.resizeMatrix(this->matrixWidth, this->matrixHeight, this->nonZeroNum);
+    Triplet ins;
+    for(unsigned int i = 1; i < data.size(); i++)
+    {
+        ins.modifyTriplet(data[i].getColNum(), data[i].getRowNum(), data[i].getValue());
+        Temp.insertTripletToMatrix(ins);
+    }
+    return Temp;
+
+}
+
+
 TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
 {
     /* TODO: Multiply
