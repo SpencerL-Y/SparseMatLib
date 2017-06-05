@@ -4,8 +4,8 @@ using namespace std;
 #include <vector>
 
 
-#include <MatLib/TripletStore/RowLinkTriMat.h>
-using namespace MatLib::TripletStore;
+#include <MatLib/ArrayStore/Array1d.h>
+using namespace MatLib::ArrayStore;
 int main()
 {
 //TripletMatrix
@@ -39,16 +39,18 @@ int main()
     (my*temp).printMatrix();
     */
 //vector
-    /*vector<int> vec(4);
+/*
+    vector<int> vec(4);
     vec[0] = 1; vec[1] = 2; vec[2] = 3; vec[3] = 4;
     vec.insert(vec.begin()+1, 10);
-    for(int i =0; vec[i];i++)
+    vec.resize(3,0);
+    for(int i =0; i< vec.size();i++)
     {
         cout << vec[i];
     }
 */
 //RowLinkTriMat
-
+/*
     RowLinkTriMat M;
     M.resizeMatrix(3,3,3);
     M.displayTable();
@@ -67,11 +69,20 @@ int main()
     MM.printMatrix();
     (M+MM).displayTable();
     (M+MM).printMatrix();
-    RowLinkTriMat multi = M+MM;
+    RowLinkTriMat mult  i = M+MM;
     (multi*multi).displayTable();
     (multi*multi).printMatrix();
-
-
-
+*/
+//Array1d
+    Array1d ary1(6);
+    Array1d ary2(6);
+    for(unsigned int i = 1; i <= ary1.getSize(); i++)
+    {
+        ary1.elemAssign(i, 2*i);
+        ary2.elemAssign(i, i+2);
+    }
+    ary1.arrayPrint();
+    ary2.arrayPrint();
+    std::cout << ary1.dotProduct(ary2);
     return 0;
 }
