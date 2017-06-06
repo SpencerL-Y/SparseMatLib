@@ -246,7 +246,7 @@ TripletMatrix TripletMatrix::getNegMatrix() const
     NegMat.resizeMatrix(this->getMatrixWidth(), this->getMatrixHeight(), this->getMatrixNonZeroNum());
     for(unsigned int i = 1; i < data.size(); i++)
     {
-        cout<<i;
+        std::cout<<i;
         now.modifyTriplet(data[i].getRowNum(),data[i].getColNum(), -(data[i].getValue()));
         NegMat.data.push_back(now);
     }
@@ -284,7 +284,7 @@ TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
     }
     Temp.resizeMatrix(this->getMatrixWidth(), M.getMatrixHeight(), 0);
     //array used to store intermediate result
-    vector<int> heightArray(M.getMatrixHeight()+1, 0);
+    std::vector<int> heightArray(M.getMatrixHeight()+1, 0);
 
 
     for(unsigned int tableRow = 1; tableRow <= this->getMatrixWidth(); tableRow++)// Each row

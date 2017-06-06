@@ -10,7 +10,7 @@
 #ifndef TRIPLETMATRIX_H
 #include "Triplet.h"
 #define TRIPLETMATRIX_H
-using namespace std;
+
 #include <vector>
 
 
@@ -43,7 +43,7 @@ class TripletMatrix
         TripletMatrix operator+(const TripletMatrix &M);
         TripletMatrix operator-(const TripletMatrix &M);
         TripletMatrix operator*(const TripletMatrix &M);
-        vector<Triplet> data;
+        std::vector<Triplet> data;
     protected:
         unsigned int matrixWidth; unsigned int matrixHeight;
         unsigned int nonZeroNum;

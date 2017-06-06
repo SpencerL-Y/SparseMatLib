@@ -9,7 +9,7 @@
 #ifndef ARRAY1D_H
 #define ARRAY1D_H
 #include <vector>
-using namespace std;
+
 
 namespace MatLib
 {
@@ -35,7 +35,7 @@ class Array1d
 
     protected:
         unsigned int arraySize;
-        vector<int> vec;
+        std::vector<int> vec;
 
     private:
 };

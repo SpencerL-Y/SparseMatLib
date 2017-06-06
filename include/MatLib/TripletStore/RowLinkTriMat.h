@@ -10,7 +10,6 @@
 #define ROWLINKTRIMAT_H
 
 #include <MatLib/TripletStore/TripletMatrix.h>
-using namespace std;
 
 
 namespace MatLib
@@ -37,7 +36,7 @@ class RowLinkTriMat : public TripletMatrix
 
 
     protected:
-        vector<unsigned int> rowPtr;
+        std::vector<unsigned int> rowPtr;
     private:
 };
 
