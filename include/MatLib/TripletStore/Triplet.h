@@ -10,6 +10,7 @@
 
 #ifndef TRIPLET_H
 #define TRIPLET_H
+#include <iostream>
 
 
 namespace MatLib

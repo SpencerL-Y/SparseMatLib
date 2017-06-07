@@ -8,10 +8,11 @@
  * Last Modified: 6/3/2017
  -----------------------------------------------------------------------------------------------*/
 #ifndef TRIPLETMATRIX_H
-#include "Triplet.h"
 #define TRIPLETMATRIX_H
-
+#include <iostream>
 #include <vector>
+#include "MatLib/TripletStore/Triplet.h"
+
 
 
 namespace MatLib

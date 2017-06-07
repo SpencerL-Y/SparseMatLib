@@ -8,7 +8,8 @@
  -----------------------------------------------------------------------------------------------*/
 #ifndef ROWLINKTRIMAT_H
 #define ROWLINKTRIMAT_H
-
+#include <iostream>
+#include <vector>
 #include <MatLib/TripletStore/TripletMatrix.h>
 
 

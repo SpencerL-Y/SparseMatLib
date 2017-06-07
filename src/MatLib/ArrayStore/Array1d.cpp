@@ -1,5 +1,5 @@
 #include "MatLib/ArrayStore/Array1d.h"
-#include <iostream>
+
 
 namespace MatLib
 {

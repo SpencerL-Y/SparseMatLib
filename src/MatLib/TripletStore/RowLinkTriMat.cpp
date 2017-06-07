@@ -1,6 +1,4 @@
-#include <iostream>
-#include <stdlib.h>
-#include <vector>
+
 #include "MatLib/TripletStore/RowLinkTriMat.h"
 
 
@@ -170,8 +168,8 @@ RowLinkTriMat RowLinkTriMat::operator*(const RowLinkTriMat &M)
     }
     Temp.resizeMatrix(this->getMatrixWidth(), M.getMatrixHeight(), 0);
     //array used to store intermediate result
-    int *heightArray;
-    heightArray = (int *)malloc((M.getMatrixHeight()+1)*sizeof(int ));
+    std::vector<int> heightArray(M.getMatrixHeight()+1, 0);
+
 
     for(unsigned int tableRow = 1; tableRow <= this->getMatrixWidth(); tableRow++)// Each row
     {
@@ -207,7 +205,6 @@ RowLinkTriMat RowLinkTriMat::operator*(const RowLinkTriMat &M)
     }
 
 
-    free(heightArray);
     for(unsigned int i = 0; i < Temp.data.size() - 1; i++)
     {
 

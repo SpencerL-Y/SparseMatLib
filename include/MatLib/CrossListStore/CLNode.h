@@ -10,6 +10,7 @@
 #ifndef CLNODE_H
 #define CLNODE_H
 #include <iostream>
+#include <vector>
 #include <memory>
 namespace MatLib
 {

@@ -8,6 +8,7 @@
  -----------------------------------------------------------------------------------------------*/
 #ifndef ARRAY1D_H
 #define ARRAY1D_H
+#include <iostream>
 #include <vector>
 
 

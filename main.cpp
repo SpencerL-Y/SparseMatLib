@@ -3,11 +3,11 @@
 using namespace std;
 #include <vector>
 #include <memory>
-
-//#include <MatLib/ArrayStore/Array1d.h>
+#include <MatLib/TripletStore/RowLinkTriMat.h>
+#include <MatLib/ArrayStore/Array1d.h>
 #include <MatLib/TripletStore/TripletMatrix.h>
 #include <MatLib/CrossListStore/CLNode.h>
-using namespace MatLib::CrossListStore;
+using namespace MatLib::TripletStore;
 int main()
 {
 //TripletMatrix
@@ -72,7 +72,7 @@ int main()
     MM.printMatrix();
     (M+MM).displayTable();
     (M+MM).printMatrix();
-    RowLinkTriMat mult  i = M+MM;
+    RowLinkTriMat multi = M+MM;
     (multi*multi).displayTable();
     (multi*multi).printMatrix();
 */
@@ -91,11 +91,11 @@ int main()
 */
 
 //CLNode
-    CLNode N1(1,1,1);
+    /*CLNode N1(1,1,1);
     CLNode N2(1,1,1);
     shared_ptr<CLNode> temp;
 
-    /*
+
     N1.createDownNode(1,2,1);
     N1.printDownList();
     temp = N1.down;
@@ -105,7 +105,7 @@ int main()
     N1.printDownList();
     N1.modifyNode(3,3,3);
     N1.printDownList();
-    */
+
 
     N2.createRightNode(1,2,1);
     N2.printRightList();
@@ -114,7 +114,7 @@ int main()
     N2.printRightList();
     N2.deleteRightNode();
     N2.printRightList();
-
+    */
 
     return 0;
 }
