@@ -95,10 +95,26 @@ int main()
     CLNode N2(1,1,1);
     shared_ptr<CLNode> temp;
 
+    /*
     N1.createDownNode(1,2,1);
     N1.printDownList();
-    temp = N1.down->down;
+    temp = N1.down;
     temp->createDownNode(1,3,2);
+    N1.printDownList();
+    N1.deleteDownNode();
+    N1.printDownList();
+    N1.modifyNode(3,3,3);
+    N1.printDownList();
+    */
+
+    N2.createRightNode(1,2,1);
+    N2.printRightList();
+    temp = N2.right;
+    temp->createRightNode(1,3,2);
+    N2.printRightList();
+    N2.deleteRightNode();
+    N2.printRightList();
+
 
     return 0;
 }
