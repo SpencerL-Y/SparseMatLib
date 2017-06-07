@@ -1,5 +1,7 @@
 # Sparse Matrix Library For Demonstration
-- IDE: Codeblocks
+- Environment: Win10 15063.296
+- Compiler: g++ [-stl=c++11]
+- IDE: Codeblocks 16.01
 - Status: Under development
 
 ## Current members:

@@ -89,9 +89,9 @@ int main()
     ary2.arrayPrint();
     std::cout << ary1.dotProduct(ary2);
 */
-
 //CLNode
-    /*CLNode N1(1,1,1);
+/*
+    CLNode N1(1,1,1);
     CLNode N2(1,1,1);
     shared_ptr<CLNode> temp;
 
@@ -115,6 +115,10 @@ int main()
     N2.deleteRightNode();
     N2.printRightList();
     */
+//shared_ptr
+    int a = 100;
+
+
 
     return 0;
 }
