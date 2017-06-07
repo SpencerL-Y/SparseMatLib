@@ -2,15 +2,16 @@
 
 using namespace std;
 #include <vector>
-
+#include <memory>
 
 //#include <MatLib/ArrayStore/Array1d.h>
 #include <MatLib/TripletStore/TripletMatrix.h>
-using namespace MatLib::TripletStore;
+#include <MatLib/CrossListStore/CLNode.h>
+using namespace MatLib::CrossListStore;
 int main()
 {
 //TripletMatrix
-
+/*
     TripletMatrix M;
     cout << M.data[0].getValue();
     M.resizeMatrix(3,3,3);
@@ -39,6 +40,7 @@ int main()
     my.printMatrix();
     (my*temp).printMatrix();
     (my*temp).transposeMatrix().printMatrix();
+    */
 //vector
 /*
     vector<int> vec(4);
@@ -87,6 +89,16 @@ int main()
     ary2.arrayPrint();
     std::cout << ary1.dotProduct(ary2);
 */
+
+//CLNode
+    CLNode N1(1,1,1);
+    CLNode N2(1,1,1);
+    shared_ptr<CLNode> temp;
+
+    N1.createDownNode(1,2,1);
+    N1.printDownList();
+    temp = N1.down->down;
+    temp->createDownNode(1,3,2);
 
     return 0;
 }
