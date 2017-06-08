@@ -7,7 +7,8 @@ using namespace std;
 #include <MatLib/ArrayStore/Array1d.h>
 #include <MatLib/TripletStore/TripletMatrix.h>
 #include <MatLib/CrossListStore/CLNode.h>
-using namespace MatLib::TripletStore;
+#include <MatLib/CrossListStore/CLMatrix.h>
+using namespace MatLib::CrossListStore;
 int main()
 {
 //TripletMatrix
@@ -115,9 +116,13 @@ int main()
     N2.deleteRightNode();
     N2.printRightList();
     */
-//shared_ptr
-    int a = 100;
-
+//CLMatrix
+    CLMatrix M(3,3,3);
+    for(unsigned int i = 0; i < 4; i++)
+    {
+        std::cout << (M.rowHead[i].getColNum()) << '\t' << (M.colHead[i].getRowNum()) << '\n';
+    }
+    std::cout << M.getWidth() << '\t' << M.getHeight() << '\t' << M.getNonZero() << '\n';
 
 
     return 0;

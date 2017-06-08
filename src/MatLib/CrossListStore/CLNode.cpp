@@ -93,13 +93,25 @@ void CLNode::printDownList() const
 }
 
 
+unsigned int CLNode::getRowNum() const
+{
+    return this->rowNum;
+}
+unsigned int CLNode::getColNum() const
+{
+    return this->colNum;
+}
+int CLNode::getVal() const
+{
+    return this->value;
+}
 
 
 
 
 CLNode::~CLNode()
 {
-    std::cout << "CLNode destructed" << '\n';
+    //std::cout << "CLNode destructed" << '\n';
     //dtor
 }
 

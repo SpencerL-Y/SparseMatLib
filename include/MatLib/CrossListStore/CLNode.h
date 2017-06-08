@@ -4,7 +4,7 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 6/7/2017
- * Last Modified: 6/7/2017
+ * Last Modified: 6/8/2017
  -----------------------------------------------------------------------------------------------*/
 
 #ifndef CLNODE_H
@@ -38,6 +38,9 @@ class CLNode
         void printRightList() const;
         void printDownList() const;
 
+        unsigned int getRowNum() const;
+        unsigned int getColNum() const;
+        int getVal() const;
 
         void operator=(const CLNode &N);
         std::shared_ptr<CLNode> down;
