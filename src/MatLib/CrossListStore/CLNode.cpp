@@ -98,6 +98,7 @@ void CLNode::printDownList() const
 
 void CLNode::printRightListVal(unsigned int hgt) const
 {
+    /* Debugged */
     std::shared_ptr<CLNode> temp = this->right;
     for(unsigned int i = 1; i <= hgt; i++)
     {
@@ -111,6 +112,7 @@ void CLNode::printRightListVal(unsigned int hgt) const
             std::cout << 0 << '\t';
         }
     }
+    std::cout << '\n';
     return;
 }
 

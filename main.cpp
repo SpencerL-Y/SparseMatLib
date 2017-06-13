@@ -91,7 +91,7 @@ int main()
     std::cout << ary1.dotProduct(ary2);
 */
 //CLNode
-
+/*
     CLNode N1(1,1,1);
     CLNode N2(1,1,1);
     shared_ptr<CLNode> temp;
@@ -124,9 +124,9 @@ int main()
 
     std::shared_ptr<CLNode> head; head = std::make_shared<CLNode>(1,0,0);
     head->createRightNode(1,3,2); head->right->createRightNode(1,5,2);
-    head->printRightListVal(6);
+    head->printRightListVal(6);*/
 //CLMatrix
-/*
+
     CLMatrix M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
@@ -135,7 +135,21 @@ int main()
     std::cout << M.getWidth() << '\t' << M.getHeight() << '\t' << M.getNonZero() << '\n';
     CLNode ins(1,1,1);
     M.insertNode(ins);
-*/
+    ins.modifyNode(1,2,1);
+    M.insertNode(ins);
+    ins.modifyNode(2,1,1);
+    M.insertNode(ins);
+    ins.modifyNode(2,3,1);
+    M.insertNode(ins);
+    M.printMatrix();
+    CLMatrix Mprime = M;
+
+    ins.modifyNode(3,3,1);
+    Mprime.insertNode(ins);
+    Mprime.printMatrix();
+    Mprime.rowHead[3]->right->printNode();
+    M.rowHead[3]->right->printNode();
+    std::cout << (M == Mprime);
     return 0;
 }
 
