@@ -18,7 +18,7 @@ class CLMatrix
 
         void resizeMatrix(unsigned int wid, unsigned int hgt, unsigned int nonZero);
         void insertNode(CLNode ins);
-
+        void printMatrix() const;
         CLMatrix operator=(const CLMatrix &M);
         bool operator==(const CLMatrix &M) const;
         CLMatrix operator+(const CLMatrix &M);

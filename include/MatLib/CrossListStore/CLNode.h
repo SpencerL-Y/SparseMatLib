@@ -37,6 +37,7 @@ class CLNode
         void printNode() const;
         void printRightList() const;
         void printDownList() const;
+        void printRightListVal(unsigned int hgt) const;
 
         unsigned int getRowNum() const;
         unsigned int getColNum() const;

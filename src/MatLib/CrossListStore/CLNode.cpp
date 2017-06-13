@@ -96,6 +96,24 @@ void CLNode::printDownList() const
     }
 }
 
+void CLNode::printRightListVal(unsigned int hgt) const
+{
+    std::shared_ptr<CLNode> temp = this->right;
+    for(unsigned int i = 1; i <= hgt; i++)
+    {
+        if(temp && temp->getColNum() == i)
+        {
+            std::cout << temp->getVal() << '\t';
+            temp = temp->right;
+        }
+        else
+        {
+            std::cout << 0 << '\t';
+        }
+    }
+    return;
+}
+
 
 unsigned int CLNode::getRowNum() const
 {

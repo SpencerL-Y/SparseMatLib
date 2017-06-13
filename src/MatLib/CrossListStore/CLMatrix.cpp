@@ -50,30 +50,34 @@ void CLMatrix::insertNode(CLNode ins)
         return;
     }
     std::shared_ptr<CLNode> temp = this->rowHead[ins.getRowNum()];
-    while(temp && temp->right && temp->right->getColNum() < ins.getColNum())
+    while(temp->right && temp->right->getColNum() < ins.getColNum())
     {
         temp = temp->right;
     }
-    if(temp && temp->right->getColNum() == ins.getColNum())
+    if(temp->right)
     {
-        std::cout << "Element existed, insert failed" << '\n';
-        return;
-    }
-    else
-    {
-        temp->createRightNode(ins.getRowNum(), ins.getColNum(), ins.getVal());
-        std::shared_ptr<CLNode> ptrToNode = temp->right;
-        temp = this->colHead[ins.getColNum()];
-        while(temp && temp->down && temp->down->getRowNum()<ins.getRowNum())
+        if(temp->right->getColNum() == ins.getColNum())
         {
-            temp = temp->down;
+            std::cout << "Element existed, insert failed" << '\n';
+            return;
         }
-        std::shared_ptr<CLNode> exchange = temp->down;
-        temp->down = ptrToNode;
-        temp->down->down = exchange;
-        return ;
     }
+
+    temp->createRightNode(ins.getRowNum(), ins.getColNum(), ins.getVal());
+    std::shared_ptr<CLNode> ptrToNode = temp->right;
+    temp = this->colHead[ins.getColNum()];
+    while(temp->down && temp->down->getRowNum()<ins.getRowNum())
+    {
+        temp = temp->down;
+    }
+    std::shared_ptr<CLNode> exchange = temp->down;
+    temp->down = ptrToNode;
+    temp->down->down = exchange;
+    return ;
 }
+
+
+
 
 unsigned int CLMatrix::getWidth() const
 {
