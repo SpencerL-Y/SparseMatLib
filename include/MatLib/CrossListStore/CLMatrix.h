@@ -27,8 +27,8 @@ class CLMatrix
         unsigned int getWidth() const;
         unsigned int getHeight() const;
         unsigned int getNonZero() const;
-        std::vector<CLNode> rowHead;
-        std::vector<CLNode> colHead;
+        std::vector<std::shared_ptr<CLNode>> rowHead;
+        std::vector<std::shared_ptr<CLNode>> colHead;
     protected:
         unsigned int width; unsigned int height;
         unsigned int nonZeroNum;

@@ -115,15 +115,22 @@ int main()
     N2.printRightList();
     N2.deleteRightNode();
     N2.printRightList();
+    CLNode head;
+    std::shared_ptr<CLNode> what = head.right;
+
+    what->createRightNode(13,13,13);
+    what->printRightList();
     */
 //CLMatrix
+
     CLMatrix M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
-        std::cout << (M.rowHead[i].getColNum()) << '\t' << (M.colHead[i].getRowNum()) << '\n';
+        std::cout << (M.rowHead[i]->getColNum()) << '\t' << (M.colHead[i]->getRowNum()) << '\n';
     }
     std::cout << M.getWidth() << '\t' << M.getHeight() << '\t' << M.getNonZero() << '\n';
-
-
+    //CLNode ins(1,1,1);
+   // M.insertNode(ins);
     return 0;
 }
+

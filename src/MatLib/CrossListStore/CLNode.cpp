@@ -33,13 +33,17 @@ void CLNode::modifyNode(unsigned int row, unsigned int col, int val)
 void CLNode::createDownNode(unsigned int row, unsigned int col, int val)
 {
     /* Debugged */
+    std::shared_ptr<CLNode> temp = this->down;
     this->down = std::make_shared<CLNode>(row, col, val);
+    this->down->down = temp;
 }
 
 void CLNode::createRightNode(unsigned int row, unsigned int col, int val)
 {
     /* Debugged */
+    std::shared_ptr<CLNode> temp = this->right;
     this->right = std::make_shared<CLNode>(row, col, val);
+    this->right->right = temp;
 }
 
 void CLNode::deleteDownNode()
