@@ -26,13 +26,13 @@ CLMatrix::CLMatrix(unsigned int wid, unsigned int hgt, unsigned int nonZero)
     for(unsigned int i = 1; i <= wid; i++)
     {
         std::shared_ptr<CLNode> push;
-        push = std::make_shared<CLNode>(0, i, 0);
+        push = std::make_shared<CLNode>(i, 0, 0);
         this->rowHead.push_back(push);
     }
     for(unsigned int j = 1; j <= hgt; j++)
     {
         std::shared_ptr<CLNode> push;
-        push = std::make_shared<CLNode>(j, 0, 0);
+        push = std::make_shared<CLNode>(0, j, 0);
         this->colHead.push_back(push);
     }
 }
@@ -98,6 +98,7 @@ void CLMatrix::printMatrix() const
 
 bool CLMatrix::operator==(const CLMatrix &M) const
 {
+    /* Debugged */
     if(this->getHeight()!= M.getHeight() || this->getWidth()!=M.getWidth())
     {
         return false;
@@ -118,24 +119,38 @@ bool CLMatrix::operator==(const CLMatrix &M) const
     }
     return true;
 }
-
-CLMatrix CLMatrix::operator=(const CLMatrix &M)
+void CLMatrix::operator=(const CLMatrix &M)
 {
+    /* Debugged */
+    this->width = M.getWidth(); this->height = M.getHeight();
+    this->nonZeroNum = M.getNonZero();
+    //header re-initialization
+    for(unsigned int i = 1; i <= this->width; i++)
+    {
+        std::shared_ptr<CLNode> push;
+        push = std::make_shared<CLNode>(i, 0, 0);
+        this->rowHead.push_back(push);
+    }
+    for(unsigned int j = 1; j <= this->height; j++)
+    {
+        std::shared_ptr<CLNode> push;
+        push = std::make_shared<CLNode>(0, j, 0);
+        this->colHead.push_back(push);
+    }
 
-    CLMatrix Temp(M.getWidth(), M.getHeight(), M.getNonZero());
+
+    //insertNodes
     for(unsigned int i = 1; i <= M.getWidth(); i++)
     {
         std::shared_ptr<CLNode> temp = M.rowHead[i]->right;
         while(temp)
         {
-            Temp.insertNode(temp->getRowNum(), temp->getColNum(), temp->getVal());
+            this->insertNode(temp->getRowNum(), temp->getColNum(), temp->getVal());
             temp = temp->right;
         }
     }
-    std::cout << "test";
-    Temp.printMatrix();
-    this->printMatrix();
-    return Temp;
+
+    return;
 }
 
 

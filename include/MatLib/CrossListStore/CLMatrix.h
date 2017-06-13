@@ -20,7 +20,7 @@ class CLMatrix
         void insertNode(CLNode ins);
         void insertNode(unsigned int row, unsigned int col, int val);
         void printMatrix() const;
-        CLMatrix operator=(const CLMatrix &M);
+        void operator=(const CLMatrix &M);
         bool operator==(const CLMatrix &M) const;
         CLMatrix operator+(const CLMatrix &M);
         CLMatrix operator*(const CLMatrix &M);

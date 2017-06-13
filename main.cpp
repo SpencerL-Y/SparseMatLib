@@ -142,13 +142,12 @@ int main()
     ins.modifyNode(2,3,1);
     M.insertNode(ins);
     M.printMatrix();
-    CLMatrix Mprime = M;
-
+    CLMatrix Mprime;
+    Mprime = M;
     ins.modifyNode(3,3,1);
     Mprime.insertNode(ins);
     Mprime.printMatrix();
-    Mprime.rowHead[3]->right->printNode();
-    M.rowHead[3]->right->printNode();
+
     std::cout << (M == Mprime);
     return 0;
 }
