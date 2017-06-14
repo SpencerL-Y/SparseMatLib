@@ -152,6 +152,7 @@ int main()
     M.printMatrix();
     std::cout << (M == Mprime);
     (M+Mprime).printMatrix();
+    (M*Mprime).printMatrix();
     return 0;
 }
 

@@ -157,8 +157,8 @@ void CLMatrix::operator=(const CLMatrix &M)
 
 CLMatrix CLMatrix::operator+(const CLMatrix &M)
 {
-    /* TODO: Add66
-     *
+    /* TODO: Add Two CLMatrix
+     * Debugged
      */
     if(this->getWidth()!=M.getWidth() || this->getHeight()!=M.getHeight())//the size of two matrices is different
     {
@@ -208,6 +208,46 @@ CLMatrix CLMatrix::operator+(const CLMatrix &M)
     }
     return Temp;
 }
+
+CLMatrix CLMatrix::operator*(const CLMatrix &M)
+{
+    /* TODO: Matrix Multiplication
+     * Debugged
+     */
+    if(this->getHeight() != M.getWidth())
+    {
+        std::cout << "ERROR multiplication, size incompatible" << '\n';
+        return *this;
+    }
+    CLMatrix Temp(this->getWidth(), M.getHeight(),0);//result matrix
+
+    for(unsigned int i = 1; i <= this->getWidth(); i++)
+    {
+        std::vector<int> sumArray(M.getHeight()+1, 0);
+        std::shared_ptr<CLNode> first = this->rowHead[i]->right;
+
+        while(first)//traverse this matrix  i-th row
+        {
+            std::shared_ptr<CLNode> second = M.rowHead[first->getColNum()]->right;
+            while(second)//traverse corresponding row in M
+            {
+                sumArray[second->getColNum()] += (first->getVal())*(second->getVal());
+                second = second->right;
+            }
+            first = first->right;
+        }
+        for(unsigned int j = 1; j < sumArray.size(); j++)
+        {
+            std::cout << sumArray[j];
+            if(sumArray[j]!=0)
+            {
+                Temp.insertNode(i, j, sumArray[j]);
+            }
+        }
+    }
+    return Temp;
+}
+
 
 unsigned int CLMatrix::getWidth() const
 {
