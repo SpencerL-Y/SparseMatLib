@@ -146,9 +146,12 @@ int main()
     Mprime = M;
     ins.modifyNode(3,3,1);
     Mprime.insertNode(ins);
+    ins.modifyNode(3,3,-1);
+    M.insertNode(ins);
     Mprime.printMatrix();
-
+    M.printMatrix();
     std::cout << (M == Mprime);
+    (M+Mprime).printMatrix();
     return 0;
 }
 

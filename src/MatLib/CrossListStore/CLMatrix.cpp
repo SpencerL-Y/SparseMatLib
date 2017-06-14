@@ -87,6 +87,7 @@ void CLMatrix::insertNode(unsigned int row, unsigned int col, int val)
 void CLMatrix::printMatrix() const
 {
     /* Debugged */
+    std::cout << "CLMatrix Print:" << '\n';
     for(unsigned int i = 1; i <= this->getWidth(); i++)
     {
         this->rowHead[i]->printRightListVal(this->getHeight());
@@ -153,6 +154,60 @@ void CLMatrix::operator=(const CLMatrix &M)
     return;
 }
 
+
+CLMatrix CLMatrix::operator+(const CLMatrix &M)
+{
+    /* TODO: Add66
+     *
+     */
+    if(this->getWidth()!=M.getWidth() || this->getHeight()!=M.getHeight())//the size of two matrices is different
+    {
+        std::cout << "ERROR Adding size incompatible." << '\n';
+        return *this;
+    }
+    CLMatrix Temp(this->getWidth(), this->getHeight(), 0);//new matrix
+    for(unsigned int i = 1; i<=this->getWidth(); i++)//traverse rowHead
+    {
+        std::shared_ptr<CLNode> first = this->rowHead[i]->right;//pointer to identify position
+        std::shared_ptr<CLNode> second = M.rowHead[i]->right;
+        while(first && second)
+        {
+            //same position
+            if(first->getColNum() == second->getColNum())
+            {
+                int sum = first->getVal()+second->getVal();
+                if(sum != 0)
+                {
+                    Temp.insertNode(first->getRowNum(), first->getColNum(), sum);//Insert method can be improved later.
+                }
+                first = first->right; second = second->right;
+            }
+            //deferent position
+            else if(first->getColNum() < second->getColNum())
+            {
+                Temp.insertNode(first->getRowNum(), first->getColNum(), first->getVal());
+                first = first->right;
+            }
+            else if(first->getColNum() > second->getColNum())
+            {
+                Temp.insertNode(second->getRowNum(), second->getColNum(), second->getVal());
+                second = second->right;
+            }
+            else{std::cout << "ERROR adding" << '\n'; return *this;}
+        }
+        while(first)
+        {
+            Temp.insertNode(first->getRowNum(), first->getColNum(), first->getVal());
+            first = first->right;
+        }
+        while(second)
+        {
+            Temp.insertNode(second->getRowNum(), second->getColNum(), second->getVal());
+            second = second->right;
+        }
+    }
+    return Temp;
+}
 
 unsigned int CLMatrix::getWidth() const
 {
