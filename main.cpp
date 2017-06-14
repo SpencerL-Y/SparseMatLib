@@ -8,6 +8,7 @@ using namespace std;
 #include <MatLib/TripletStore/TripletMatrix.h>
 #include <MatLib/CrossListStore/CLNode.h>
 #include <MatLib/CrossListStore/CLMatrix.h>
+#include <MatLib/ArrayStore/Array2d.h>
 using namespace MatLib::CrossListStore;
 int main()
 {
@@ -79,17 +80,36 @@ int main()
 */
 //Array1d
 /*
-    Array1d ary1(6);
-    Array1d ary2(6);
+    Array1d ary1(6,1);
+    Array1d ary2(6,1);
     for(unsigned int i = 1; i <= ary1.getSize(); i++)
     {
-        ary1.elemAssign(i, 2*i);
-        ary2.elemAssign(i, i+2);
+        ary1.elemAssign(i, 2);
+        ary2.elemAssign(i, 1);
     }
     ary1.arrayPrint();
     ary2.arrayPrint();
     std::cout << ary1.dotProduct(ary2);
+    ary1.transpose();
+    ary1.arrayPrint();
 */
+//Array2d
+/*
+    Array2d M(3,3);
+    M.printMatrix();
+    M.insertElem(1,1,1); M.insertElem(2,2,2);
+    M.insertElem(2,3,1);M.insertElem(3,3,4);
+    M.printMatrix();
+    M.getNegMatrix().transpose().printMatrix();
+    Array2d temp;
+    temp = (M.transpose());
+    temp.printMatrix();
+    std::cout << temp.getNonZeroNum() << '\n';
+    (temp*M).printMatrix();
+    (temp - M).printMatrix();
+    */
+//STD array
+
 //CLNode
 /*
     CLNode N1(1,1,1);
@@ -153,6 +173,11 @@ int main()
     std::cout << (M == Mprime);
     (M+Mprime).printMatrix();
     (M*Mprime).printMatrix();
+    M = (M*Mprime);
+    M.printMatrix();
+    M.getNegMat().printMatrix();
+    Mprime.printMatrix();
+    (M-Mprime).printMatrix();
     return 0;
 }
 

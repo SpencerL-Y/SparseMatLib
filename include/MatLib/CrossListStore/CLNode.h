@@ -4,7 +4,7 @@
  * Author: Clexma
  * Institute: UCAS
  * Created: 6/7/2017
- * Last Modified: 6/12/2017
+ * Last Modified: 6/14/2017
  -----------------------------------------------------------------------------------------------*/
 
 #ifndef CLNODE_H

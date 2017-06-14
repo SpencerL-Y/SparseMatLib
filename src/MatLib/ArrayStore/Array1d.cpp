@@ -9,8 +9,9 @@ namespace ArrayStore
 
 
 
-Array1d::Array1d(unsigned int length)
+Array1d::Array1d(unsigned int length, bool rowVector)
 {
+    this->rowVec = rowVector;
     this->arraySize = length;
     vec.push_back(0);
     vec.resize(length+1, 0);
@@ -18,6 +19,7 @@ Array1d::Array1d(unsigned int length)
 }
 Array1d::~Array1d()
 {
+    this->rowVec = 1;
     this->arraySize = 0; vec.push_back(0);
     //dtor
 }
@@ -56,7 +58,12 @@ void Array1d::elemAssign(unsigned int pos, int value)
     this->vec[pos] = value; return;
 }
 
-unsigned int  Array1d::getSize() const
+void Array1d::transpose()
+{
+    this->rowVec = !(this->rowVec);
+}
+
+unsigned int Array1d::getSize() const
 {
     return arraySize;
 }
@@ -67,10 +74,22 @@ void Array1d::arrayPrint() const
      * Debugged
      */
     std::cout << "Array1d print: " << '\n';
-    for(unsigned int i = 1; i < this->vec.size(); i++)
+    if(!(this->rowVec))
     {
-        std::cout << this->vec[i] << '\n';
+        for(unsigned int i = 1; i < this->vec.size(); i++)
+        {
+            std::cout << this->vec[i] << '\n';
+        }
     }
+    else
+    {
+        for(unsigned int i = 1; i < this->vec.size();i++)
+        {
+            std::cout << this->vec[i] << '\t';
+        }
+        std::cout << '\n';
+    }
+
     return;
 }
 

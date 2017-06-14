@@ -39,6 +39,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/MatLib/ArrayStore/Array1d.h" />
+		<Unit filename="include/MatLib/ArrayStore/Array2d.h" />
 		<Unit filename="include/MatLib/CSRStore/CSRMatrix.h" />
 		<Unit filename="include/MatLib/CSRStore/CSRTuple.h" />
 		<Unit filename="include/MatLib/CrossListStore/CLMatrix.h" />
@@ -48,6 +49,7 @@
 		<Unit filename="include/MatLib/TripletStore/TripletMatrix.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/MatLib/ArrayStore/Array1d.cpp" />
+		<Unit filename="src/MatLib/ArrayStore/Array2d.cpp" />
 		<Unit filename="src/MatLib/CSRStore/CSRMatrix.cpp" />
 		<Unit filename="src/MatLib/CSRStore/CSRTuple.cpp" />
 		<Unit filename="src/MatLib/CrossListStore/CLMatrix.cpp" />

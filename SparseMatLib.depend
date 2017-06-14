@@ -35,7 +35,7 @@
 	"MatLib/CSRStore/CSRTuple.h"
 	<iostream>
 
-1497419639 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
+1497458640 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\main.cpp
 	<iostream>
 	<vector>
 	<memory>
@@ -44,6 +44,7 @@
 	<MatLib/TripletStore/TripletMatrix.h>
 	<MatLib/CrossListStore/CLNode.h>
 	<MatLib/CrossListStore/CLMatrix.h>
+	<MatLib/ArrayStore/Array2d.h>
 
 1496843973 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\tripletstore\tripletmatrix.h
 	<iostream>
@@ -73,10 +74,10 @@
 1496843894 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\tripletstore\tripletmatrix.cpp
 	"MatLib/TripletStore/TripletMatrix.h"
 
-1496843452 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\arraystore\array1d.cpp
+1497424896 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\arraystore\array1d.cpp
 	"MatLib/ArrayStore/Array1d.h"
 
-1496843456 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\arraystore\array1d.h
+1497424689 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\arraystore\array1d.h
 	<iostream>
 	<vector>
 
@@ -88,7 +89,7 @@
 1496843955 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\tripletstore\rowlinktrimat.cpp
 	"MatLib/TripletStore/RowLinkTriMat.h"
 
-1497336139 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\crossliststore\clnode.h
+1497423653 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\crossliststore\clnode.h
 	<iostream>
 	<vector>
 	<memory>
@@ -96,9 +97,16 @@
 1497356279 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\crossliststore\clnode.cpp
 	"MatLib/CrossListStore/CLNode.h"
 
-1497419604 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\crossliststore\clmatrix.cpp
+1497458657 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\crossliststore\clmatrix.cpp
 	"MatLib/CrossListStore/CLMatrix.h"
 
-1497372159 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\crossliststore\clmatrix.h
+1497457265 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\crossliststore\clmatrix.h
 	<MatLib/CrossListStore/CLNode.h>
+
+1497457105 source:c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\src\matlib\arraystore\array2d.cpp
+	"Array2d.h"
+
+1497432345 c:\users\my-pc\desktop\tcs\datastructure\sparsematlib\sparsematlib\include\matlib\arraystore\array2d.h
+	<iostream>
+	<vector>
 

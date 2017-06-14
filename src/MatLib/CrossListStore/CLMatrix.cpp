@@ -38,6 +38,7 @@ CLMatrix::CLMatrix(unsigned int wid, unsigned int hgt, unsigned int nonZero)
 }
 
 
+
 void CLMatrix::insertNode(CLNode ins)
 {
     /* TODO: Insert a CLNode to CLMatrix
@@ -120,12 +121,34 @@ bool CLMatrix::operator==(const CLMatrix &M) const
     }
     return true;
 }
+
+CLMatrix CLMatrix::getNegMat() const
+{
+    CLMatrix Temp(this->getWidth(), this->getHeight(), this->getNonZero());
+
+    for(unsigned i = 1; i <= this->width; i++)
+    {
+        std::shared_ptr<CLNode> temp = this->rowHead[i]->right;
+        while(temp)
+        {
+            Temp.insertNode(temp->getRowNum(), temp->getColNum(), -(temp->getVal()));
+            temp = temp->right;
+        }
+    }
+    return Temp;
+}
+
 void CLMatrix::operator=(const CLMatrix &M)
 {
+
     /* Debugged */
+    //header re-initialization
+
     this->width = M.getWidth(); this->height = M.getHeight();
     this->nonZeroNum = M.getNonZero();
-    //header re-initialization
+    this->rowHead.clear(); this->colHead.clear();
+    std::shared_ptr<CLNode> pushNode; pushNode = std::make_shared<CLNode>(0, 0, 0);
+    this->rowHead.push_back(pushNode); this->colHead.push_back(pushNode);
     for(unsigned int i = 1; i <= this->width; i++)
     {
         std::shared_ptr<CLNode> push;
@@ -138,9 +161,8 @@ void CLMatrix::operator=(const CLMatrix &M)
         push = std::make_shared<CLNode>(0, j, 0);
         this->colHead.push_back(push);
     }
-
-
     //insertNodes
+
     for(unsigned int i = 1; i <= M.getWidth(); i++)
     {
         std::shared_ptr<CLNode> temp = M.rowHead[i]->right;
@@ -238,7 +260,6 @@ CLMatrix CLMatrix::operator*(const CLMatrix &M)
         }
         for(unsigned int j = 1; j < sumArray.size(); j++)
         {
-            std::cout << sumArray[j];
             if(sumArray[j]!=0)
             {
                 Temp.insertNode(i, j, sumArray[j]);
@@ -249,6 +270,13 @@ CLMatrix CLMatrix::operator*(const CLMatrix &M)
 }
 
 
+
+CLMatrix CLMatrix::operator-(const CLMatrix &M)
+{
+    CLMatrix Temp(this->getWidth(), this->getHeight(), 0);
+    Temp = *this + M.getNegMat();
+    return Temp;
+}
 unsigned int CLMatrix::getWidth() const
 {
     return this->width;
