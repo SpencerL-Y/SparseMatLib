@@ -14,9 +14,9 @@
 
 * MatLib
 	* ArrayStore
-		* Array1d: Finished
-		* Array2d: Under development
-	* CSRStore: In schedule
+		* Array1d: finished
+		* Array2d: finished (with transpose)
+	* CSRStore: Under development
 	* TripletStore: finished
 		* TripletMatrix : finished
 		* RowLinkTriMat : public TripletMatrix : finished
