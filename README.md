@@ -16,9 +16,10 @@
 	* ArrayStore
 		* Array1d: finished
 		* Array2d: finished (with transpose)
-	* CSRStore: Under development
+	* CSRStore: Finished
+	* ELLStore: Under Development
 	* TripletStore: finished
-		* TripletMatrix : finished
+		* TripletMatrix : finished (with transpose)
 		* RowLinkTriMat : public TripletMatrix : finished
 	* CrossListStore: finished 
 		* CLNode: finished
