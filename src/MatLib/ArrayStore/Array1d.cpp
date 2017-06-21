@@ -109,5 +109,20 @@ int Array1d::dotProduct(const Array1d &ary) const
     return sum;
 }
 
+Array1d Array1d::operator+(const Array1d &A)
+{
+    if(this->arraySize != A.arraySize)
+    {
+        std::cout << "ERROR: Array1d add error, size incompatible." <<'\n';
+    }
+    Array1d temp(this->arraySize, 1);
+    for(unsigned int i = 0; i < this->vec.size(); i++)
+    {
+        temp.vec[i] = (this->vec[i]+\
+                       A.vec[i]);
+    }
+    return temp;
+}
+
 }//ArrayStore
 }//MatLib

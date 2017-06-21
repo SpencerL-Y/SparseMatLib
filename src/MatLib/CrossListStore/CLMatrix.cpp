@@ -117,11 +117,13 @@ bool CLMatrix::operator==(const CLMatrix &M) const
         std::shared_ptr<CLNode> second = M.rowHead[i]->right;
         while(first && second)// for each col
         {
-            if(first->getColNum() != second->getColNum() || first->getVal() != second->getVal())
+            if(first->getColNum() != second->getColNum() ||\
+               first->getVal() != second->getVal())
             {
                 return false;
             }
-            first = first->right; second = second->right;
+            first = first->right;
+            second = second->right;
         }
         if(first || second){return false;}
     }
@@ -130,14 +132,16 @@ bool CLMatrix::operator==(const CLMatrix &M) const
 
 CLMatrix CLMatrix::getNegMat() const
 {
-    CLMatrix Temp(this->getWidth(), this->getHeight(), this->getNonZero());
+    CLMatrix Temp(this->getWidth(),\
+                  this->getHeight(), this->getNonZero());
 
     for(unsigned i = 1; i <= this->width; i++)
     {
         std::shared_ptr<CLNode> temp = this->rowHead[i]->right;
         while(temp)
         {
-            Temp.insertNode(temp->getRowNum(), temp->getColNum(), -(temp->getVal()));
+            Temp.insertNode(temp->getRowNum(), \
+                            temp->getColNum(), -(temp->getVal()));
             temp = temp->right;
         }
     }
@@ -199,9 +203,11 @@ CLMatrix CLMatrix::operator+(const CLMatrix &M)
     }
     CLMatrix Temp(this->getWidth(),\
                   this->getHeight(), 0);//new matrix
-    for(unsigned int i = 1; i<=this->getWidth(); i++)//traverse rowHead
+    //traverse rowHead
+    for(unsigned int i = 1; i<=this->getWidth(); i++)
     {
-        std::shared_ptr<CLNode> first = this->rowHead[i]->right;//pointer to identify position
+        //pointer to identify position
+        std::shared_ptr<CLNode> first = this->rowHead[i]->right;
         std::shared_ptr<CLNode> second = M.rowHead[i]->right;
         while(first && second)
         {
@@ -290,8 +296,6 @@ CLMatrix CLMatrix::operator*(const CLMatrix &M)
     }
     return Temp;
 }
-
-
 
 CLMatrix CLMatrix::operator-(const CLMatrix &M)
 {

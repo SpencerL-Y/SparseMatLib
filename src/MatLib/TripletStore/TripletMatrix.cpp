@@ -26,7 +26,8 @@ TripletMatrix::TripletMatrix()
 }
 
 
-inline void TripletMatrix::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
+void TripletMatrix::resizeMatrix(unsigned int width,\
+                                 unsigned int height, unsigned int nonZero)
 {
     /* TODO: resize Matrix */
     matrixWidth = width; matrixHeight = height;
@@ -57,6 +58,7 @@ void TripletMatrix::insertTripletToMatrix(Triplet insertTriplet)
     }
     return ;
 }
+
 
 void TripletMatrix::nonZeroUpdate()
 {
@@ -98,7 +100,7 @@ void TripletMatrix::printMatrix() const
     /* TODO: Print matrix.
      * Debugged
      */
-    std::cout << "TripleMatrix Print:" << '\n';
+    std::cout << "TripletMatrix Print:" << '\n';
     unsigned int pos = 1;
     for(unsigned int i = 1; i <= getMatrixWidth(); i++)
     {

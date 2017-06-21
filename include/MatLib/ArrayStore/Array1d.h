@@ -32,12 +32,13 @@ class Array1d
         unsigned int getSize() const;
         int dotProduct(const Array1d &ary) const;
 
+        Array1d operator+(const Array1d &A);
         virtual ~Array1d();
-
+        std::vector<int> vec;
     protected:
         bool rowVec;
         unsigned int arraySize;
-        std::vector<int> vec;
+
 
     private:
 };

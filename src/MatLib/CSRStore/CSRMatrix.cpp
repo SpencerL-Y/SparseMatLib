@@ -343,7 +343,7 @@ CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
         if(x < rowPtr.size()){upper = rowPtr[x];}
         for(unsigned int pos = rowPtr[row]; pos < upper; pos++)
         {
-            data[pos].printTuple();
+            //data[pos].printTuple();
             temp.addInsert(row, data[pos]);
         }
         row++;
