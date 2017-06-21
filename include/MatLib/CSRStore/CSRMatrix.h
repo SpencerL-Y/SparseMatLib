@@ -5,8 +5,8 @@
  * Institute: UCAS
  * Created: 5/19/2017
  * Last Modified: 6/20/2017
- -----------------------------------------------------------------------------------------------*/#ifndef CSRMATRIX_H
-
+ -----------------------------------------------------------------------------------------------*/
+#ifndef CSRMATRIX_H
 #define CSRMATRIX_H
 #define MAXSIZE 1000
 #include <iostream>

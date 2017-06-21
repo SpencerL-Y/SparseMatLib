@@ -79,7 +79,18 @@ int main(int argc,char *argv[])
     RowLinkTriMat multi = M+MM;
     (multi*multi).displayTable();
     (multi*multi).printMatrix();
-*/
+    RowLinkTriMat test;
+    test.resizeMatrix(5,5,5);
+    for(unsigned int i = 1; i<=5; i++)
+    {
+        for(unsigned int j = 5; j >=1; j--)
+        {
+            Triplet ins; ins.modifyTriplet(i,j,10);
+            test.insertTripletToMatrix(ins);
+        }
+    }
+    test.printMatrix();
+    test.displayTable();*/
 //Array1d
 /*
     Array1d ary1(6,1);
@@ -148,7 +159,7 @@ int main(int argc,char *argv[])
     head->createRightNode(1,3,2); head->right->createRightNode(1,5,2);
     head->printRightListVal(6);*/
 //CLMatrix
-
+/*
     CLMatrix M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
@@ -185,11 +196,13 @@ int main(int argc,char *argv[])
     {
         for(unsigned int j = 5; j >=1; j--)
         {
-
+            CLNode ins(i,j,10);
+            test.insertNode(ins);
         }
     }
+    test.printMatrix();*/
     //CSRMatrix
-    /*
+
     CSRMatrix mat(4, 4);
     for(unsigned int i = 1; i <=4; i ++)
     {
@@ -211,7 +224,17 @@ int main(int argc,char *argv[])
     std::cout << (amat == mat);
     mat.printMatrix();
     (amat-mat).printMatrix();
-    */
+    CSRMatrix a(3,3);
+    a.insertElemToMat(1,1,1);
+    a.insertElemToMat(1,3,2);
+    a.insertElemToMat(3,2,1);
+    CSRMatrix b(3,3);
+    b.insertElemToMat(3,1,1);
+    b.insertElemToMat(2,2,1);
+    b.insertElemToMat(1,3,1);
+    a.printMatrix();
+    b.printMatrix();
+    (a*b).printMatrix();
     /*
 
     if(argc == 2)

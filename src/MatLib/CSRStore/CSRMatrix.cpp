@@ -205,7 +205,9 @@ void CSRMatrix::addInsert(unsigned int rowNum, CSRTuple ins)
     }
 
 }
-void CSRMatrix::insertElemToMat(unsigned int rowNum, unsigned int colNum, int value)
+void CSRMatrix::insertElemToMat(unsigned int rowNum,\
+                                unsigned int colNum,\
+                                int value)
 {
     CSRTuple ins; ins.modifyTuple(colNum, value);
     this->insertTupleToMatrix(rowNum, ins);
@@ -258,7 +260,8 @@ void CSRMatrix::printMatrix() const
 void CSRMatrix::operator=(const CSRMatrix &M)
 {
     /* Debugged */
-    if(this->matrixWidth != M.getMatrixWidth() || this->matrixHeight!=M.getMatrixHeight())
+    if(this->matrixWidth != M.getMatrixWidth() ||\
+       this->matrixHeight!= M.getMatrixHeight())
     {
         std::cout << "Warning: Matrix Size changed." << '\n';
     }
@@ -278,7 +281,8 @@ void CSRMatrix::operator=(const CSRMatrix &M)
 
 bool CSRMatrix::operator==(const CSRMatrix &M) const
 {
-    if(matrixHeight != M.getMatrixHeight() || matrixWidth != M.getMatrixWidth())
+    if(matrixHeight != M.getMatrixHeight() ||\
+       matrixWidth  != M.getMatrixWidth())
     {
         std::cout << "Compare Size Error." << '\n';
         return 0;
@@ -310,12 +314,14 @@ bool CSRMatrix::operator==(const CSRMatrix &M) const
 //Not Debugged
 CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
 {
-    if(this->getMatrixWidth() != M.getMatrixWidth() || this->getMatrixHeight()!=M.getMatrixHeight())
+    if(this->getMatrixWidth() != M.getMatrixWidth() ||\
+       this->getMatrixHeight()!= M.getMatrixHeight())
     {
         std::cout << "Unable to Add." << '\n';
         return *this;
     }
-    CSRMatrix temp(M.getMatrixWidth(),M.getMatrixHeight()); temp = M;
+    CSRMatrix temp(M.getMatrixWidth(),M.getMatrixHeight());
+    temp = M;
     unsigned int row = 1;
     while(row <= this->getMatrixWidth())
     {
@@ -357,7 +363,40 @@ CSRMatrix CSRMatrix::operator-(const CSRMatrix &M)
 
 CSRMatrix CSRMatrix::operator*(const CSRMatrix &M)
 {
-
+    if(this->getMatrixHeight() != M.getMatrixWidth())
+    {
+        std::cout << "ERROR in CSRMatrix Multiplication: size incompatible." << '\n';
+        return *this;
+    }
+    CSRMatrix temp(this->getMatrixWidth(), M.getMatrixHeight());
+    for(unsigned int thisRow = 1; thisRow < this->getMatrixWidth(); thisRow++)
+    {
+        unsigned int thisUp = data.size();
+        for(unsigned int y = thisRow+1; y < rowPtr.size(); y++)
+        {
+            if(rowPtr[y]){thisUp = rowPtr[y]; break;}
+        }
+        for(unsigned int pos = rowPtr[thisRow]; pos < thisUp && pos; pos++)
+        {
+            unsigned int Mrow = this->data[pos].getColNum();
+            CSRTuple ins;
+            unsigned int upper = M.data.size();
+            for(unsigned int x = Mrow+1; x < M.rowPtr.size(); x++)
+            {
+                if(M.rowPtr[x]){upper = M.rowPtr[x]; break;}
+            }
+            for(unsigned int Mpos = M.rowPtr[Mrow]; Mpos < upper && Mpos; Mpos++ )
+            {
+                int insVal = data[pos].getVal()*M.data[Mpos].getVal();
+                if(insVal)
+                {
+                    ins.modifyTuple(M.data[Mpos].getColNum(), insVal);
+                    temp.addInsert(thisRow, ins);
+                }
+            }
+        }
+    }
+    return temp;
 }
 
 CSRMatrix::~CSRMatrix()
