@@ -15,37 +15,26 @@
 
 namespace MatLib
 {
-
 namespace TripletStore
 {
-
-
 
 class RowLinkTriMat : public TripletMatrix
 {
     public:
         RowLinkTriMat();
         virtual ~RowLinkTriMat();
-        void resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero);
+        void resizeMatrix(unsigned int width,\
+                          unsigned int height, unsigned int nonZero);
         void insertTripletToMatrix(Triplet insertTriplet);
-
-
         void displayTable() const;
         void operator=(const RowLinkTriMat &M);
         RowLinkTriMat operator+(const RowLinkTriMat &M);
         RowLinkTriMat operator*(const RowLinkTriMat &M);
-
-
     protected:
         std::vector<unsigned int> rowPtr;
     private:
 };
 
-
-
-
 }
-
-
 }
 #endif // ROWLINKTRIMAT_H

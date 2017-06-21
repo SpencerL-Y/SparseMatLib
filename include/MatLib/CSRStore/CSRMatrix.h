@@ -14,7 +14,6 @@
 #include "CSRTuple.h"
 namespace MatLib
 {
-
 namespace CSRStore
 {
 
@@ -22,7 +21,8 @@ namespace CSRStore
 class CSRMatrix
 {
     public:
-        CSRMatrix(unsigned int width, unsigned int height);
+        CSRMatrix(unsigned int width, \
+                  unsigned int height);
         virtual ~CSRMatrix();
         void printMatrix() const;
         void displayTable() const;
@@ -32,10 +32,14 @@ class CSRMatrix
         unsigned int getMatrixNonZeroNum() const;
         CSRMatrix getNegMat() const;
         //instance modifying
-        void clearCSRMatrix(unsigned int matWid, unsigned int matHgt);
-        void insertTupleToMatrix(unsigned int rowNum, CSRTuple ins);
-        void insertElemToMat(unsigned int rowNum, unsigned int colNum, int value);
-        void addInsert(unsigned int rowNum, CSRTuple ins);
+        void clearCSRMatrix(unsigned int matWid,\
+                            unsigned int matHgt);
+        void insertTupleToMatrix(unsigned int rowNum,\
+                                 CSRTuple ins);
+        void insertElemToMat(unsigned int rowNum,\
+                             unsigned int colNum, int value);
+        void addInsert(unsigned int rowNum,\
+                       CSRTuple ins);
         //operator overload
         void operator=(const CSRMatrix &M);
         bool operator==(const CSRMatrix &M) const;
@@ -43,7 +47,8 @@ class CSRMatrix
         CSRMatrix operator-(const CSRMatrix &M);
         CSRMatrix operator*(const CSRMatrix &M);
     protected:
-        unsigned int matrixWidth; unsigned int matrixHeight;
+        unsigned int matrixWidth;
+        unsigned int matrixHeight;
         std::vector<int>rowPtr;
         std::vector<CSRTuple> data;
     private:

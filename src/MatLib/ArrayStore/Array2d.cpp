@@ -1,21 +1,20 @@
 #include "Array2d.h"
 namespace MatLib
 {
-
 namespace ArrayStore
 {
-
-
 
 Array2d::Array2d()
 {
     //ctor
 }
 
-Array2d::Array2d(unsigned int wid, unsigned int hgt)
+Array2d::Array2d(unsigned int wid,\
+                 unsigned int hgt)
 {
     /* Debugged */
-    this->matrixWidth = wid; this->matrixHeight = hgt;
+    this->matrixWidth = wid;
+    this->matrixHeight = hgt;
     std::vector<int> vec(hgt+1, 0);
     for(unsigned int i = 0; i <= wid; i++)
     {
@@ -36,8 +35,6 @@ void Array2d::printMatrix() const
         std::cout << '\n';
     }
 }
-
-
 
 unsigned int Array2d::getWidth() const
 {
@@ -68,7 +65,8 @@ unsigned int Array2d::getNonZeroNum() const
 Array2d Array2d::getNegMatrix() const
 {
     /* Debugged */
-    Array2d Temp(this->getWidth(), this->getHeight());
+    Array2d Temp(this->getWidth(),\
+                 this->getHeight());
     for(unsigned int i = 1; i <= this->getWidth(); i++)
     {
         for(unsigned int j = 1; j <= this->getHeight(); j++)
@@ -82,7 +80,8 @@ Array2d Array2d::getNegMatrix() const
 Array2d Array2d::transpose() const
 {
     /* Debugged */
-    Array2d Temp(this->getHeight(), this->getWidth());
+    Array2d Temp(this->getHeight(),\
+                 this->getWidth());
     for(unsigned int i = 1; i <= this->getWidth(); i++)
     {
         for(unsigned int j = 1; j <= this->getHeight(); j++)
@@ -93,7 +92,9 @@ Array2d Array2d::transpose() const
     return Temp;
 }
 
-void Array2d::insertElem(unsigned int row, unsigned int col, int val)
+void Array2d::insertElem(unsigned int row,\
+                         unsigned int col,\
+                                  int val)
 {
     /* Debugged*/
     this->data[row][col] = val;
@@ -103,7 +104,8 @@ void Array2d::insertElem(unsigned int row, unsigned int col, int val)
 void Array2d::operator=(const Array2d &M)
 {
     /* Debugged */
-    this->matrixWidth = M.getWidth(); this->matrixHeight = M.getHeight();
+    this->matrixWidth = M.getWidth();
+    this->matrixHeight = M.getHeight();
     this->data.clear();
     std::vector<int> vec(this->matrixHeight+1, 0);
     for(unsigned int i = 0; i <= this->matrixWidth; i++)
@@ -120,16 +122,17 @@ void Array2d::operator=(const Array2d &M)
     return ;
 }
 
-
 Array2d Array2d::operator+(const Array2d &M)
 {
     /* Debugged */
-    if(this->getWidth()!= M.getWidth() || this->getHeight() != M.getHeight())
+    if(this->getWidth()!= M.getWidth() ||\
+       this->getHeight() != M.getHeight())
     {
         std::cout << "Error adding Array2d matrix, size incompatible." << '\n';
         return *this;
     }
-    Array2d Temp(this->getWidth(), this->getHeight());
+    Array2d Temp(this->getWidth(),\
+                 this->getHeight());
     for(unsigned int i = 1; i <= this->getWidth(); i++)
     {
         for(unsigned int j = 1; j <= this->getHeight(); j++)
@@ -140,7 +143,6 @@ Array2d Array2d::operator+(const Array2d &M)
     return Temp;
 }
 
-
 Array2d Array2d::operator*(const Array2d &M)
 {
     /* Debugged */
@@ -149,7 +151,8 @@ Array2d Array2d::operator*(const Array2d &M)
         std::cout << "Error Array2d matrix multiplication, size incompatible." << '\n';
         return *this;
     }
-    Array2d Temp(this->getWidth(), M.getHeight());
+    Array2d Temp(this->getWidth(),\
+                 M.getHeight());
     for(unsigned int i = 1; i <= this->getWidth(); i++)
     {
         for(unsigned int j = 1; j <= M.getHeight(); j++)
@@ -168,7 +171,8 @@ Array2d Array2d::operator*(const Array2d &M)
 Array2d Array2d::operator-(const Array2d &M)
 {
     /* Debugged */
-    Array2d Temp(this->getWidth(), this->getHeight());
+    Array2d Temp(this->getWidth(),\
+                 this->getHeight());
     Temp = *this + M.getNegMatrix();
     return Temp;
 }
@@ -178,7 +182,6 @@ Array2d::~Array2d()
     //dtor
 }
 
-}
-
-}
+}//ArrayStore
+}//MatLib
 

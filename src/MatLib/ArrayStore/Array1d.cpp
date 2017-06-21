@@ -3,12 +3,8 @@
 
 namespace MatLib
 {
-
 namespace ArrayStore
 {
-
-
-
 Array1d::Array1d(unsigned int length, bool rowVector)
 {
     this->rowVec = rowVector;
@@ -17,6 +13,7 @@ Array1d::Array1d(unsigned int length, bool rowVector)
     vec.resize(length+1, 0);
     return;
 }
+
 Array1d::~Array1d()
 {
     this->rowVec = 1;
@@ -24,19 +21,20 @@ Array1d::~Array1d()
     //dtor
 }
 
-
 void Array1d::resizeArray(unsigned int arySize, int value)
 {
     // vector resize
     this->arraySize = arySize;
     vec.resize(arySize+1, value);
 }
+
 void Array1d::resizeArray(unsigned int arySize)
 {
     // vector resize
     vec.resize(arySize+1, 0);
     this->arraySize = arySize;
 }
+
 void Array1d::setZero()
 {
     //set all element int vec to 0
@@ -45,6 +43,7 @@ void Array1d::setZero()
         vec[i] = 0;
     }
 }
+
 void Array1d::elemAssign(unsigned int pos, int value)
 {
     /* TODO: assign the value to vec[pos] if pos < size
@@ -89,7 +88,6 @@ void Array1d::arrayPrint() const
         }
         std::cout << '\n';
     }
-
     return;
 }
 
@@ -111,9 +109,5 @@ int Array1d::dotProduct(const Array1d &ary) const
     return sum;
 }
 
-
-
-
-}
-
-}
+}//ArrayStore
+}//MatLib

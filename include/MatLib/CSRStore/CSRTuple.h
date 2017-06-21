@@ -9,6 +9,10 @@
 #define CSRTUPLE_H
 #define MAXSIZE 1000
 
+namespace MatLib
+{
+namespace CSRStore
+{
 
 class CSRTuple
 {
@@ -31,4 +35,6 @@ class CSRTuple
     private:
 };
 
+}
+}
 #endif // CSRTUPLE_H

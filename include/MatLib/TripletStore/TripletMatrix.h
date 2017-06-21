@@ -35,7 +35,8 @@ class TripletMatrix
         TripletMatrix getNegMatrix() const;
         TripletMatrix transposeMatrix() const;
         // Instance Modifying
-        void resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero);
+        void resizeMatrix(unsigned int width,\
+                          unsigned int height, unsigned int nonZero);
         void insertTripletToMatrix(Triplet insertTriplet);
         void nonZeroUpdate();
         // Operators Overload

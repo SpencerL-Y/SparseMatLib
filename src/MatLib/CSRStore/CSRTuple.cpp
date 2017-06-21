@@ -1,6 +1,11 @@
 
 #include <iostream>
 #include "MatLib/CSRStore/CSRTuple.h"
+namespace MatLib
+{
+namespace CSRStore
+{
+
 CSRTuple::CSRTuple()
 {
     //ctor
@@ -14,7 +19,8 @@ void CSRTuple::modifyTuple(unsigned int col, int val)
 void CSRTuple::printTuple() const
 {
     if(colNum)
-        std::cout<< colNum << '\t' << value << '\n';
+        std::cout<< colNum << '\t' \
+                 << value  << '\n';
 }
 
 void CSRTuple::destroyTuple()
@@ -54,7 +60,8 @@ CSRTuple CSRTuple::operator+(const CSRTuple &T)
         return *this;
     }
     CSRTuple Temp;
-    Temp.modifyTuple(this->getColNum(), this->getVal() + T.getVal());
+    Temp.modifyTuple(this->getColNum(), \
+                     this->getVal() + T.getVal());
     if(Temp.getVal() == 0)
     {
         Temp.modifyTuple(0,0);
@@ -66,7 +73,8 @@ CSRTuple CSRTuple::operator+(const CSRTuple &T)
 
 bool CSRTuple::operator!=(const CSRTuple &T) const
 {
-    if(this->colNum != T.getColNum() || this->value !=T.getVal())
+    if(this->colNum != T.getColNum() ||\
+       this->value  != T.getVal())
     {
         return true;
     }
@@ -90,11 +98,17 @@ CSRTuple CSRTuple::operator-(const CSRTuple &M)
     }
     else
     {
-        Temp.modifyTuple(this->getColNum(), this->getVal() - M.getVal());
+        Temp.modifyTuple(this->getColNum(),\
+                         this->getVal() - M.getVal());
     }
     return Temp;
 }
+
 CSRTuple::~CSRTuple()
 {
     //dtor
 }
+
+
+}//CSRStore
+}//MatLib
