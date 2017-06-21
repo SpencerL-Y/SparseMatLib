@@ -379,6 +379,14 @@ int main(int argc,char *argv[])
                 guide();
             }
         }
+        else
+        {
+            guide();
+        }
+    }
+    else
+    {
+        guide();
     }
 
     return 0;
