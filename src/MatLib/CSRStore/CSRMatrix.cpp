@@ -95,7 +95,7 @@ void CSRMatrix::insertTupleToMatrix(unsigned int rowNum, CSRTuple ins)
     }
     else
     {
-        if(ins.getColNum() < this->data[rowNum].getColNum())
+        if(ins.getColNum() < this->data[rowPtr[rowNum]].getColNum())
         {
 
             this->data.insert(data.begin()+rowPtr[rowNum], ins);
@@ -116,10 +116,11 @@ void CSRMatrix::insertTupleToMatrix(unsigned int rowNum, CSRTuple ins)
             if(data[i].getColNum() == ins.getColNum())
             {
                 std::cout << "CSRTuple insertion failed. Element existed." << '\n';
+                return;
             }
             if(data[i].getColNum() > ins.getColNum())
             {
-                this->data.insert(data.begin()+i+2, ins);
+                this->data.insert(data.begin()+i, ins);
                 for(unsigned int y = rowNum+1; y < rowPtr.size(); y++)
                 {
                     if(rowPtr[y]){rowPtr[y]++;}
@@ -127,7 +128,7 @@ void CSRMatrix::insertTupleToMatrix(unsigned int rowNum, CSRTuple ins)
                 return;
             }
         }
-        this->data.insert(data.begin()+upper, ins);
+        this->data.insert(data.begin()+i, ins);
         for(unsigned int y = rowNum+1; y < rowPtr.size(); y++)
         {
             if(rowPtr[y]){rowPtr[y]++;}
@@ -162,7 +163,7 @@ void CSRMatrix::addInsert(unsigned int rowNum, CSRTuple ins)
     }
     else
     {
-        if(ins.getColNum() < this->data[rowNum].getColNum())
+        if(ins.getColNum() < this->data[rowPtr[rowNum]].getColNum())
         {
 
             this->data.insert(data.begin()+rowPtr[rowNum], ins);
@@ -182,11 +183,12 @@ void CSRMatrix::addInsert(unsigned int rowNum, CSRTuple ins)
         {
             if(data[i].getColNum() == ins.getColNum())
             {
-                this->data[i] = this->data[i] + ins;
+                this->data[i].modifyTuple(data[i].getColNum(), data[i].getVal()+ins.getVal());
+                return;
             }
             if(data[i].getColNum() > ins.getColNum())
             {
-                this->data.insert(data.begin()+i+2, ins);
+                this->data.insert(data.begin()+i, ins);
                 for(unsigned int y = rowNum+1; y < rowPtr.size(); y++)
                 {
                     if(rowPtr[y]){rowPtr[y]++;}
@@ -194,13 +196,14 @@ void CSRMatrix::addInsert(unsigned int rowNum, CSRTuple ins)
                 return;
             }
         }
-        this->data.insert(data.begin()+upper, ins);
+        this->data.insert(data.begin()+i, ins);
         for(unsigned int y = rowNum+1; y < rowPtr.size(); y++)
         {
             if(rowPtr[y]){rowPtr[y]++;}
         }
         return;
     }
+
 }
 void CSRMatrix::insertElemToMat(unsigned int rowNum, unsigned int colNum, int value)
 {
@@ -326,25 +329,37 @@ CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
         if(x < rowPtr.size()){upper = rowPtr[x];}
         for(unsigned int pos = rowPtr[row]; pos < upper; pos++)
         {
-            temp.addInsert(row, this->data[pos]);
+            data[pos].printTuple();
+            temp.addInsert(row, data[pos]);
         }
         row++;
     }
     return temp;
 }
-/*
+
 CSRMatrix CSRMatrix::getNegMat() const
 {
-    CSRMatrix temp;
-    temp.matrixWidth = this->matrixWidth;
-    temp.matrixHeight = this->matrixHeight;
-    for(unsigned int i = 1; i < MAXSIZE; i++)
+    CSRMatrix temp(this->getMatrixWidth(), this->getMatrixHeight());
+    temp = *this;
+    for(unsigned int i = 1; i < data.size(); i++)
     {
         temp.data[i].modifyTuple(this->data[i].getColNum(), -(this->data[i].getVal()));
     }
     return temp;
 }
-*/
+
+CSRMatrix CSRMatrix::operator-(const CSRMatrix &M)
+{
+    CSRMatrix temp(this->getMatrixWidth(), this->getMatrixHeight());
+    temp = *this+M.getNegMat();
+    return temp;
+}
+
+CSRMatrix CSRMatrix::operator*(const CSRMatrix &M)
+{
+
+}
+
 CSRMatrix::~CSRMatrix()
 {
     //dtor

@@ -148,7 +148,7 @@ int main(int argc,char *argv[])
     head->createRightNode(1,3,2); head->right->createRightNode(1,5,2);
     head->printRightListVal(6);*/
 //CLMatrix
-    /*
+
     CLMatrix M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
@@ -180,26 +180,40 @@ int main(int argc,char *argv[])
     M.getNegMat().printMatrix();
     Mprime.printMatrix();
     (M-Mprime).printMatrix();
-    */
+    CLMatrix test(5,5,5);
+    for(unsigned int i = 1; i <=5; i++)
+    {
+        for(unsigned int j = 5; j >=1; j--)
+        {
+
+        }
+    }
     //CSRMatrix
+    /*
     CSRMatrix mat(4, 4);
-    mat.insertElemToMat(1,1,1);
-    mat.insertElemToMat(1,2,2);
-    mat.insertElemToMat(3,2,3);
-    mat.insertElemToMat(3,1,4);
-    mat.insertElemToMat(2,2,5);
-    mat.insertElemToMat(2,4,6);
+    for(unsigned int i = 1; i <=4; i ++)
+    {
+        for(unsigned int j = 1; j <=4; j++)
+        {
+            mat.insertElemToMat(i,j,10);
+        }
+    }
     mat.displayTable();
     mat.printMatrix();
     CSRMatrix amat(3,3);
     amat = mat;
 
-
+    CSRTuple ins; ins.modifyTuple(2,2);
     amat.insertElemToMat(4,4,1);amat.displayTable();amat.printMatrix();
+    amat.addInsert(1,ins);
+    amat.printMatrix();
     (amat+mat).printMatrix();
     std::cout << (amat == mat);
+    mat.printMatrix();
+    (amat-mat).printMatrix();
+    */
     /*
-    unsigned int i = 1;
+
     if(argc == 2)
     {
         if(!strcmp(argv[1], "-help"))
