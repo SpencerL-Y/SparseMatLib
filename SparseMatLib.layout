@@ -2,19 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\MatLib\CrossListStore\CLMatrix.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\MatLib\ArrayStore\Array2d.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="478" topLine="16" />
+			<Cursor1 position="4050" topLine="130" />
 		</Cursor>
 	</File>
-	<File name="include\MatLib\TripletStore\Triplet.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\MatLib\ArrayStore\Array2d.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1035" topLine="14" />
+			<Cursor1 position="1170" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="include\MatLib\ArrayStore\Array2d.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\MatLib\CSRStore\CSRMatrix.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1170" topLine="19" />
+			<Cursor1 position="2230" topLine="66" />
+		</Cursor>
+	</File>
+	<File name="src\MatLib\CSRStore\CSRTuple.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1268" topLine="40" />
+		</Cursor>
+	</File>
+	<File name="src\MatLib\CrossListStore\CLMatrix.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6568" topLine="209" />
 		</Cursor>
 	</File>
 	<File name="src\MatLib\CrossListStore\CLNode.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,14 +37,24 @@
 			<Cursor1 position="3166" topLine="78" />
 		</Cursor>
 	</File>
+	<File name="include\MatLib\TripletStore\RowLinkTriMat.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="462" topLine="9" />
+		</Cursor>
+	</File>
 	<File name="include\MatLib\CrossListStore\CLNode.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="143" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\MatLib\CSRStore\CSRMatrix.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\MatLib\TripletStore\Triplet.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="468" topLine="0" />
+			<Cursor1 position="1035" topLine="14" />
+		</Cursor>
+	</File>
+	<File name="include\MatLib\CSRStore\CSRTuple.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="379" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\MatLib\TripletStore\TripletMatrix.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -42,44 +62,9 @@
 			<Cursor1 position="6664" topLine="252" />
 		</Cursor>
 	</File>
-	<File name="include\MatLib\TripletStore\TripletMatrix.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="576" topLine="35" />
-		</Cursor>
-	</File>
-	<File name="src\MatLib\CrossListStore\CLMatrix.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="8245" topLine="258" />
-		</Cursor>
-	</File>
-	<File name="src\MatLib\ArrayStore\Array1d.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1789" topLine="60" />
-		</Cursor>
-	</File>
 	<File name="include\MatLib\ArrayStore\Array1d.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="654" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="include\MatLib\TripletStore\RowLinkTriMat.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="462" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\MatLib\ArrayStore\Array2d.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4050" topLine="145" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4822" topLine="148" />
-		</Cursor>
-	</File>
-	<File name="src\MatLib\CSRStore\CSRTuple.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="82" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\MatLib\TripletStore\Triplet.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -87,19 +72,29 @@
 			<Cursor1 position="352" topLine="55" />
 		</Cursor>
 	</File>
-	<File name="src\MatLib\CSRStore\CSRMatrix.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\MatLib\CSRStore\CSRMatrix.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="109" topLine="0" />
+			<Cursor1 position="1106" topLine="18" />
 		</Cursor>
-		<Folding>
-			<Collapse line="52" />
-			<Collapse line="57" />
-			<Collapse line="62" />
-		</Folding>
 	</File>
-	<File name="include\MatLib\CSRStore\CSRTuple.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\MatLib\TripletStore\TripletMatrix.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="381" topLine="0" />
+			<Cursor1 position="576" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="include\MatLib\CrossListStore\CLMatrix.h" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1376" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5347" topLine="177" />
+		</Cursor>
+	</File>
+	<File name="src\MatLib\ArrayStore\Array1d.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1789" topLine="57" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

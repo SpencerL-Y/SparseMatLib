@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <string.h>
+#include <stdlib.h>
 using namespace std;
 #include <vector>
 #include <memory>
@@ -9,8 +10,9 @@ using namespace std;
 #include <MatLib/CrossListStore/CLNode.h>
 #include <MatLib/CrossListStore/CLMatrix.h>
 #include <MatLib/ArrayStore/Array2d.h>
-using namespace MatLib::CrossListStore;
-int main()
+#include <MatLib/CSRStore/CSRMatrix.h>
+using namespace MatLib::CSRStore;
+int main(int argc,char *argv[])
 {
 //TripletMatrix
 /*
@@ -146,7 +148,7 @@ int main()
     head->createRightNode(1,3,2); head->right->createRightNode(1,5,2);
     head->printRightListVal(6);*/
 //CLMatrix
-
+    /*
     CLMatrix M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
@@ -178,6 +180,47 @@ int main()
     M.getNegMat().printMatrix();
     Mprime.printMatrix();
     (M-Mprime).printMatrix();
+    */
+    //CSRMatrix
+    CSRMatrix mat(4, 4);
+    mat.insertElemToMat(1,1,1);
+    mat.insertElemToMat(1,2,2);
+    mat.insertElemToMat(3,2,3);
+    mat.insertElemToMat(3,1,4);
+    mat.insertElemToMat(2,2,5);
+    mat.insertElemToMat(2,4,6);
+    mat.displayTable();
+    mat.printMatrix();
+    CSRMatrix amat(3,3);
+    amat = mat;
+
+
+    amat.insertElemToMat(4,4,1);amat.displayTable();amat.printMatrix();
+    (amat+mat).printMatrix();
+    std::cout << (amat == mat);
+    /*
+    unsigned int i = 1;
+    if(argc == 2)
+    {
+        if(!strcmp(argv[1], "-help"))
+        {
+            std::cout << "Usage:" << " print SML -n or SML -n -v" << endl;
+        }
+
+        if(!strcmp(argv[1], "-n"))
+        {
+            std::cout << "first test" << endl;
+        }
+    }
+    if(argc == 3)
+    {
+        if(!strcmp(argv[1], "-n") && !strcmp(argv[2], "-v"))
+        {
+            std::cout << "second test" << endl;
+        }
+    }
+*/
+
     return 0;
 }
 

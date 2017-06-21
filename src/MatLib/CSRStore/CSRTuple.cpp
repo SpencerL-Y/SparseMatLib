@@ -64,6 +64,18 @@ CSRTuple CSRTuple::operator+(const CSRTuple &T)
 
 }
 
+bool CSRTuple::operator!=(const CSRTuple &T) const
+{
+    if(this->colNum != T.getColNum() || this->value !=T.getVal())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 CSRTuple CSRTuple::operator-(const CSRTuple &M)
 {
     if(colNum != M.getColNum())
