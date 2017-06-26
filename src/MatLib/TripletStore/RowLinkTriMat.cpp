@@ -13,7 +13,7 @@ RowLinkTriMat::RowLinkTriMat()
 
 
 }
-inline void RowLinkTriMat::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
+void RowLinkTriMat::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
 {
     /* TODO: Override resizeMatrix of TripletMatrix to initialize rowPtr
      * Debugged

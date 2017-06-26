@@ -27,6 +27,10 @@ void triTrans();
 void triAdd();
 void triSub();
 void triMult();
+void trirlTrans();
+void trirlAdd();
+void trirlSub();
+void trirlMult();
 void clmAdd();
 void clmMult();
 void clmSub();
@@ -262,7 +266,7 @@ int main(int argc,char *argv[])
         printHelp();
     }
 
-    if(argc == 2 )
+    else if(argc == 2 )
     {
         if(!strcmp(argv[1], "-help"))
         {
@@ -273,7 +277,7 @@ int main(int argc,char *argv[])
             guide();
         }
     }
-    if(argc == 3)
+    else if(argc == 3)
     {
         if(!strcmp(argv[1], "-ary1d"))
         {
@@ -360,6 +364,29 @@ int main(int argc,char *argv[])
                 guide();
             }
         }
+        else if(!strcmp(argv[1], "-trirl"))
+        {
+            if(!strcmp(argv[2], "-add"))
+            {
+                trirlAdd();
+            }
+            else if(!strcmp(argv[2], "-sub"))
+            {
+                trirlSub();
+            }
+            else if(!strcmp(argv[2], "-mmult"))
+            {
+                trirlMult();
+            }
+            else if(!strcmp(argv[2], "-trs"))
+            {
+                trirlTrans();
+            }
+            else
+            {
+                guide();
+            }
+        }
         else if(!strcmp(argv[1], "-csr"))
         {
             if(!strcmp(argv[2], "-mmult"))
@@ -388,7 +415,7 @@ int main(int argc,char *argv[])
     {
         guide();
     }
-
+    std::cout << "Authors: Li Xie, Xu Yinan, Zhang Yuan-hang" << '\n';
     return 0;
 }
 
@@ -824,6 +851,164 @@ void triMult()
     (myTriMat1*myTriMat2).printMatrix();
 }
 
+
+void trirlTrans()
+{
+    std::cout << "input the row and col number of the matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum1; cin >> rowNum1;
+    std::cout << "col: ";
+    unsigned int colNum1; cin >> colNum1;
+    std::cout << "input the number of non-zero elements: " << '\n';
+    unsigned int nonz1; cin >> nonz1;
+    TripletStore::RowLinkTriMat myTriMat1;
+    myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
+    std::cout << "input the non-zero elements (in the format 'row col val')" << '\n';
+    for(unsigned int i = 1; i <= nonz1; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat1.insertTripletToMatrix(ins);
+    }
+    std::cout << "original matrix: " << '\n';
+    myTriMat1.printMatrix();
+    std::cout << "transposed matrix: " << '\n';
+    myTriMat1.transposeMatrix().printMatrix();
+}
+void trirlAdd()
+{
+    std::cout << "input the row and col number of the first matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum1; cin >> rowNum1;
+    std::cout << "col: ";
+    unsigned int colNum1; cin >> colNum1;
+    std::cout << "input the row and col number of the second matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum2; cin >> rowNum2;
+    std::cout << "col: ";
+    unsigned int colNum2; cin >> colNum2;
+    std::cout << "input the non-zero number of the first matrix: " << '\n';
+    unsigned int nonz1; cin >> nonz1;
+    std::cout << "input the non-zero number of the second matrix: " << '\n';
+    unsigned int nonz2; cin >> nonz2;
+    TripletStore::RowLinkTriMat myTriMat1;
+    myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
+    TripletStore::RowLinkTriMat myTriMat2;
+    myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
+    std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz1; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat1.insertTripletToMatrix(ins);
+    }
+    std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz2; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat2.insertTripletToMatrix(ins);
+    }
+    std::cout << "original matrices: " << '\n';
+    std::cout << "first: " << '\n'; myTriMat1.printMatrix();
+    std::cout << "second: " << '\n'; myTriMat2.printMatrix();
+    std::cout << "addition result: " << '\n';
+    (myTriMat1+myTriMat2).printMatrix();
+}
+void trirlSub()
+{
+std::cout << "input the row and col number of the first matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum1; cin >> rowNum1;
+    std::cout << "col: ";
+    unsigned int colNum1; cin >> colNum1;
+    std::cout << "input the row and col number of the second matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum2; cin >> rowNum2;
+    std::cout << "col: ";
+    unsigned int colNum2; cin >> colNum2;
+    std::cout << "input the non-zero number of the first matrix: " << '\n';
+    unsigned int nonz1; cin >> nonz1;
+    std::cout << "input the non-zero number of the second matrix: " << '\n';
+    unsigned int nonz2; cin >> nonz2;
+    TripletStore::RowLinkTriMat myTriMat1;
+    myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
+    TripletStore::RowLinkTriMat myTriMat2;
+    myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
+    std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz1; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat1.insertTripletToMatrix(ins);
+    }
+    std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz2; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat2.insertTripletToMatrix(ins);
+    }
+    std::cout << "original matrices: " << '\n';
+    std::cout << "first: " << '\n'; myTriMat1.printMatrix();
+    std::cout << "second: " << '\n'; myTriMat2.printMatrix();
+    std::cout << "subtraction result: " << '\n';
+    (myTriMat1-myTriMat2).printMatrix();
+}
+void trirlMult()
+{
+    std::cout << "input the row and col number of the first matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum1; cin >> rowNum1;
+    std::cout << "col: ";
+    unsigned int colNum1; cin >> colNum1;
+    std::cout << "input the row and col number of the second matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum2; cin >> rowNum2;
+    std::cout << "col: ";
+    unsigned int colNum2; cin >> colNum2;
+    std::cout << "input the non-zero number of the first matrix: " << '\n';
+    unsigned int nonz1; cin >> nonz1;
+    std::cout << "input the non-zero number of the second matrix: " << '\n';
+    unsigned int nonz2; cin >> nonz2;
+    TripletStore::RowLinkTriMat myTriMat1;
+    myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
+    TripletStore::RowLinkTriMat myTriMat2;
+    myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
+    std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz1; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat1.insertTripletToMatrix(ins);
+    }
+    std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz2; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        myTriMat2.insertTripletToMatrix(ins);
+    }
+    std::cout << "original matrices: " << '\n';
+    std::cout << "first: " << '\n'; myTriMat1.printMatrix();
+    std::cout << "second: " << '\n'; myTriMat2.printMatrix();
+    std::cout << "multiplication result: " << '\n';
+    (myTriMat1*myTriMat2).printMatrix();
+}
 
 void clmAdd()
 {

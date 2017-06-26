@@ -243,7 +243,7 @@ TripletMatrix TripletMatrix::getNegMatrix() const
     NegMat.resizeMatrix(this->getMatrixWidth(), this->getMatrixHeight(), this->getMatrixNonZeroNum());
     for(unsigned int i = 1; i < data.size(); i++)
     {
-        std::cout<<i;
+        //std::cout<<i;
         now.modifyTriplet(data[i].getRowNum(),data[i].getColNum(), -(data[i].getValue()));
         NegMat.data.push_back(now);
     }
