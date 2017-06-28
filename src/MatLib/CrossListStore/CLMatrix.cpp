@@ -4,19 +4,20 @@ namespace MatLib
 {
 namespace CrossListStore
 {
-
-CLMatrix::CLMatrix()
+template<typename T>
+CLMatrix<T>::CLMatrix()
 {
-    std::shared_ptr<CLNode> pushNode;
-    pushNode = std::make_shared<CLNode>(0, 0, 0);
+    std::shared_ptr<CLNode<T>> pushNode;
+    pushNode = std::make_shared<CLNode<T>>(0, 0, 0);
     this->rowHead.push_back(pushNode);
     this->colHead.push_back(pushNode);
     //ctor
 }
 
-CLMatrix::CLMatrix(unsigned int wid,\
-                   unsigned int hgt,\
-                   unsigned int nonZero)
+template<typename T>
+CLMatrix<T>::CLMatrix(unsigned int wid,\
+                      unsigned int hgt,\
+                      unsigned int nonZero)
 {
     /* constructor with parameter
      * Debugged
@@ -25,24 +26,25 @@ CLMatrix::CLMatrix(unsigned int wid,\
     this->height = hgt;
     this->nonZeroNum = nonZero;
 
-    std::shared_ptr<CLNode> pushNode; pushNode = std::make_shared<CLNode>(0, 0, 0);
+    std::shared_ptr<CLNode<T>> pushNode; pushNode = std::make_shared<CLNode<T>>(0, 0, 0);
     this->rowHead.push_back(pushNode);
     this->colHead.push_back(pushNode);
     for(unsigned int i = 1; i <= wid; i++)
     {
-        std::shared_ptr<CLNode> push;
-        push = std::make_shared<CLNode>(i, 0, 0);
+        std::shared_ptr<CLNode<T>> push;
+        push = std::make_shared<CLNode<T>>(i, 0, 0);
         this->rowHead.push_back(push);
     }
     for(unsigned int j = 1; j <= hgt; j++)
     {
-        std::shared_ptr<CLNode> push;
-        push = std::make_shared<CLNode>(0, j, 0);
+        std::shared_ptr<CLNode<T>> push;
+        push = std::make_shared<CLNode<T>>(0, j, 0);
         this->colHead.push_back(push);
     }
 }
 
-void CLMatrix::insertNode(CLNode ins)
+template <typename T>
+void CLMatrix<T>::insertNode(CLNode<T> ins)
 {
     /* TODO: Insert a CLNode to CLMatrix
      * Debugged
@@ -53,7 +55,7 @@ void CLMatrix::insertNode(CLNode ins)
         std::cout << "insert CLNode Size Error" << '\n';
         return;
     }
-    std::shared_ptr<CLNode> temp = this->rowHead[ins.getRowNum()];
+    std::shared_ptr<CLNode<T>> temp = this->rowHead[ins.getRowNum()];
     while(temp->right && temp->right->getColNum() < ins.getColNum())//find position in row
     {
         temp = temp->right;
@@ -70,28 +72,29 @@ void CLMatrix::insertNode(CLNode ins)
     temp->createRightNode(ins.getRowNum(),\
                           ins.getColNum(),\
                           ins.getVal());
-    std::shared_ptr<CLNode> ptrToNode = temp->right;
+    std::shared_ptr<CLNode<T>> ptrToNode = temp->right;
     temp = this->colHead[ins.getColNum()];
     while(temp->down && temp->down->getRowNum()<ins.getRowNum())
     {
         temp = temp->down;
     }
-    std::shared_ptr<CLNode> exchange = temp->down;
+    std::shared_ptr<CLNode<T>> exchange = temp->down;
     temp->down = ptrToNode;
     temp->down->down = exchange;
     return ;
 }
 
-void CLMatrix::insertNode(unsigned int row,\
-                          unsigned int col,\
-                          int val)
+template <typename T>
+void CLMatrix<T>::insertNode(unsigned int row,\
+                             unsigned int col,\
+                             T val)
 {
-    CLNode ins(row, col, val);
+    CLNode<T> ins(row, col, val);
     this->insertNode(ins);
 }
 
-
-void CLMatrix::printMatrix() const
+template <typename T>
+void CLMatrix<T>::printMatrix() const
 {
     /* Debugged */
     std::cout << "CLMatrix Print:" << '\n';
@@ -103,8 +106,8 @@ void CLMatrix::printMatrix() const
 }
 
 
-
-bool CLMatrix::operator==(const CLMatrix &M) const
+template <typename T>
+bool CLMatrix<T>::operator==(const CLMatrix<T> &M) const
 {
     /* Debugged */
     if(this->getHeight()!= M.getHeight() || this->getWidth()!=M.getWidth())
@@ -113,8 +116,8 @@ bool CLMatrix::operator==(const CLMatrix &M) const
     }
     for(unsigned int i = 1; i <= this->getWidth(); i++)//for each row
     {
-        std::shared_ptr<CLNode> first = this->rowHead[i]->right;
-        std::shared_ptr<CLNode> second = M.rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> first = this->rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> second = M.rowHead[i]->right;
         while(first && second)// for each col
         {
             if(first->getColNum() != second->getColNum() ||\
@@ -130,14 +133,15 @@ bool CLMatrix::operator==(const CLMatrix &M) const
     return true;
 }
 
-CLMatrix CLMatrix::getNegMat() const
+template <typename T>
+CLMatrix<T> CLMatrix<T>::getNegMat() const
 {
-    CLMatrix Temp(this->getWidth(),\
-                  this->getHeight(), this->getNonZero());
+    CLMatrix<T> Temp(this->getWidth(),\
+                     this->getHeight(), this->getNonZero());
 
     for(unsigned i = 1; i <= this->width; i++)
     {
-        std::shared_ptr<CLNode> temp = this->rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> temp = this->rowHead[i]->right;
         while(temp)
         {
             Temp.insertNode(temp->getRowNum(), \
@@ -148,7 +152,8 @@ CLMatrix CLMatrix::getNegMat() const
     return Temp;
 }
 
-void CLMatrix::operator=(const CLMatrix &M)
+template <typename T>
+void CLMatrix<T>::operator=(const CLMatrix<T> &M)
 {
     /* Debugged */
     //header re-initialization
@@ -157,26 +162,26 @@ void CLMatrix::operator=(const CLMatrix &M)
     this->nonZeroNum = M.getNonZero();
 
     this->rowHead.clear(); this->colHead.clear();
-    std::shared_ptr<CLNode> pushNode; pushNode = std::make_shared<CLNode>(0, 0, 0);
+    std::shared_ptr<CLNode<T>> pushNode; pushNode = std::make_shared<CLNode<T>>(0, 0, 0);
     this->rowHead.push_back(pushNode);
     this->colHead.push_back(pushNode);
     for(unsigned int i = 1; i <= this->width; i++)
     {
-        std::shared_ptr<CLNode> push;
-        push = std::make_shared<CLNode>(i, 0, 0);
+        std::shared_ptr<CLNode<T>> push;
+        push = std::make_shared<CLNode<T>>(i, 0, 0);
         this->rowHead.push_back(push);
     }
     for(unsigned int j = 1; j <= this->height; j++)
     {
-        std::shared_ptr<CLNode> push;
-        push = std::make_shared<CLNode>(0, j, 0);
+        std::shared_ptr<CLNode<T>> push;
+        push = std::make_shared<CLNode<T>>(0, j, 0);
         this->colHead.push_back(push);
     }
     //insertNodes
 
     for(unsigned int i = 1; i <= M.getWidth(); i++)
     {
-        std::shared_ptr<CLNode> temp = M.rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> temp = M.rowHead[i]->right;
         while(temp)
         {
             this->insertNode(temp->getRowNum(),\
@@ -189,10 +194,10 @@ void CLMatrix::operator=(const CLMatrix &M)
     return;
 }
 
-
-CLMatrix CLMatrix::operator+(const CLMatrix &M)
+template <typename T>
+CLMatrix<T> CLMatrix<T>::operator+(const CLMatrix<T> &M)
 {
-    /* TODO: Add Two CLMatrix
+    /* TODO: Add Two CLMatrix<T>
      * Debugged
      */
     if(this->getWidth()!=M.getWidth() ||\
@@ -201,20 +206,20 @@ CLMatrix CLMatrix::operator+(const CLMatrix &M)
         std::cout << "ERROR Adding size incompatible." << '\n';
         return *this;
     }
-    CLMatrix Temp(this->getWidth(),\
+    CLMatrix<T> Temp(this->getWidth(),\
                   this->getHeight(), 0);//new matrix
     //traverse rowHead
     for(unsigned int i = 1; i<=this->getWidth(); i++)
     {
         //pointer to identify position
-        std::shared_ptr<CLNode> first = this->rowHead[i]->right;
-        std::shared_ptr<CLNode> second = M.rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> first = this->rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> second = M.rowHead[i]->right;
         while(first && second)
         {
             //same position
             if(first->getColNum() == second->getColNum())
             {
-                int sum = first->getVal()+second->getVal();
+                T sum = first->getVal()+second->getVal();
                 if(sum != 0)
                 {
                     Temp.insertNode(first->getRowNum(),\
@@ -259,7 +264,8 @@ CLMatrix CLMatrix::operator+(const CLMatrix &M)
     return Temp;
 }
 
-CLMatrix CLMatrix::operator*(const CLMatrix &M)
+template <typename T>
+CLMatrix<T> CLMatrix<T>::operator*(const CLMatrix<T> &M)
 {
     /* TODO: Matrix Multiplication
      * Debugged
@@ -269,16 +275,16 @@ CLMatrix CLMatrix::operator*(const CLMatrix &M)
         std::cout << "ERROR multiplication, size incompatible" << '\n';
         return *this;
     }
-    CLMatrix Temp(this->getWidth(), M.getHeight(),0);//result matrix
+    CLMatrix<T> Temp(this->getWidth(), M.getHeight(),0);//result matrix
 
     for(unsigned int i = 1; i <= this->getWidth(); i++)
     {
         std::vector<int> sumArray(M.getHeight()+1, 0);
-        std::shared_ptr<CLNode> first = this->rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> first = this->rowHead[i]->right;
 
         while(first)//traverse this matrix  i-th row
         {
-            std::shared_ptr<CLNode> second = M.rowHead[first->getColNum()]->right;
+            std::shared_ptr<CLNode<T>> second = M.rowHead[first->getColNum()]->right;
             while(second)//traverse corresponding row in M
             {
                 sumArray[second->getColNum()] += (first->getVal())*(second->getVal());
@@ -297,26 +303,34 @@ CLMatrix CLMatrix::operator*(const CLMatrix &M)
     return Temp;
 }
 
-CLMatrix CLMatrix::operator-(const CLMatrix &M)
+template <typename T>
+CLMatrix<T> CLMatrix<T>::operator-(const CLMatrix<T> &M)
 {
-    CLMatrix Temp(this->getWidth(), this->getHeight(), 0);
+    CLMatrix<T> Temp(this->getWidth(), this->getHeight(), 0);
     Temp = *this + M.getNegMat();
     return Temp;
 }
-unsigned int CLMatrix::getWidth() const
+
+template <typename T>
+unsigned int CLMatrix<T>::getWidth() const
 {
     return this->width;
 }
-unsigned int CLMatrix::getHeight() const
+
+template <typename T>
+unsigned int CLMatrix<T>::getHeight() const
 {
     return this->height;
 }
-unsigned int CLMatrix::getNonZero() const
+
+template <typename T>
+unsigned int CLMatrix<T>::getNonZero() const
 {
     return this->nonZeroNum;
 }
 
-int CLMatrix::getDeterminant()
+template <typename T>
+T CLMatrix<T>::getDeterminant()
 {
 
     for(unsigned int i = 0; i <= this->getWidth(); i++)
@@ -327,22 +341,30 @@ int CLMatrix::getDeterminant()
 
 }
 
-int CLMatrix::deterCal(unsigned int colNow)
+template <typename T>
+T CLMatrix<T>::deterCal(unsigned int colNow)
 {
 
     if(colNow == this->getHeight()-1)
     {
         unsigned int detIndex[2] = {0 ,0};
-        int subMat[2][2] = {0};
+        T subMat[2][2] = {0};
         for(unsigned int i = 1; i < this->used.size(); i++)
         {
             if(this->used[i])
             {
-                if(!detIndex[0]){detIndex[0] = i; }
-                else {detIndex[1] = i;}
+                if(!detIndex[0])
+                {
+                    detIndex[0] = i;
+                }
+                else
+                {
+                    detIndex[1] = i;
+                }
             }
         }
-        std::shared_ptr<CLNode> temp; temp = this->colHead[colNow]->down;
+        std::shared_ptr<CLNode<T>> temp;
+        temp = this->colHead[colNow]->down;
         while(temp)
         {
             if(this->used[temp->getRowNum()] == 1)
@@ -374,12 +396,13 @@ int CLMatrix::deterCal(unsigned int colNow)
             }
             temp = temp->down;
         }
-        return (subMat[0][0]*subMat[1][1] - subMat[1][0]*subMat[0][1]);
+        return (subMat[0][0]*subMat[1][1] -
+                subMat[1][0]*subMat[0][1]);
     }
     else
     {
-        int det = 0;
-        std::shared_ptr<CLNode> temp = this->colHead[colNow]->down;
+        T det = 0;
+        std::shared_ptr<CLNode<T>> temp = this->colHead[colNow]->down;
         while(temp)
         {
             if(this->used[temp->getRowNum()])
@@ -396,52 +419,91 @@ int CLMatrix::deterCal(unsigned int colNow)
 
 }
 
-int CLMatrix::naive_getCofactor(unsigned int row, unsigned int col)
+template <typename T>
+T CLMatrix<T>::naive_getCofactor(unsigned int row, unsigned int col)
 {
-    CLMatrix Temp(this->getWidth()-1, this->getHeight()-1, 0);
+    CLMatrix<T> Temp(this->getWidth()-1, this->getHeight()-1, 0);
     for(unsigned int i = 1; i < row; i++)
     {
-        std::shared_ptr<CLNode> temp = rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> temp = rowHead[i]->right;
         while(temp)
         {
             if(temp->getColNum() < col)
             {
-                Temp.insertNode(temp->getRowNum(), temp->getColNum(), temp->getVal());
+                Temp.insertNode(temp->getRowNum(),
+                                temp->getColNum(),
+                                temp->getVal());
             }
             else
             {
                 if(temp->getColNum() == col){;}
-                else{Temp.insertNode(temp->getRowNum(), temp->getColNum()-1, temp->getVal());}
+                else{Temp.insertNode(temp->getRowNum(),
+                                     temp->getColNum()-1,
+                                     temp->getVal());}
             }
             temp = temp->right;
         }
     }
     for(unsigned int i = row+1; i <= this->getWidth(); i++)
     {
-        std::shared_ptr<CLNode> temp = rowHead[i]->right;
+        std::shared_ptr<CLNode<T>> temp = rowHead[i]->right;
         while(temp)
         {
             if(temp->getColNum() < col)
             {
-                Temp.insertNode(temp->getRowNum()-1, temp->getColNum(), temp->getVal());
+                Temp.insertNode(temp->getRowNum()-1,
+                                temp->getColNum(),
+                                temp->getVal());
             }
             else
             {
                 if(temp->getColNum() == col){;}
-                else{Temp.insertNode(temp->getRowNum()-1, temp->getColNum()-1, temp->getVal());}
+                else{Temp.insertNode(temp->getRowNum()-1,
+                                     temp->getColNum()-1,
+                                     temp->getVal());}
             }
             temp = temp->right;
 
         }
     }
-    return Temp.getDeterminant();
+    int parity = ((row + col) & 0x1)? -1: 1;
+    return parity*Temp.getDeterminant();
 }
 
+template <class T>
+CLMatrix<T> CLMatrix<T>::getInverseMatrix()
+{
+    CLMatrix<T> Temp(this->getHeight(),
+                     this->getWidth(), 0);
+    T det = this->getDeterminant();
+    if(!det)
+    {
+        std::cout << "CLMatrix not invertible." << '\n';
+    }
+    for(unsigned int i = 1; i < this->rowHead.size(); i++)
+    {
+        std::shared_ptr<CLNode<T>> temp = this->rowHead[i]->right;
+        while(temp)
+        {
+            double coef = (naive_getCofactor(i, temp->getColNum())/det);
+            /*std::cout << "row: " << i << "col: "
+                      << temp->getColNum() << "coef: "
+                      << coef << '\n';*/
+            Temp.insertNode(temp->getColNum(), i, coef);
+            temp = temp->right;
+        }
+    }
+    return Temp;
+}
 
-CLMatrix::~CLMatrix()
+template <typename T>
+CLMatrix<T>::~CLMatrix()
 {
     //dtor
 }
 
+
+template class CLMatrix<double>;
+template class CLMatrix<int>;
 }//CrossListStore
 }//MatLib

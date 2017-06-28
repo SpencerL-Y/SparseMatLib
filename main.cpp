@@ -12,7 +12,7 @@ using namespace std;
 #include <MatLib/CrossListStore/CLMatrix.h>
 #include <MatLib/ArrayStore/Array2d.h>
 #include <MatLib/CSRStore/CSRMatrix.h>
-using namespace MatLib::CrossListStore;
+using namespace MatLib;
 
 void printHelp();
 void guide();
@@ -34,6 +34,8 @@ void trirlMult();
 void clmAdd();
 void clmMult();
 void clmSub();
+void clmInv();
+void clmDet();
 void csrMult();
 void csrSub();
 void csrAdd();
@@ -184,14 +186,14 @@ int main(int argc,char *argv[])
     head->createRightNode(1,3,2); head->right->createRightNode(1,5,2);
     head->printRightListVal(6);*/
 //CLMatrix
-
-    CLMatrix M(3,3,3);
+/*
+    CLMatrix<int> M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
         std::cout << (M.rowHead[i]->getColNum()) << '\t' << (M.colHead[i]->getRowNum()) << '\n';
     }
     std::cout << M.getWidth() << '\t' << M.getHeight() << '\t' << M.getNonZero() << '\n';
-    CLNode ins(1,1,1);
+    CLNode<int> ins(1,1,1);
     M.insertNode(ins);
     ins.modifyNode(1,2,1);
     M.insertNode(ins);
@@ -200,7 +202,7 @@ int main(int argc,char *argv[])
     ins.modifyNode(2,3,1);
     M.insertNode(ins);
     M.printMatrix();
-    CLMatrix Mprime;
+    CLMatrix<int> Mprime;
     Mprime = M;
     ins.modifyNode(3,3,1);
     Mprime.insertNode(ins);
@@ -218,14 +220,14 @@ int main(int argc,char *argv[])
     (M-Mprime).printMatrix();
     M.printMatrix();
     M.getDeterminant();
-    CLMatrix detTest(4,4,10);
+    CLMatrix<int> detTest(4,4,10);
     detTest.insertNode(1,1,1); detTest.insertNode(1,2,3); detTest.insertNode(1,3,2); detTest.insertNode(1,4,5);
     detTest.insertNode(2,2,2); detTest.insertNode(2,3,10); detTest.insertNode(2,4,8);
     detTest.insertNode(3,3,3); detTest.insertNode(3,4,9);
     detTest.insertNode(4,4,4);
     detTest.printMatrix();
     std::cout << "The determinant of the matrix is " << detTest.getDeterminant() << '\n';
-    CLMatrix detTest2(3,3,9);
+    CLMatrix<int> detTest2(3,3,9);
     for(int i = 1; i <=3; i++)
     {
         for(int j = 1; j <=3; j++)
@@ -234,8 +236,19 @@ int main(int argc,char *argv[])
         }
     }
     detTest2.printMatrix();
-    std::cout << detTest2.getDeterminant();
-    detTest.naive_getCofactor(1,2);
+    std::cout << detTest2.getDeterminant() << '\n';
+    CLMatrix<double> idMat(3,3,3);
+    idMat.insertNode(1,2,2);
+    idMat.insertNode(2,1,1);
+    idMat.insertNode(2,2,1);
+    idMat.insertNode(2,3,-1);
+    idMat.insertNode(3,1,2);
+    idMat.insertNode(3,2,1);
+    idMat.insertNode(3,3,-1);
+    std::cout << idMat.naive_getCofactor(2,1) << '\t' <<idMat.naive_getCofactor(3,3) << '\n';
+    idMat.printMatrix();
+    idMat.getInverseMatrix().printMatrix();
+    (idMat*(idMat.getInverseMatrix())).printMatrix();*/
     //CSRMatrix
 /*
     CSRMatrix mat(4, 4);
@@ -273,7 +286,7 @@ int main(int argc,char *argv[])
     */
 
 
-    /*
+
     if(argc == 1)
     {
         printHelp();
@@ -348,6 +361,14 @@ int main(int argc,char *argv[])
             else if(!strcmp(argv[2], "-mmult"))
             {
                 clmMult();
+            }
+            else if(!strcmp(argv[2], "-det"))
+            {
+                clmDet();
+            }
+            else if(!strcmp(argv[2], "-inv"))
+            {
+                clmInv();
             }
             else
             {
@@ -428,7 +449,7 @@ int main(int argc,char *argv[])
     {
         guide();
     }
-    std::cout << "Authors: Li Xie, Xu Yinan, Zhang Yuan-hang" << '\n';
+    std::cout << "Authors: Li Xie, Zhang Yuanhang, Xu Yinan" << '\n';
     return 0;
 }
 
@@ -461,6 +482,8 @@ std::cout << "Usage:" << " SML [-formats] [-options]" << endl;
                   << '\t' << '\t'<< "-mmult" << '\t' << "output the multiplication of two matrices" << '\n'
                   << '\t' << '\t'<< "-add" << '\t' << "addition of of two matrices." << '\n'
                   << '\t' << '\t'<< "-sub" << '\t' << "subtraction of of two matrices." << '\n' << '\n'
+                  << '\t' << '\t'<< "-det" << '\t' << "calculate the determinant of a matrix." << '\n' << '\n'
+                  << '\t' << '\t'<< "-inv" << '\t' << "output the inversion of a matrix." << '\n' << '\n'
                   << '\t' << "-csr" <<  '\t'<< '\t' << "Class CSRMatrix:" <<'\n'
                   << '\t' << '\t'<< "-mmult" << '\t' << "output the multiplication of two matrices" << '\n'
                   << '\t' << '\t'<< "-add" << '\t' << "addition of of two matrices." << '\n'
@@ -1039,8 +1062,8 @@ void clmAdd()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    CrossListStore::CLMatrix myCLM1(rowNum1, colNum1, nonz1);
-    CrossListStore::CLMatrix myCLM2(rowNum2, colNum2, nonz2);
+    CrossListStore::CLMatrix<int> myCLM1(rowNum1, colNum1, nonz1);
+    CrossListStore::CLMatrix<int> myCLM2(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
     {
@@ -1079,8 +1102,8 @@ void clmMult()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    CrossListStore::CLMatrix myCLM1(rowNum1, colNum1, nonz1);
-    CrossListStore::CLMatrix myCLM2(rowNum2, colNum2, nonz2);
+    CrossListStore::CLMatrix<int> myCLM1(rowNum1, colNum1, nonz1);
+    CrossListStore::CLMatrix<int> myCLM2(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <=nonz1; i++)
     {
@@ -1119,8 +1142,8 @@ void clmSub()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    CrossListStore::CLMatrix myCLM1(rowNum1, colNum1, nonz1);
-    CrossListStore::CLMatrix myCLM2(rowNum2, colNum2, nonz2);
+    CrossListStore::CLMatrix<int> myCLM1(rowNum1, colNum1, nonz1);
+    CrossListStore::CLMatrix<int> myCLM2(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
     {
@@ -1142,6 +1165,62 @@ void clmSub()
     std::cout << "second: " << '\n'; myCLM2.printMatrix();
     std::cout << "subtraction result: " << '\n';
     (myCLM1-myCLM2).printMatrix();
+}
+
+void clmDet()
+{
+    std::cout << "input the row and col number of the matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum1; cin >> rowNum1;
+    std::cout << "col: ";
+    unsigned int colNum1; cin >> colNum1;
+
+    std::cout << "input the non-zero number of the matrix: " << '\n';
+    unsigned int nonz1; cin >> nonz1;
+
+    CrossListStore::CLMatrix<int> myCLM1(rowNum1, colNum1, nonz1);
+
+    std::cout << "input the non-zero elements the matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz1; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        myCLM1.insertNode(row, col, val);
+    }
+
+    std::cout << "original matrix: " << '\n';
+    myCLM1.printMatrix();
+    std::cout << "Determinant result: " << '\n';
+    std::cout << myCLM1.getDeterminant() << '\n';
+}
+
+void clmInv()
+{
+    std::cout << "input the row and col number of the matrix: " << '\n'
+              << "row: ";
+    unsigned int rowNum1; cin >> rowNum1;
+    std::cout << "col: ";
+    unsigned int colNum1; cin >> colNum1;
+
+    std::cout << "input the non-zero number of the matrix: " << '\n';
+    unsigned int nonz1; cin >> nonz1;
+
+    CrossListStore::CLMatrix<double> myCLM1(rowNum1, colNum1, nonz1);
+
+    std::cout << "input the non-zero elements the matrix (in the format 'row col val'):" << '\n';
+    for(unsigned int i = 1; i <= nonz1; i++)
+    {
+        cout << i <<"th: ";
+        unsigned int row; unsigned int col; int val;
+        cin >> row >> col >> val;
+        myCLM1.insertNode(row, col, val);
+    }
+
+    std::cout << "original matrix: " << '\n';
+    myCLM1.printMatrix();
+    std::cout << "Inversion result: " << '\n';
+    myCLM1.getInverseMatrix().printMatrix();
 }
 
 void csrMult()
@@ -1262,6 +1341,7 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
     std::cout << "first: " << '\n'; myCSR1.printMatrix();
     std::cout << "second: " << '\n'; myCSR2.printMatrix();
     std::cout << "addition result: " << '\n';
-    (myCSR1+myCSR2).printMatrix();*/
+    (myCSR1+myCSR2).printMatrix();
+
 }
 

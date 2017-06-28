@@ -22,15 +22,16 @@ namespace CrossListStore
 
 
 
+template <typename T>
 class CLNode
 {
     public:
         CLNode();
-        CLNode(unsigned int row, unsigned int col, int val);
+        CLNode(unsigned int row, unsigned int col, T val);
         virtual ~CLNode();
-        void modifyNode(unsigned int row, unsigned int col, int val);
-        void createDownNode(unsigned int row, unsigned int col, int val);
-        void createRightNode(unsigned int row, unsigned int col, int val);
+        void modifyNode(unsigned int row, unsigned int col, T val);
+        void createDownNode(unsigned int row, unsigned int col, T val);
+        void createRightNode(unsigned int row, unsigned int col, T val);
         void deleteDownNode();
         void deleteRightNode();
 
@@ -41,7 +42,7 @@ class CLNode
 
         unsigned int getRowNum() const;
         unsigned int getColNum() const;
-        int getVal() const;
+        T getVal() const;
 
         void operator=(const CLNode &N);
         std::shared_ptr<CLNode> down;
@@ -49,7 +50,7 @@ class CLNode
     protected:
         unsigned int rowNum;
         unsigned int colNum;
-        int value;
+        T value;
     private:
 };
 

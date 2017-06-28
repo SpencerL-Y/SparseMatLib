@@ -260,7 +260,8 @@ TripletMatrix TripletMatrix::transposeMatrix() const
     Triplet ins;
     for(unsigned int i = 1; i < data.size(); i++)
     {
-        ins.modifyTriplet(data[i].getColNum(), data[i].getRowNum(), data[i].getValue());
+        ins.modifyTriplet(data[i].getColNum(),
+                          data[i].getRowNum(), data[i].getValue());
         Temp.insertTripletToMatrix(ins);
     }
     return Temp;

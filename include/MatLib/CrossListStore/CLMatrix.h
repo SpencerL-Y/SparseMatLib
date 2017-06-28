@@ -10,6 +10,7 @@
 #ifndef CLMATRIX_H
 #define CLMATRIX_H
 #include <MatLib/CrossListStore/CLNode.h>
+
 namespace MatLib
 {
 
@@ -17,7 +18,7 @@ namespace CrossListStore
 {
 
 
-
+template <typename T>
 class CLMatrix
 {
     public:
@@ -25,8 +26,8 @@ class CLMatrix
         CLMatrix(unsigned int wid, unsigned int hgt, unsigned int nonZero);
         virtual ~CLMatrix();
 
-        void insertNode(CLNode ins);
-        void insertNode(unsigned int row, unsigned int col, int val);
+        void insertNode(CLNode<T> ins);
+        void insertNode(unsigned int row, unsigned int col, T val);
         void printMatrix() const;
         void operator=(const CLMatrix &M);
         bool operator==(const CLMatrix &M) const;
@@ -38,11 +39,12 @@ class CLMatrix
         unsigned int getWidth() const;
         unsigned int getHeight() const;
         unsigned int getNonZero() const;
-        int getDeterminant();
+        T getDeterminant();
+        T naive_getCofactor(unsigned int row, unsigned int col);
         CLMatrix getInverseMatrix();
 
-        std::vector<std::shared_ptr<CLNode>> rowHead;
-        std::vector<std::shared_ptr<CLNode>> colHead;
+        std::vector<std::shared_ptr<CLNode<T>>> rowHead;
+        std::vector<std::shared_ptr<CLNode<T>>> colHead;
         std::vector<int> used;
 
 
@@ -50,8 +52,8 @@ class CLMatrix
         unsigned int width; unsigned int height;
         unsigned int nonZeroNum;
     private:
-        int deterCal(unsigned int colNow);
-        int naive_getCofactor(unsigned int row, unsigned int col);
+        T deterCal(unsigned int colNow);
+
 
 
 };
