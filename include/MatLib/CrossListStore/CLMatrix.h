@@ -38,12 +38,22 @@ class CLMatrix
         unsigned int getWidth() const;
         unsigned int getHeight() const;
         unsigned int getNonZero() const;
+        int getDeterminant();
+        CLMatrix getInverseMatrix();
+
         std::vector<std::shared_ptr<CLNode>> rowHead;
         std::vector<std::shared_ptr<CLNode>> colHead;
+        std::vector<int> used;
+
+
     protected:
         unsigned int width; unsigned int height;
         unsigned int nonZeroNum;
     private:
+        int deterCal(unsigned int colNow);
+        int naive_getCofactor(unsigned int row, unsigned int col);
+
+
 };
 
 

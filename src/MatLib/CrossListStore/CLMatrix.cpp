@@ -316,6 +316,128 @@ unsigned int CLMatrix::getNonZero() const
     return this->nonZeroNum;
 }
 
+int CLMatrix::getDeterminant()
+{
+
+    for(unsigned int i = 0; i <= this->getWidth(); i++)
+    {
+        this->used.push_back(1);
+    }
+    return deterCal(1);
+
+}
+
+int CLMatrix::deterCal(unsigned int colNow)
+{
+
+    if(colNow == this->getHeight()-1)
+    {
+        unsigned int detIndex[2] = {0 ,0};
+        int subMat[2][2] = {0};
+        for(unsigned int i = 1; i < this->used.size(); i++)
+        {
+            if(this->used[i])
+            {
+                if(!detIndex[0]){detIndex[0] = i; }
+                else {detIndex[1] = i;}
+            }
+        }
+        std::shared_ptr<CLNode> temp; temp = this->colHead[colNow]->down;
+        while(temp)
+        {
+            if(this->used[temp->getRowNum()] == 1)
+            {
+                if(detIndex[0] == temp->getRowNum())
+                {
+                    subMat[0][0] = temp->getVal();
+                }
+                else
+                {
+                    subMat[0][1] = temp->getVal();
+                }
+            }
+            temp = temp->down;
+        }
+        temp = this->colHead[colNow+1]->down;
+        while(temp)
+        {
+            if(this->used[temp->getRowNum()] == 1)
+            {
+                if(detIndex[0] == temp->getRowNum())
+                {
+                    subMat[1][0] = temp->getVal();
+                }
+                else
+                {
+                    subMat[1][1] = temp->getVal();
+                }
+            }
+            temp = temp->down;
+        }
+        return (subMat[0][0]*subMat[1][1] - subMat[1][0]*subMat[0][1]);
+    }
+    else
+    {
+        int det = 0;
+        std::shared_ptr<CLNode> temp = this->colHead[colNow]->down;
+        while(temp)
+        {
+            if(this->used[temp->getRowNum()])
+            {
+                int parity = ((temp->getRowNum() + colNow) & 0x1)? -1: 1;
+                this->used[temp->getRowNum()] = 0;
+                det += parity * temp->getVal() * deterCal(colNow+1);
+                this->used[temp->getRowNum()] = 1;
+            }
+            temp = temp->down;
+        }
+        return det;
+    }
+
+}
+
+int CLMatrix::naive_getCofactor(unsigned int row, unsigned int col)
+{
+    CLMatrix Temp(this->getWidth()-1, this->getHeight()-1, 0);
+    for(unsigned int i = 1; i < row; i++)
+    {
+        std::shared_ptr<CLNode> temp = rowHead[i]->right;
+        while(temp)
+        {
+            if(temp->getColNum() < col)
+            {
+                Temp.insertNode(temp->getRowNum(), temp->getColNum(), temp->getVal());
+            }
+            else
+            {
+                if(temp->getColNum() == col){;}
+                else{Temp.insertNode(temp->getRowNum(), temp->getColNum()-1, temp->getVal());}
+            }
+            temp = temp->right;
+        }
+    }
+    for(unsigned int i = row+1; i <= this->getWidth(); i++)
+    {
+        std::shared_ptr<CLNode> temp = rowHead[i]->right;
+        while(temp)
+        {
+            if(temp->getColNum() < col)
+            {
+                Temp.insertNode(temp->getRowNum()-1, temp->getColNum(), temp->getVal());
+            }
+            else
+            {
+                if(temp->getColNum() == col){;}
+                else{Temp.insertNode(temp->getRowNum()-1, temp->getColNum()-1, temp->getVal());}
+            }
+            temp = temp->right;
+
+        }
+    }
+    return Temp.getDeterminant();
+}
+
+
 CLMatrix::~CLMatrix()
 {
     //dtor

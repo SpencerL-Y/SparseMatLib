@@ -12,7 +12,7 @@ using namespace std;
 #include <MatLib/CrossListStore/CLMatrix.h>
 #include <MatLib/ArrayStore/Array2d.h>
 #include <MatLib/CSRStore/CSRMatrix.h>
-using namespace MatLib;
+using namespace MatLib::CrossListStore;
 
 void printHelp();
 void guide();
@@ -184,7 +184,7 @@ int main(int argc,char *argv[])
     head->createRightNode(1,3,2); head->right->createRightNode(1,5,2);
     head->printRightListVal(6);*/
 //CLMatrix
-/*
+
     CLMatrix M(3,3,3);
     for(unsigned int i = 0; i < 4; i++)
     {
@@ -216,16 +216,26 @@ int main(int argc,char *argv[])
     M.getNegMat().printMatrix();
     Mprime.printMatrix();
     (M-Mprime).printMatrix();
-    CLMatrix test(5,5,5);
-    for(unsigned int i = 1; i <=5; i++)
+    M.printMatrix();
+    M.getDeterminant();
+    CLMatrix detTest(4,4,10);
+    detTest.insertNode(1,1,1); detTest.insertNode(1,2,3); detTest.insertNode(1,3,2); detTest.insertNode(1,4,5);
+    detTest.insertNode(2,2,2); detTest.insertNode(2,3,10); detTest.insertNode(2,4,8);
+    detTest.insertNode(3,3,3); detTest.insertNode(3,4,9);
+    detTest.insertNode(4,4,4);
+    detTest.printMatrix();
+    std::cout << "The determinant of the matrix is " << detTest.getDeterminant() << '\n';
+    CLMatrix detTest2(3,3,9);
+    for(int i = 1; i <=3; i++)
     {
-        for(unsigned int j = 5; j >=1; j--)
+        for(int j = 1; j <=3; j++)
         {
-            CLNode ins(i,j,10);
-            test.insertNode(ins);
+            detTest2.insertNode(i, j, 1);
         }
     }
-    test.printMatrix();*/
+    detTest2.printMatrix();
+    std::cout << detTest2.getDeterminant();
+    detTest.naive_getCofactor(1,2);
     //CSRMatrix
 /*
     CSRMatrix mat(4, 4);
@@ -261,6 +271,9 @@ int main(int argc,char *argv[])
     b.printMatrix();
     (a*b).printMatrix();
     */
+
+
+    /*
     if(argc == 1)
     {
         printHelp();
@@ -1249,6 +1262,6 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
     std::cout << "first: " << '\n'; myCSR1.printMatrix();
     std::cout << "second: " << '\n'; myCSR2.printMatrix();
     std::cout << "addition result: " << '\n';
-    (myCSR1+myCSR2).printMatrix();
+    (myCSR1+myCSR2).printMatrix();*/
 }
 
