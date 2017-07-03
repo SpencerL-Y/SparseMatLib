@@ -17,7 +17,7 @@ namespace MatLib
 namespace CSRStore
 {
 
-
+template <typename T>
 class CSRMatrix
 {
     public:
@@ -35,22 +35,22 @@ class CSRMatrix
         void clearCSRMatrix(unsigned int matWid,\
                             unsigned int matHgt);
         void insertTupleToMatrix(unsigned int rowNum,\
-                                 CSRTuple ins);
+                                 CSRTuple<T> ins);
         void insertElemToMat(unsigned int rowNum,\
-                             unsigned int colNum, int value);
+                             unsigned int colNum, T value);
         void addInsert(unsigned int rowNum,\
-                       CSRTuple ins);
+                       CSRTuple<T> ins);
         //operator overload
-        void operator=(const CSRMatrix &M);
-        bool operator==(const CSRMatrix &M) const;
-        CSRMatrix operator+(const CSRMatrix &M);
-        CSRMatrix operator-(const CSRMatrix &M);
-        CSRMatrix operator*(const CSRMatrix &M);
+        void operator=(const CSRMatrix<T> &M);
+        bool operator==(const CSRMatrix<T> &M) const;
+        CSRMatrix operator+(const CSRMatrix<T> &M);
+        CSRMatrix operator-(const CSRMatrix<T> &M);
+        CSRMatrix operator*(const CSRMatrix<T> &M);
     protected:
         unsigned int matrixWidth;
         unsigned int matrixHeight;
         std::vector<int>rowPtr;
-        std::vector<CSRTuple> data;
+        std::vector<CSRTuple<T>> data;
     private:
 };
 

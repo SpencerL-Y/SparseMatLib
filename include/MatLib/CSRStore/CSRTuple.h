@@ -13,25 +13,25 @@ namespace MatLib
 {
 namespace CSRStore
 {
-
+template <typename T>
 class CSRTuple
 {
     public:
         CSRTuple();
         virtual ~CSRTuple();
-        void modifyTuple(unsigned int col, int val);
+        void modifyTuple(unsigned int col, T val);
         void destroyTuple();
         void printTuple() const;
         unsigned int getColNum() const;
-        int getVal() const;
-        void operator=(const CSRTuple &T);
-        bool operator!=(const CSRTuple &T) const;
-        bool operator==(const CSRTuple &T) const;
-        CSRTuple operator+(const CSRTuple &T);
-        CSRTuple operator-(const CSRTuple &T);
+        T getVal() const;
+        void operator=(const CSRTuple &t);
+        bool operator!=(const CSRTuple &t) const;
+        bool operator==(const CSRTuple &t) const;
+        CSRTuple operator+(const CSRTuple &t);
+        CSRTuple operator-(const CSRTuple &t);
     protected:
         unsigned int colNum;
-        int value;
+        T value;
     private:
 };
 

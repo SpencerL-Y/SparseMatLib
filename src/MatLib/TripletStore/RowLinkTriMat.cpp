@@ -8,12 +8,14 @@ namespace MatLib
 
 namespace TripletStore
 {
-RowLinkTriMat::RowLinkTriMat()
+template <typename T>
+RowLinkTriMat<T>::RowLinkTriMat()
 {
 
 
 }
-void RowLinkTriMat::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
+template <typename T>
+void RowLinkTriMat<T>::resizeMatrix(unsigned int width, unsigned int height, unsigned int nonZero)
 {
     /* TODO: Override resizeMatrix of TripletMatrix to initialize rowPtr
      * Debugged
@@ -26,8 +28,8 @@ void RowLinkTriMat::resizeMatrix(unsigned int width, unsigned int height, unsign
     }
     return;
 }
-
-void RowLinkTriMat::insertTripletToMatrix(Triplet insertTriplet)
+template <typename T>
+void RowLinkTriMat<T>::insertTripletToMatrix(Triplet<T> insertTriplet)
 {
     /* TODO: Insert Triplet
      * Debugged
@@ -43,24 +45,24 @@ void RowLinkTriMat::insertTripletToMatrix(Triplet insertTriplet)
     if(!ins)
     {
         this->data.push_back(insertTriplet);
-        rowPtr[insertTriplet.getRowNum()] = data.size()-1;
+        rowPtr[insertTriplet.getRowNum()] = this->data.size()-1;
         this->nonZeroUpdate();
         return;
     }
     else
     {
-        while(ins < data.size() && data[ins].getColNum() < insertTriplet.getColNum() && data[ins].getRowNum() == row)
+        while(ins < this->data.size() && this->data[ins].getColNum() < insertTriplet.getColNum() && this->data[ins].getRowNum() == row)
         {
             ins++;
         }
-        if(ins < data.size() && data[ins].getColNum() == insertTriplet.getColNum() && data[ins].getRowNum() == insertTriplet.getRowNum())
+        if(ins < this->data.size() && this->data[ins].getColNum() == insertTriplet.getColNum() && this->data[ins].getRowNum() == insertTriplet.getRowNum())
         {
             std::cout << "ERROR Inserting" << '\n';
             return ;
         }
         else
         {
-            this->data.insert(data.begin()+ins, insertTriplet);
+            this->data.insert(this->data.begin()+ins, insertTriplet);
             if(ins < rowPtr[insertTriplet.getRowNum()] || rowPtr[insertTriplet.getRowNum()] == 0)
             {
                 rowPtr[insertTriplet.getRowNum()] = ins;
@@ -77,64 +79,65 @@ void RowLinkTriMat::insertTripletToMatrix(Triplet insertTriplet)
     return ;
 }
 
-
-void RowLinkTriMat::operator=(const RowLinkTriMat &M)
+template <typename T>
+void RowLinkTriMat<T>::operator=(const RowLinkTriMat<T> &M)
 {
     /*Debugged*/
-    matrixWidth = M.getMatrixWidth(); matrixHeight = M.getMatrixHeight();
-    nonZeroNum = M.getMatrixNonZeroNum();
+    this->matrixWidth = M.getMatrixWidth();
+    this->matrixHeight = M.getMatrixHeight();
+    this->nonZeroNum = M.getMatrixNonZeroNum();
     this->data.assign(M.data.begin(), M.data.end());
     this->rowPtr.assign(M.rowPtr.begin(), M.rowPtr.end());
     return;
 
 }
-
-RowLinkTriMat RowLinkTriMat::operator+(const RowLinkTriMat &M)
+template <typename T>
+RowLinkTriMat<T> RowLinkTriMat<T>::operator+(const RowLinkTriMat<T> &M)
 {
     if(this->matrixWidth != M.matrixWidth || this->matrixHeight != M.matrixHeight)
     {
         std::cout << "Unable To Add" << '\n';
         return *this;
     }
-    RowLinkTriMat Temp; Temp.resizeMatrix(this->matrixWidth, this->matrixHeight, 0);
+    RowLinkTriMat<T> Temp; Temp.resizeMatrix(this->matrixWidth, this->matrixHeight, 0);
     unsigned int i = 1;  unsigned int j = 1;
-    while(i < data.size() && j < M.data.size())
+    while(i < this->data.size() && j < M.data.size())
     {
 
-        if(data[i].getRowNum() == M.data[j].getRowNum())
+        if(this->data[i].getRowNum() == M.data[j].getRowNum())
         {
-            if(data[i].getColNum() < M.data[j].getColNum())
+            if(this->data[i].getColNum() < M.data[j].getColNum())
             {
-                Temp.data.push_back(data[i]) ; i++;
+                Temp.data.push_back(this->data[i]) ; i++;
             }
-            else if(data[i].getColNum() == M.data[j].getColNum())
+            else if(this->data[i].getColNum() == M.data[j].getColNum())
             {
-                Triplet sum = data[i] + M.data[j];
+                Triplet<T> sum = this->data[i] + M.data[j];
                 if(sum.getValue())
                 {
-                    Temp.data.push_back(sum); i++; j++;
+                    Temp.data.push_back(sum);
                 }
                 i++; j++;
             }
-            else if(data[i].getColNum() > M.data[j].getColNum())
+            else if(this->data[i].getColNum() > M.data[j].getColNum())
             {
                 Temp.data.push_back(M.data[j]); j++;
             }
             else {;}
         }
-        else if(data[i].getRowNum() < M.data[j].getRowNum())
+        else if(this->data[i].getRowNum() < M.data[j].getRowNum())
         {
-            Temp.data.push_back(data[i]); i++;
+            Temp.data.push_back(this->data[i]); i++;
         }
-        else if(data[i].getRowNum() > M.data[j].getRowNum())
+        else if(this->data[i].getRowNum() > M.data[j].getRowNum())
         {
             Temp.data.push_back(M.data[j]); j++;
         }
         else {;}
     }
-    while(i < data.size())
+    while(i < this->data.size())
     {
-        Temp.data.push_back(data[i]);
+        Temp.data.push_back(this->data[i]);
         i++;
     }
     while(j < M.data.size())
@@ -154,19 +157,22 @@ RowLinkTriMat RowLinkTriMat::operator+(const RowLinkTriMat &M)
     return Temp;
 }
 
-
-RowLinkTriMat RowLinkTriMat::operator*(const RowLinkTriMat &M)
+template <typename T>
+RowLinkTriMat<T> RowLinkTriMat<T>::operator*(const RowLinkTriMat<T> &M)
 {
     /* TODO: Multiply
      * Debugged
      */
-    RowLinkTriMat Temp;
-    if(this->getMatrixHeight() != M.getMatrixWidth() || this->getMatrixWidth() == 0 || M.getMatrixHeight() == 0)
+    RowLinkTriMat<T> Temp;
+    if(this->getMatrixHeight() != M.getMatrixWidth() ||
+       this->getMatrixWidth() == 0 ||
+       M.getMatrixHeight() == 0)
     {
         std::cout<< "ERROR in Multiplication." << '\n';
         return *this;
     }
-    Temp.resizeMatrix(this->getMatrixWidth(), M.getMatrixHeight(), 0);
+    Temp.resizeMatrix(this->getMatrixWidth(),
+                      M.getMatrixHeight(), 0);
     //array used to store intermediate result
     std::vector<int> heightArray(M.getMatrixHeight()+1, 0);
 
@@ -182,7 +188,7 @@ RowLinkTriMat RowLinkTriMat::operator*(const RowLinkTriMat &M)
             if(j == 0) {break;}
             if(this->data[j].getRowNum() == tableRow)
             {
-                for(unsigned int k = M.rowPtr[data[j].getColNum()]; k < M.data.size(); k++)//Traverse M data vector
+                for(unsigned int k = M.rowPtr[this->data[j].getColNum()]; k < M.data.size(); k++)//Traverse M data vector
                 {
                     if(k == 0){break;}
                     if(this->data[j].getColNum() == M.data[k].getRowNum())
@@ -196,7 +202,7 @@ RowLinkTriMat RowLinkTriMat::operator*(const RowLinkTriMat &M)
         {
             if(heightArray[colNum])
             {
-                Triplet add;
+                Triplet<T> add;
                 add.modifyTriplet(tableRow, colNum, heightArray[colNum]);
                 Temp.insertTripletToMatrix(add);
 
@@ -217,27 +223,27 @@ RowLinkTriMat RowLinkTriMat::operator*(const RowLinkTriMat &M)
     return Temp;
 }
 
-
-void RowLinkTriMat::displayTable() const
+template <typename T>
+void RowLinkTriMat<T>::displayTable() const
 {
     /*  TODO: Override displayTable, add display of rowPtr
      *  Debugged
      */
     std::cout << "Matrix Table Print:" << '\n';
     std::cout << "Data: " << '\n';
-    for(unsigned int i = 0; i<data.size(); i++)
+    for(unsigned int i = 0; i<this->data.size(); i++)
     {
-        std::cout << data[i].getRowNum() << '\t';
+        std::cout << this->data[i].getRowNum() << '\t';
     }
     std::cout << '\n';
-    for(unsigned int i = 0; i<data.size(); i++)
+    for(unsigned int i = 0; i<this->data.size(); i++)
     {
-        std::cout << data[i].getColNum() << '\t';
+        std::cout << this->data[i].getColNum() << '\t';
     }
     std::cout << '\n';
-    for(unsigned int i = 0; i<data.size(); i++)
+    for(unsigned int i = 0; i<this->data.size(); i++)
     {
-        std::cout << data[i].getValue() << '\t';
+        std::cout << this->data[i].getValue() << '\t';
     }
     std::cout << '\n' << "rowPtr: " << '\n';
     for(unsigned int i = 1; i< rowPtr.size(); i++)
@@ -247,12 +253,13 @@ void RowLinkTriMat::displayTable() const
     std::cout << '\n';
 
 }
-
-RowLinkTriMat::~RowLinkTriMat()
+template <typename T>
+RowLinkTriMat<T>::~RowLinkTriMat()
 {
     //dtor
 }
-
+template class RowLinkTriMat<double>;
+template class RowLinkTriMat<int>;
 }
 
 

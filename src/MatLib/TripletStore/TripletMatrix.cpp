@@ -10,8 +10,8 @@ namespace TripletStore
 {
 
 //constructor
-
-TripletMatrix::TripletMatrix()
+template <typename T>
+TripletMatrix<T>::TripletMatrix()
 {
     /* TODO: Constructor
      * initialize the matrix width 0s and take the position of data[0].
@@ -19,15 +19,15 @@ TripletMatrix::TripletMatrix()
      */
     matrixWidth = 0; matrixHeight = 0;
     nonZeroNum = 0;
-    Triplet a;
+    Triplet<T> a;
     a.modifyTriplet(0,0,0);
     data.push_back(a);
 
 }
 
-
-void TripletMatrix::resizeMatrix(unsigned int width,\
-                                 unsigned int height, unsigned int nonZero)
+template <typename T>
+void TripletMatrix<T>::resizeMatrix(unsigned int width,\
+                                    unsigned int height, unsigned int nonZero)
 {
     /* TODO: resize Matrix */
     matrixWidth = width; matrixHeight = height;
@@ -35,8 +35,8 @@ void TripletMatrix::resizeMatrix(unsigned int width,\
 }
 
 
-
-void TripletMatrix::insertTripletToMatrix(Triplet insertTriplet)
+template <typename T>
+void TripletMatrix<T>::insertTripletToMatrix(Triplet<T> insertTriplet)
 {
    /* TODO: Insert a Triple into the right place of matrix table
     * Debugged
@@ -44,12 +44,22 @@ void TripletMatrix::insertTripletToMatrix(Triplet insertTriplet)
     unsigned int row = insertTriplet.getRowNum();
     unsigned int col = insertTriplet.getColNum();
     unsigned int i;
-    for(i = 1; i < data.size() &&  data[i].getColNum() && row > data[i].getRowNum() ; i++) ;
-    for(; row == data[i].getRowNum() && col > data[i].getColNum() && i < data.size(); i++);
-    if(row == data[i].getRowNum() && col == data[i].getColNum() && i < data.size())
+    for(i = 1; i < data.size() &&
+               data[i].getColNum() &&
+               row > data[i].getRowNum() ; i++) ;
+    for(; row == data[i].getRowNum() &&
+          col > data[i].getColNum() &&
+          i < data.size(); i++);
+    if(row == data[i].getRowNum() &&
+       col == data[i].getColNum() &&
+       i < data.size())
     {
-        std::cout << i << ": "<<"getRowNum: " << data[i].getRowNum() << " getColNum: " << data[i].getColNum() << " getVal: " << data[i].getValue()<< '\n';
-        std::cout << "row: " << row << "col: " << col<< "ERROR inserting" << '\n';
+        std::cout << i << ": "<<"getRowNum: " << data[i].getRowNum() << " getColNum: "
+                                              << data[i].getColNum() << " getVal: "
+                                              << data[i].getValue()<< '\n';
+        std::cout << "row: " << row
+                  << "col: " << col
+                  << "ERROR inserting" << '\n';
         return;
     }
     else
@@ -59,8 +69,8 @@ void TripletMatrix::insertTripletToMatrix(Triplet insertTriplet)
     return ;
 }
 
-
-void TripletMatrix::nonZeroUpdate()
+template <typename T>
+void TripletMatrix<T>::nonZeroUpdate()
 {
     /* TODO: get Non-zero number
      * Debugged
@@ -69,8 +79,8 @@ void TripletMatrix::nonZeroUpdate()
     //std::cout << this->nonZeroNum;
     return;
 }
-
-void TripletMatrix::displayTable() const
+template <typename T>
+void TripletMatrix<T>::displayTable() const
 {
     /* TODO: Display triple table of a matrix
      * Debugged
@@ -94,8 +104,8 @@ void TripletMatrix::displayTable() const
 
 
 }
-
-void TripletMatrix::printMatrix() const
+template <typename T>
+void TripletMatrix<T>::printMatrix() const
 {
     /* TODO: Print matrix.
      * Debugged
@@ -121,42 +131,47 @@ void TripletMatrix::printMatrix() const
     std::cout << '\n';
     return;
 }
-
-unsigned int TripletMatrix::getMatrixWidth() const
+template <typename T>
+unsigned int TripletMatrix<T>::getMatrixWidth() const
 {
     return matrixWidth;
 }
-unsigned int TripletMatrix::getMatrixHeight() const
+template <typename T>
+unsigned int TripletMatrix<T>::getMatrixHeight() const
 {
     return matrixHeight;
 }
-unsigned int TripletMatrix::getMatrixNonZeroNum() const
+template <typename T>
+unsigned int TripletMatrix<T>::getMatrixNonZeroNum() const
 {
     return nonZeroNum;
 }
 
 
 // Operators Overload
-
-void TripletMatrix::operator=(const TripletMatrix &M)
+template <typename T>
+void TripletMatrix<T>::operator=(const TripletMatrix<T> &M)
 {
     /*Debugged*/
-    matrixWidth = M.getMatrixWidth(); matrixHeight = M.getMatrixHeight();
+    matrixWidth = M.getMatrixWidth();
+    matrixHeight = M.getMatrixHeight();
     nonZeroNum = M.getMatrixNonZeroNum();
     this->data.assign(M.data.begin(), M.data.end());
     return;
 
 }
-
-bool TripletMatrix::operator==(const TripletMatrix &M) const
+template <typename T>
+bool TripletMatrix<T>::operator==(const TripletMatrix<T> &M) const
 {
    /* TODO: Equality Judge
     * Debugged
     */
-    if((matrixHeight == M.getMatrixHeight()) && (matrixWidth == M.getMatrixWidth())){;}
+    if((matrixHeight == M.getMatrixHeight()) &&
+       (matrixWidth == M.getMatrixWidth())){;}
     else return false;
     unsigned int i;
-    for(i = 1; this->data[i].getRowNum() && M.data[i].getRowNum(); i++)
+    for(i = 1; this->data[i].getRowNum() &&
+               M.data[i].getRowNum(); i++)
     {
         if(data[i].getRowNum()!=M.data[i].getRowNum() ||\
            data[i].getColNum()!=M.data[i].getColNum() ||\
@@ -172,19 +187,22 @@ bool TripletMatrix::operator==(const TripletMatrix &M) const
     return true;
     //lixie
 }
-
-TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
+template <typename T>
+TripletMatrix<T> TripletMatrix<T>::operator+(const TripletMatrix<T> &M)
 {
    /* TODO: ADD
     * Debugged
     */
-    if(this->matrixWidth != M.matrixWidth || this->matrixHeight != M.matrixHeight)
+    if(this->matrixWidth != M.matrixWidth ||
+       this->matrixHeight != M.matrixHeight)
     {
         std::cout << "Unable To Add" << '\n';
         return *this;
     }
-    TripletMatrix Temp; Temp.resizeMatrix(this->matrixWidth, this->matrixHeight, 0);
-    unsigned int i = 1;  unsigned int j = 1;
+    TripletMatrix<T> Temp; Temp.resizeMatrix(this->matrixWidth,
+                                             this->matrixHeight, 0);
+    unsigned int i = 1;
+    unsigned int j = 1;
     while(i < data.size() && j < M.data.size())
     {
 
@@ -196,7 +214,7 @@ TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
             }
             else if(data[i].getColNum() == M.data[j].getColNum())
             {
-                Triplet sum = data[i] + M.data[j];
+                Triplet<T> sum = data[i] + M.data[j];
                 if(sum.getValue())
                 {
                     Temp.data.push_back(sum);
@@ -233,31 +251,37 @@ TripletMatrix TripletMatrix::operator+(const TripletMatrix &M)
     return Temp;
 
 }
-
-TripletMatrix TripletMatrix::getNegMatrix() const
+template <typename T>
+TripletMatrix<T> TripletMatrix<T>::getNegMatrix() const
 {
     /* TODO: reverse the value
      * Debugged
      */
-    TripletMatrix NegMat; Triplet now;
-    NegMat.resizeMatrix(this->getMatrixWidth(), this->getMatrixHeight(), this->getMatrixNonZeroNum());
+    TripletMatrix<T> NegMat; Triplet<T> now;
+    NegMat.resizeMatrix(this->getMatrixWidth(),
+                        this->getMatrixHeight(),
+                        this->getMatrixNonZeroNum());
     for(unsigned int i = 1; i < data.size(); i++)
     {
         //std::cout<<i;
-        now.modifyTriplet(data[i].getRowNum(),data[i].getColNum(), -(data[i].getValue()));
+        now.modifyTriplet(data[i].getRowNum(),
+                          data[i].getColNum(),
+                          -(data[i].getValue()));
         NegMat.data.push_back(now);
     }
     return NegMat;
 }
-
-TripletMatrix TripletMatrix::transposeMatrix() const
+template <typename T>
+TripletMatrix<T> TripletMatrix<T>::transposeMatrix() const
 {
     /* TODO: transpose
      * Debugged
      */
-    TripletMatrix Temp;
-    Temp.resizeMatrix(this->matrixWidth, this->matrixHeight, this->nonZeroNum);
-    Triplet ins;
+    TripletMatrix<T> Temp;
+    Temp.resizeMatrix(this->matrixWidth,
+                      this->matrixHeight,
+                      this->nonZeroNum);
+    Triplet<T> ins;
     for(unsigned int i = 1; i < data.size(); i++)
     {
         ins.modifyTriplet(data[i].getColNum(),
@@ -268,14 +292,16 @@ TripletMatrix TripletMatrix::transposeMatrix() const
 
 }
 
-
-TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
+template <typename T>
+TripletMatrix<T> TripletMatrix<T>::operator*(const TripletMatrix<T> &M)
 {
     /* TODO: Multiply
      * Debugged
      */
-    TripletMatrix Temp;
-    if(this->getMatrixHeight() != M.getMatrixWidth() || this->getMatrixWidth() == 0 || M.getMatrixHeight() == 0)
+    TripletMatrix<T> Temp;
+    if(this->getMatrixHeight() != M.getMatrixWidth() ||
+       this->getMatrixWidth() == 0 ||
+       M.getMatrixHeight() == 0)
     {
         std::cout<< "ERROR in Multiplication." << '\n';
         return *this;
@@ -308,7 +334,7 @@ TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
         {
             if(heightArray[colNum])
             {
-                Triplet add;
+                Triplet<T> add;
                 add.modifyTriplet(tableRow, colNum, heightArray[colNum]);
                 Temp.insertTripletToMatrix(add);
 
@@ -321,20 +347,24 @@ TripletMatrix TripletMatrix::operator*(const TripletMatrix &M)
     Temp.nonZeroUpdate();
     return Temp;
 }
-
-TripletMatrix TripletMatrix::operator-(const TripletMatrix &M)
+template <typename T>
+TripletMatrix<T> TripletMatrix<T>::operator-(const TripletMatrix<T> &M)
 {
-    TripletMatrix Temp;
+    TripletMatrix<T> Temp;
     Temp = *this+M.getNegMatrix();
     return Temp;
 }
 //destructor
 //xie
-TripletMatrix::~TripletMatrix()
+template <typename T>
+TripletMatrix<T>::~TripletMatrix<T>()
 {
     data.clear();
    //std::cout << "TripleMatrix Destructed." << '\n';
 }
+
+template class TripletMatrix<int>;
+template class TripletMatrix<double>;
 
 }//End Namespace Triple
 

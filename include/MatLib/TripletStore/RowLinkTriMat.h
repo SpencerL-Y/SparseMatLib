@@ -17,15 +17,15 @@ namespace MatLib
 {
 namespace TripletStore
 {
-
-class RowLinkTriMat : public TripletMatrix
+template <typename T>
+class RowLinkTriMat : public TripletMatrix<T>
 {
     public:
         RowLinkTriMat();
         virtual ~RowLinkTriMat();
         void resizeMatrix(unsigned int width,\
                           unsigned int height, unsigned int nonZero);
-        void insertTripletToMatrix(Triplet insertTriplet);
+        void insertTripletToMatrix(Triplet<T> insertTriplet);
         void displayTable() const;
         void operator=(const RowLinkTriMat &M);
         RowLinkTriMat operator+(const RowLinkTriMat &M);

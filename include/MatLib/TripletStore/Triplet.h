@@ -19,7 +19,7 @@ namespace MatLib
 namespace TripletStore
 {
 
-
+template <typename T>
 class Triplet
 {
     public:
@@ -32,19 +32,19 @@ class Triplet
         // Methods that do no change to instance: add const qualifier.
         unsigned int getRowNum() const;
         unsigned int getColNum() const;
-        int getValue() const;
+        T getValue() const;
         void displayTriplet() const;
 
         void modifyTriplet(unsigned int newRow,\
-                           unsigned int newCol, int newVal);
-        void operator=(const Triplet &T);
-        bool operator==(const Triplet &T) const;
-        Triplet operator+(const Triplet &T);
-        Triplet operator-(const Triplet &T);
+                           unsigned int newCol, T newVal);
+        void operator=(const Triplet &t);
+        bool operator==(const Triplet &t) const;
+        Triplet operator+(const Triplet &t);
+        Triplet operator-(const Triplet &t);
     protected:
         unsigned int rowNum;
         unsigned int colNum;
-        int value;
+        T value;
     private:
 };
 

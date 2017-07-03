@@ -5,7 +5,8 @@ namespace MatLib
 {
 namespace ArrayStore
 {
-Array1d::Array1d(unsigned int length, bool rowVector)
+template <typename T>
+Array1d<T>::Array1d(unsigned int length, bool rowVector)
 {
     this->rowVec = rowVector;
     this->arraySize = length;
@@ -13,29 +14,29 @@ Array1d::Array1d(unsigned int length, bool rowVector)
     vec.resize(length+1, 0);
     return;
 }
-
-Array1d::~Array1d()
+template <typename T>
+Array1d<T>::~Array1d()
 {
     this->rowVec = 1;
     this->arraySize = 0; vec.push_back(0);
     //dtor
 }
-
-void Array1d::resizeArray(unsigned int arySize, int value)
+template <typename T>
+void Array1d<T>::resizeArray(unsigned int arySize, T value)
 {
     // vector resize
     this->arraySize = arySize;
     vec.resize(arySize+1, value);
 }
-
-void Array1d::resizeArray(unsigned int arySize)
+template <typename T>
+void Array1d<T>::resizeArray(unsigned int arySize)
 {
     // vector resize
     vec.resize(arySize+1, 0);
     this->arraySize = arySize;
 }
-
-void Array1d::setZero()
+template <typename T>
+void Array1d<T>::setZero()
 {
     //set all element int vec to 0
     for(unsigned int i = 0; i < vec.size(); i++)
@@ -43,31 +44,31 @@ void Array1d::setZero()
         vec[i] = 0;
     }
 }
-
-void Array1d::elemAssign(unsigned int pos, int value)
+template <typename T>
+void Array1d<T>::elemAssign(unsigned int pos, T value)
 {
     /* TODO: assign the value to vec[pos] if pos < size
      * Debugged
      */
     if(pos > this->arraySize|| pos == 0)
     {
-        std::cout << "ERROR in array1d assignment" <<'\n';
+        std::cout << "ERROR in Array1d assignment" <<'\n';
         return;
     }
     this->vec[pos] = value; return;
 }
-
-void Array1d::transpose()
+template <typename T>
+void Array1d<T>::transpose()
 {
     this->rowVec = !(this->rowVec);
 }
-
-unsigned int Array1d::getSize() const
+template <typename T>
+unsigned int Array1d<T>::getSize() const
 {
     return arraySize;
 }
-
-void Array1d::arrayPrint() const
+template <typename T>
+void Array1d<T>::arrayPrint() const
 {
     /* TODO: print array in sequence
      * Debugged
@@ -90,8 +91,8 @@ void Array1d::arrayPrint() const
     }
     return;
 }
-
-int Array1d::dotProduct(const Array1d &ary) const
+template <typename T>
+T Array1d<T>::dotProduct(const Array1d<T> &ary) const
 {
     /* TODO: dotProduct
      * Debugged
@@ -101,21 +102,21 @@ int Array1d::dotProduct(const Array1d &ary) const
         std::cout << "ERROR in dotProduct" << '\n';
         return 0;
     }
-    int sum = 0;
+    T sum = 0;
     for(unsigned int i = 1; i < vec.size(); i++)
     {
         sum += (vec[i])*(ary.vec[i]);
     }
     return sum;
 }
-
-Array1d Array1d::operator+(const Array1d &A)
+template <typename T>
+Array1d<T> Array1d<T>::operator+(const Array1d<T> &A)
 {
     if(this->arraySize != A.arraySize)
     {
-        std::cout << "ERROR: Array1d add error, size incompatible." <<'\n';
+        std::cout << "ERROR: Array1d<T> add error, size incompatible." <<'\n';
     }
-    Array1d temp(this->arraySize, 1);
+    Array1d<T> temp(this->arraySize, 1);
     for(unsigned int i = 0; i < this->vec.size(); i++)
     {
         temp.vec[i] = (this->vec[i]+\
@@ -123,6 +124,9 @@ Array1d Array1d::operator+(const Array1d &A)
     }
     return temp;
 }
+
+template class Array1d<double>;
+template class Array1d<int>;
 
 }//ArrayStore
 }//MatLib

@@ -20,7 +20,7 @@ namespace MatLib
 
 namespace TripletStore
 {
-
+template <typename T>
 class TripletMatrix
 {
     public:
@@ -37,7 +37,7 @@ class TripletMatrix
         // Instance Modifying
         void resizeMatrix(unsigned int width,\
                           unsigned int height, unsigned int nonZero);
-        void insertTripletToMatrix(Triplet insertTriplet);
+        void insertTripletToMatrix(Triplet<T> insertTriplet);
         void nonZeroUpdate();
         // Operators Overload
         void operator=(const TripletMatrix &M);
@@ -45,7 +45,7 @@ class TripletMatrix
         TripletMatrix operator+(const TripletMatrix &M);
         TripletMatrix operator-(const TripletMatrix &M);
         TripletMatrix operator*(const TripletMatrix &M);
-        std::vector<Triplet> data;
+        std::vector<Triplet<T>> data;
     protected:
         unsigned int matrixWidth; unsigned int matrixHeight;
         unsigned int nonZeroNum;

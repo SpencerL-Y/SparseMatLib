@@ -17,6 +17,7 @@ namespace MatLib
 
 namespace ArrayStore
 {
+template <typename T>
 class Array2d
 {
     public:
@@ -29,7 +30,7 @@ class Array2d
         Array2d getNegMatrix() const;
         Array2d transpose() const;
 
-        void insertElem(unsigned int row, unsigned int col, int val);
+        void insertElem(unsigned int row, unsigned int col, T val);
 
         void operator=(const Array2d &M);
         bool operator==(const Array2d &M) const;
@@ -39,7 +40,7 @@ class Array2d
 
 
         virtual ~Array2d();
-        std::vector<std::vector<int>> data;
+        std::vector<std::vector<T>> data;
     protected:
         unsigned int matrixWidth; unsigned int matrixHeight;
     private:

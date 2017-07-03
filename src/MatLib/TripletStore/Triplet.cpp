@@ -6,35 +6,35 @@ namespace MatLib
 
 namespace TripletStore
 {
-
-Triplet::Triplet()
+template <typename T>
+Triplet<T>::Triplet()
 {
     rowNum = 0; colNum = 0;
     value = 0;//ctor
 }
-
-unsigned int Triplet::getRowNum() const
+template <typename T>
+unsigned int Triplet<T>::getRowNum() const
 {
     return rowNum;
 }
-
-unsigned int Triplet::getColNum() const
+template <typename T>
+unsigned int Triplet<T>::getColNum() const
 {
     return colNum;
 }
-
-void Triplet::displayTriplet() const
+template <typename T>
+void Triplet<T>::displayTriplet() const
 {
-    //std::cout << "Triple Print:" << '\n';
+    //std::cout << "Triplet Print:" << '\n';
     std::cout << rowNum <<'\t'<< colNum << '\t' << value << '\n';
 }
-
-int Triplet::getValue() const
+template <typename T>
+T Triplet<T>::getValue() const
 {
     return value;
 }
-
-void Triplet::modifyTriplet(unsigned int newRow, unsigned int newCol, int newVal)
+template <typename T>
+void Triplet<T>::modifyTriplet(unsigned int newRow, unsigned int newCol, T newVal)
 {
     rowNum = newRow; colNum = newCol;
     value = newVal;
@@ -43,32 +43,33 @@ void Triplet::modifyTriplet(unsigned int newRow, unsigned int newCol, int newVal
 
 
 //Operators Overload
-void Triplet::operator=(const Triplet &T)
+template <typename T>
+void Triplet<T>::operator=(const Triplet<T> &t)
 {
-    rowNum = T.getRowNum();
-    colNum = T.getColNum();
-    value = T.getValue();
+    rowNum = t.getRowNum();
+    colNum = t.getColNum();
+    value = t.getValue();
 }
-
-bool Triplet::operator==(const Triplet &T) const
+template <typename T>
+bool Triplet<T>::operator==(const Triplet<T> &t) const
 {
-    if(rowNum == T.getRowNum() && colNum == T.getColNum() && value == T.getValue())
+    if(rowNum == t.getRowNum() && colNum == t.getColNum() && value == t.getValue())
     {
         return true;
     }
     else return false;
 }
-
-Triplet Triplet::operator+(const Triplet &T)
+template <typename T>
+Triplet<T> Triplet<T>::operator+(const Triplet<T> &t)
 {
-    if(this->getRowNum() != T.getRowNum() || this->getColNum() != T.getColNum())
+    if(this->getRowNum() != t.getRowNum() || this->getColNum() != t.getColNum())
     {
         std::cout << "ERROR: Unable to add Triple" << '\n';
         return *this;
     }
-    Triplet Temp;
+    Triplet<T> Temp;
     Temp.rowNum = this->getRowNum(); Temp.colNum = this->getColNum();
-    Temp.value = this->getValue() + T.getValue();
+    Temp.value = this->getValue() + t.getValue();
     if(Temp.getValue() == 0)
     {
         Temp.modifyTriplet(0,0,0);
@@ -78,11 +79,14 @@ Triplet Triplet::operator+(const Triplet &T)
 
 
 
-
-Triplet::~Triplet()
+template <typename T>
+Triplet<T>::~Triplet()
 {
     //dtor
 }
+
+template class Triplet<double>;
+template class Triplet<int>;
 
 }
 

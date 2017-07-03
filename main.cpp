@@ -85,34 +85,35 @@ int main(int argc,char *argv[])
 */
 //RowLinkTriMat
 /*
-    RowLinkTriMat M;
+    RowLinkTriMat<int> M;
     M.resizeMatrix(3,3,3);
     M.displayTable();
-    Triplet a; a.modifyTriplet(1,1,1);
+    Triplet<int> a; a.modifyTriplet(1,1,1);
     M.insertTripletToMatrix(a);
     M.displayTable();
     a.modifyTriplet(2,2,2); M.insertTripletToMatrix(a);
     M.displayTable();
-    a.modifyTriplet(3,3,3); M.insertTripletToMatrix(a);
+    a.modifyTriplet(2,3,3); M.insertTripletToMatrix(a);
     M.displayTable();
-    RowLinkTriMat MM; MM.resizeMatrix(3,3,0);
+    RowLinkTriMat<int> MM; MM.resizeMatrix(3,3,0);
     a.modifyTriplet(2,3,1); MM.insertTripletToMatrix(a);
     MM.displayTable();
     a.modifyTriplet(3,1,2); MM.insertTripletToMatrix(a);
+    M.printMatrix();
     MM.displayTable();
     MM.printMatrix();
+
     (M+MM).displayTable();
     (M+MM).printMatrix();
-    RowLinkTriMat multi = M+MM;
-    (multi*multi).displayTable();
-    (multi*multi).printMatrix();
-    RowLinkTriMat test;
+
+
+    RowLinkTriMat<int> test;
     test.resizeMatrix(5,5,5);
     for(unsigned int i = 1; i<=5; i++)
     {
         for(unsigned int j = 5; j >=1; j--)
         {
-            Triplet ins; ins.modifyTriplet(i,j,10);
+            Triplet<int> ins; ins.modifyTriplet(i,j,10);
             test.insertTripletToMatrix(ins);
         }
     }
@@ -508,8 +509,8 @@ void array1dDot()
     if(input == 'Y' || input == 'y' || input == '1'){rowVector = 1;}
     else if(input == 'N' || input == 'n'|| input == '0'){rowVector = 0;}
     else {std::cout << "ERROR input."; return;}
-    ArrayStore::Array1d myArray1(length, rowVector);
-    ArrayStore::Array1d myArray2(length, rowVector);
+    ArrayStore::Array1d<int> myArray1(length, rowVector);
+    ArrayStore::Array1d<int> myArray2(length, rowVector);
     std::cout << "input elements for array1 (format: '1 2 3'):" << '\n';
     for(unsigned int i = 1; i < myArray1.vec.size(); i++)
     {
@@ -534,8 +535,8 @@ void array1dAdd()
     if(input == 'Y' || input == 'y' || input == '1'){rowVector = 1;}
     else if(input == 'N' || input == 'n'|| input == '0'){rowVector = 0;}
     else {std::cout << "ERROR input."; return;}
-    ArrayStore::Array1d myArray1(length, rowVector);
-    ArrayStore::Array1d myArray2(length, rowVector);
+    ArrayStore::Array1d<int> myArray1(length, rowVector);
+    ArrayStore::Array1d<int> myArray2(length, rowVector);
     std::cout << "input elements for array1 (format: '1 2 3'):" << '\n';
     for(unsigned int i = 1; i < myArray1.vec.size(); i++)
     {
@@ -561,7 +562,7 @@ void array1dTrans()
     if(input == 'Y' || input == 'y' || input == '1'){rowVector = 1;}
     else if(input == 'N' || input == 'n'|| input == '0'){rowVector = 0;}
     else {std::cout << "ERROR input."; return;}
-    ArrayStore::Array1d myArray1(length, rowVector);
+    ArrayStore::Array1d<int> myArray1(length, rowVector);
     std::cout << "input elements for array1 (format: '1 2 3'):" << '\n';
     for(unsigned int i = 1; i < myArray1.vec.size(); i++)
     {
@@ -580,7 +581,7 @@ void array2dTrans()
 
     int width; int height;
     cin >> width; std::cout << "col: " <<'\n';cin >> height;
-    ArrayStore::Array2d myArray2d(width, height);
+    ArrayStore::Array2d<int> myArray2d(width, height);
     std::cout << "input the number of nonzero elements:" << '\n';
     unsigned int nznum; cin >> nznum;
     std::cout << "input non-zero elements (in the format: 'row col val'):" << '\n';
@@ -606,8 +607,8 @@ void array2dMult()
     int width1; int height1;cin >> height1;
     std::cout << "col: " ;cin >> width1;std::cout <<"second: " << "row: " ;
     int width2; int height2;cin >> width2;std::cout << "col: "; cin>>height2;
-    ArrayStore::Array2d myArray2d1(width1, height1);
-    ArrayStore::Array2d myArray2d2(width2, height2);
+    ArrayStore::Array2d<int> myArray2d1(width1, height1);
+    ArrayStore::Array2d<int> myArray2d2(width2, height2);
     if(width1 != height2){std::cout << "ERROR: size incompatible." <<'\n';return;}
     std::cout << "input the number of nonzero elements:" << '\n';
     std::cout << "first: " << '\n';unsigned int nznum1; cin >> nznum1;
@@ -649,8 +650,8 @@ void array2dAdd()
     int width1; int height1;cin >> height1;
     std::cout << "col: ";cin >> width1;std::cout <<"second: " << "row: ";
     int width2; int height2;cin >> width2;std::cout << "col: "; cin>>height2;
-    ArrayStore::Array2d myArray2d1(width1, height1);
-    ArrayStore::Array2d myArray2d2(width2, height2);
+    ArrayStore::Array2d<int> myArray2d1(width1, height1);
+    ArrayStore::Array2d<int> myArray2d2(width2, height2);
     if(width1 != height2){std::cout << "ERROR: size incompatible." <<'\n';return;}
     std::cout << "input the number of nonzero elements:" << '\n';
     std::cout << "first: " << '\n';unsigned int nznum1; cin >> nznum1;
@@ -692,8 +693,8 @@ std::cout << "input the row number and col number of two matrices:" << '\n'<<"fi
     int width1; int height1;cin >> height1;
     std::cout << "col: " <<'\n';cin >> width1;std::cout <<"second: " << "row: ";
     int width2; int height2;cin >> width2;std::cout << "col: "; cin>>height2;
-    ArrayStore::Array2d myArray2d1(width1, height1);
-    ArrayStore::Array2d myArray2d2(width2, height2);
+    ArrayStore::Array2d<int> myArray2d1(width1, height1);
+    ArrayStore::Array2d<int> myArray2d2(width2, height2);
     if(width1 != height2){std::cout << "ERROR: size incompatible." <<'\n';return;}
     std::cout << "input the number of nonzero elements:" << '\n';
     std::cout << "first: " << '\n';unsigned int nznum1; cin >> nznum1;
@@ -738,7 +739,7 @@ void triTrans()
     unsigned int colNum1; cin >> colNum1;
     std::cout << "input the number of non-zero elements: " << '\n';
     unsigned int nonz1; cin >> nonz1;
-    TripletStore::TripletMatrix myTriMat1;
+    TripletStore::TripletMatrix<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
     std::cout << "input the non-zero elements (in the format 'row col val')" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -746,7 +747,7 @@ void triTrans()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "original matrix: " << '\n';
@@ -770,9 +771,9 @@ void triAdd()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    TripletStore::TripletMatrix myTriMat1;
+    TripletStore::TripletMatrix<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
-    TripletStore::TripletMatrix myTriMat2;
+    TripletStore::TripletMatrix<int> myTriMat2;
     myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -780,7 +781,7 @@ void triAdd()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
@@ -789,7 +790,7 @@ void triAdd()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat2.insertTripletToMatrix(ins);
     }
     std::cout << "original matrices: " << '\n';
@@ -814,9 +815,9 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    TripletStore::TripletMatrix myTriMat1;
+    TripletStore::TripletMatrix<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
-    TripletStore::TripletMatrix myTriMat2;
+    TripletStore::TripletMatrix<int> myTriMat2;
     myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -824,7 +825,7 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
@@ -833,7 +834,7 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat2.insertTripletToMatrix(ins);
     }
     std::cout << "original matrices: " << '\n';
@@ -858,9 +859,9 @@ void triMult()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    TripletStore::TripletMatrix myTriMat1;
+    TripletStore::TripletMatrix<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
-    TripletStore::TripletMatrix myTriMat2;
+    TripletStore::TripletMatrix<int> myTriMat2;
     myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -868,7 +869,7 @@ void triMult()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
@@ -877,7 +878,7 @@ void triMult()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat2.insertTripletToMatrix(ins);
     }
     std::cout << "original matrices: " << '\n';
@@ -897,7 +898,7 @@ void trirlTrans()
     unsigned int colNum1; cin >> colNum1;
     std::cout << "input the number of non-zero elements: " << '\n';
     unsigned int nonz1; cin >> nonz1;
-    TripletStore::RowLinkTriMat myTriMat1;
+    TripletStore::RowLinkTriMat<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
     std::cout << "input the non-zero elements (in the format 'row col val')" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -905,7 +906,7 @@ void trirlTrans()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "original matrix: " << '\n';
@@ -929,9 +930,9 @@ void trirlAdd()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    TripletStore::RowLinkTriMat myTriMat1;
+    TripletStore::RowLinkTriMat<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
-    TripletStore::RowLinkTriMat myTriMat2;
+    TripletStore::RowLinkTriMat<int> myTriMat2;
     myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -939,7 +940,7 @@ void trirlAdd()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
@@ -948,7 +949,7 @@ void trirlAdd()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat2.insertTripletToMatrix(ins);
     }
     std::cout << "original matrices: " << '\n';
@@ -973,9 +974,9 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    TripletStore::RowLinkTriMat myTriMat1;
+    TripletStore::RowLinkTriMat<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
-    TripletStore::RowLinkTriMat myTriMat2;
+    TripletStore::RowLinkTriMat<int> myTriMat2;
     myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -983,7 +984,7 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
@@ -992,7 +993,7 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat2.insertTripletToMatrix(ins);
     }
     std::cout << "original matrices: " << '\n';
@@ -1017,9 +1018,9 @@ void trirlMult()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    TripletStore::RowLinkTriMat myTriMat1;
+    TripletStore::RowLinkTriMat<int> myTriMat1;
     myTriMat1.resizeMatrix(rowNum1, colNum1, nonz1);
-    TripletStore::RowLinkTriMat myTriMat2;
+    TripletStore::RowLinkTriMat<int> myTriMat2;
     myTriMat2.resizeMatrix(rowNum2, colNum2, nonz2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
@@ -1027,7 +1028,7 @@ void trirlMult()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat1.insertTripletToMatrix(ins);
     }
     std::cout << "input the non-zero elements of second matrix (in the format 'row col val'):" << '\n';
@@ -1036,7 +1037,7 @@ void trirlMult()
         cout << i <<"th: ";
         unsigned int row; unsigned int col; int val;
         cin >> row >> col >> val;
-        TripletStore::Triplet ins; ins.modifyTriplet(row, col, val);
+        TripletStore::Triplet<int> ins; ins.modifyTriplet(row, col, val);
         myTriMat2.insertTripletToMatrix(ins);
     }
     std::cout << "original matrices: " << '\n';
@@ -1239,8 +1240,8 @@ void csrMult()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    CSRStore::CSRMatrix myCSR1(rowNum1, colNum1);
-    CSRStore::CSRMatrix myCSR2(rowNum2, colNum2);
+    CSRStore::CSRMatrix<int> myCSR1(rowNum1, colNum1);
+    CSRStore::CSRMatrix<int> myCSR2(rowNum2, colNum2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
     {
@@ -1279,8 +1280,8 @@ void csrSub()
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    CSRStore::CSRMatrix myCSR1(rowNum1, colNum1);
-    CSRStore::CSRMatrix myCSR2(rowNum2, colNum2);
+    CSRStore::CSRMatrix<int> myCSR1(rowNum1, colNum1);
+    CSRStore::CSRMatrix<int> myCSR2(rowNum2, colNum2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
     {
@@ -1319,8 +1320,8 @@ std::cout << "input the row and col number of the first matrix: " << '\n'
     unsigned int nonz1; cin >> nonz1;
     std::cout << "input the non-zero number of the second matrix: " << '\n';
     unsigned int nonz2; cin >> nonz2;
-    CSRStore::CSRMatrix myCSR1(rowNum1, colNum1);
-    CSRStore::CSRMatrix myCSR2(rowNum2, colNum2);
+    CSRStore::CSRMatrix<int> myCSR1(rowNum1, colNum1);
+    CSRStore::CSRMatrix<int> myCSR2(rowNum2, colNum2);
     std::cout << "input the non-zero elements of first matrix (in the format 'row col val'):" << '\n';
     for(unsigned int i = 1; i <= nonz1; i++)
     {

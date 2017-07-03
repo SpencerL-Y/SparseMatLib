@@ -3,65 +3,68 @@
 #include "MatLib/CSRStore/CSRTuple.h"
 namespace MatLib
 {
+
 namespace CSRStore
 {
 
-CSRTuple::CSRTuple()
+
+template <typename T>
+CSRTuple<T>::CSRTuple()
 {
     //ctor
 }
-
-void CSRTuple::modifyTuple(unsigned int col, int val)
+template <typename T>
+void CSRTuple<T>::modifyTuple(unsigned int col, T val)
 {
     colNum = col; value = val;
 }
-
-void CSRTuple::printTuple() const
+template <typename T>
+void CSRTuple<T>::printTuple() const
 {
     if(colNum)
         std::cout<< colNum << '\t' \
                  << value  << '\n';
 }
-
-void CSRTuple::destroyTuple()
+template <typename T>
+void CSRTuple<T>::destroyTuple()
 {
     colNum = 0; value = 0;
 }
-
-unsigned int CSRTuple::getColNum() const
+template <typename T>
+unsigned int CSRTuple<T>::getColNum() const
 {
     return colNum;
 }
-
-int CSRTuple::getVal() const
+template <typename T>
+T CSRTuple<T>::getVal() const
 {
     return value;
 }
-
-void CSRTuple::operator=(const CSRTuple &T)
+template <typename T>
+void CSRTuple<T>::operator=(const CSRTuple<T> &t)
 {
-    colNum = T.getColNum(); value = T.getVal();
+    colNum = t.getColNum(); value = t.getVal();
 }
-
-bool CSRTuple::operator==(const CSRTuple &M) const
+template <typename T>
+bool CSRTuple<T>::operator==(const CSRTuple<T> &t) const
 {
-    if(colNum == M.getColNum() && value == M.getVal())
+    if(colNum == t.getColNum() && value == t.getVal())
     {
         return true;
     }
     return false;
 }
-
-CSRTuple CSRTuple::operator+(const CSRTuple &T)
+template <typename T>
+CSRTuple<T> CSRTuple<T>::operator+(const CSRTuple<T> &t)
 {
-    if(colNum != T.getColNum())
+    if(colNum != t.getColNum())
     {
         std::cout << "ERROR Adding CSRTuples" << '\n';
         return *this;
     }
-    CSRTuple Temp;
+    CSRTuple<T> Temp;
     Temp.modifyTuple(this->getColNum(), \
-                     this->getVal() + T.getVal());
+                     this->getVal() + t.getVal());
     if(Temp.getVal() == 0)
     {
         Temp.modifyTuple(0,0);
@@ -70,11 +73,11 @@ CSRTuple CSRTuple::operator+(const CSRTuple &T)
 
 
 }
-
-bool CSRTuple::operator!=(const CSRTuple &T) const
+template <typename T>
+bool CSRTuple<T>::operator!=(const CSRTuple<T> &t) const
 {
-    if(this->colNum != T.getColNum() ||\
-       this->value  != T.getVal())
+    if(this->colNum != t.getColNum() ||\
+       this->value  != t.getVal())
     {
         return true;
     }
@@ -83,32 +86,33 @@ bool CSRTuple::operator!=(const CSRTuple &T) const
         return false;
     }
 }
-
-CSRTuple CSRTuple::operator-(const CSRTuple &M)
+template <typename T>
+CSRTuple<T> CSRTuple<T>::operator-(const CSRTuple<T> &t)
 {
-    if(colNum != M.getColNum())
+    if(colNum != t.getColNum())
     {
         std::cout << "ERROR Sub CSRTuples." << '\n';
         return *this;
     }
-    CSRTuple Temp;
-    if(this->getVal() == M.getVal())
+    CSRTuple<T> Temp;
+    if(this->getVal() == t.getVal())
     {
         Temp.modifyTuple(0,0);
     }
     else
     {
         Temp.modifyTuple(this->getColNum(),\
-                         this->getVal() - M.getVal());
+                         this->getVal() - t.getVal());
     }
     return Temp;
 }
-
-CSRTuple::~CSRTuple()
+template <typename T>
+CSRTuple<T>::~CSRTuple<T>()
 {
     //dtor
 }
 
-
+template class CSRTuple<double>;
+template class CSRTuple<int>;
 }//CSRStore
 }//MatLib

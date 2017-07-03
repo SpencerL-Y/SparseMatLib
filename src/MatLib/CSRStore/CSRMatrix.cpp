@@ -5,8 +5,8 @@ namespace MatLib
 {
 namespace CSRStore
 {
-
-CSRMatrix::CSRMatrix(unsigned int width,\
+template <typename T>
+CSRMatrix<T>::CSRMatrix(unsigned int width,\
                      unsigned int height)
 {
     this->matrixWidth = width;
@@ -15,11 +15,11 @@ CSRMatrix::CSRMatrix(unsigned int width,\
     {
         this->rowPtr.push_back(0);
     }
-    CSRTuple ins; ins.modifyTuple(0,0);
+    CSRTuple<T> ins; ins.modifyTuple(0,0);
     this->data.push_back(ins);
 }
-
-void CSRMatrix::displayTable() const
+template <typename T>
+void CSRMatrix<T>::displayTable() const
 {
     std::cout << '\n'<< "CSRTuple Array:" << '\n';
     for(unsigned int i = 1; i < data.size() ; i++)
@@ -35,8 +35,8 @@ void CSRMatrix::displayTable() const
         std::cout << rowPtr[i] << '\t';
     }   std::cout << '\n';
 }
-
-void CSRMatrix::clearCSRMatrix(unsigned int matWid,\
+template <typename T>
+void CSRMatrix<T>::clearCSRMatrix(unsigned int matWid,\
                                unsigned int matHgt)
 {
     this->matrixWidth = matWid;
@@ -47,24 +47,24 @@ void CSRMatrix::clearCSRMatrix(unsigned int matWid,\
         this->rowPtr.push_back(0);
     }
 }
-
-unsigned int CSRMatrix::getMatrixWidth() const
+template <typename T>
+unsigned int CSRMatrix<T>::getMatrixWidth() const
 {
     return matrixWidth;
 }
-
-unsigned int CSRMatrix::getMatrixHeight() const
+template <typename T>
+unsigned int CSRMatrix<T>::getMatrixHeight() const
 {
     return matrixHeight;
 }
-
-unsigned int CSRMatrix::getMatrixNonZeroNum() const
+template <typename T>
+unsigned int CSRMatrix<T>::getMatrixNonZeroNum() const
 {
     return (this->data.size() - 1);
 }
-
-void CSRMatrix::insertTupleToMatrix(unsigned int rowNum,\
-                                    CSRTuple ins)
+template <typename T>
+void CSRMatrix<T>::insertTupleToMatrix(unsigned int rowNum,\
+                                    CSRTuple<T> ins)
 {
     /* Debugged */
     if(this->rowPtr[rowNum] == 0)
@@ -133,8 +133,9 @@ void CSRMatrix::insertTupleToMatrix(unsigned int rowNum,\
         return;
     }
 }
-void CSRMatrix::addInsert(unsigned int rowNum,\
-                          CSRTuple ins)
+template <typename T>
+void CSRMatrix<T>::addInsert(unsigned int rowNum,\
+                          CSRTuple<T> ins)
 {
     if(this->rowPtr[rowNum] == 0)
     {
@@ -212,15 +213,16 @@ void CSRMatrix::addInsert(unsigned int rowNum,\
     }
 
 }
-void CSRMatrix::insertElemToMat(unsigned int rowNum,\
+template <typename T>
+void CSRMatrix<T>::insertElemToMat(unsigned int rowNum,\
                                 unsigned int colNum,\
-                                int value)
+                                T value)
 {
-    CSRTuple ins; ins.modifyTuple(colNum, value);
+    CSRTuple<T> ins; ins.modifyTuple(colNum, value);
     this->insertTupleToMatrix(rowNum, ins);
 }
-
-void CSRMatrix::printMatrix() const
+template <typename T>
+void CSRMatrix<T>::printMatrix() const
 {
     /* Debugged */
     unsigned int row = 1;
@@ -262,8 +264,8 @@ void CSRMatrix::printMatrix() const
         }
     }
 }
-
-void CSRMatrix::operator=(const CSRMatrix &M)
+template <typename T>
+void CSRMatrix<T>::operator=(const CSRMatrix<T> &M)
 {
     /* Debugged */
     if(this->matrixWidth != M.getMatrixWidth() ||\
@@ -284,8 +286,8 @@ void CSRMatrix::operator=(const CSRMatrix &M)
     }
 }
 
-
-bool CSRMatrix::operator==(const CSRMatrix &M) const
+template <typename T>
+bool CSRMatrix<T>::operator==(const CSRMatrix<T> &M) const
 {
     if(matrixHeight != M.getMatrixHeight() ||\
        matrixWidth  != M.getMatrixWidth())
@@ -318,7 +320,8 @@ bool CSRMatrix::operator==(const CSRMatrix &M) const
 }
 
 //Not Debugged
-CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
+template <typename T>
+CSRMatrix<T> CSRMatrix<T>::operator+(const CSRMatrix<T> &M)
 {
     if(this->getMatrixWidth() != M.getMatrixWidth() ||\
        this->getMatrixHeight()!= M.getMatrixHeight())
@@ -326,7 +329,7 @@ CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
         std::cout << "Unable to Add." << '\n';
         return *this;
     }
-    CSRMatrix temp(M.getMatrixWidth(),\
+    CSRMatrix<T> temp(M.getMatrixWidth(),\
                    M.getMatrixHeight());
     temp = M;
     unsigned int row = 1;
@@ -350,10 +353,10 @@ CSRMatrix CSRMatrix::operator+(const CSRMatrix &M)
     }
     return temp;
 }
-
-CSRMatrix CSRMatrix::getNegMat() const
+template <typename T>
+CSRMatrix<T> CSRMatrix<T>::getNegMat() const
 {
-    CSRMatrix temp(this->getMatrixWidth(), \
+    CSRMatrix<T> temp(this->getMatrixWidth(), \
                    this->getMatrixHeight());
     temp = *this;
     for(unsigned int i = 1; i < data.size(); i++)
@@ -363,23 +366,23 @@ CSRMatrix CSRMatrix::getNegMat() const
     }
     return temp;
 }
-
-CSRMatrix CSRMatrix::operator-(const CSRMatrix &M)
+template <typename T>
+CSRMatrix<T> CSRMatrix<T>::operator-(const CSRMatrix<T> &M)
 {
-    CSRMatrix temp(this->getMatrixWidth(),\
+    CSRMatrix<T> temp(this->getMatrixWidth(),\
                    this->getMatrixHeight());
     temp = *this+M.getNegMat();
     return temp;
 }
-
-CSRMatrix CSRMatrix::operator*(const CSRMatrix &M)
+template <typename T>
+CSRMatrix<T> CSRMatrix<T>::operator*(const CSRMatrix<T> &M)
 {
     if(this->getMatrixHeight() != M.getMatrixWidth())
     {
         std::cout << "ERROR in CSRMatrix Multiplication: size incompatible." << '\n';
         return *this;
     }
-    CSRMatrix temp(this->getMatrixWidth(),\
+    CSRMatrix<T> temp(this->getMatrixWidth(),\
                    M.getMatrixHeight());
     for(unsigned int thisRow = 1; thisRow < this->getMatrixWidth(); thisRow++)
     {
@@ -391,7 +394,7 @@ CSRMatrix CSRMatrix::operator*(const CSRMatrix &M)
         for(unsigned int pos = rowPtr[thisRow]; pos < thisUp && pos; pos++)
         {
             unsigned int Mrow = this->data[pos].getColNum();
-            CSRTuple ins;
+            CSRTuple<T> ins;
             unsigned int upper = M.data.size();
             for(unsigned int x = Mrow+1; x < M.rowPtr.size(); x++)
             {
@@ -409,11 +412,15 @@ CSRMatrix CSRMatrix::operator*(const CSRMatrix &M)
         }
     }return temp;
 }
-
-CSRMatrix::~CSRMatrix()
+template <typename T>
+CSRMatrix<T>::~CSRMatrix()
 {
     //dtor
 }
+
+
+template class CSRMatrix<double>;
+template class CSRMatrix<int>;
 
 }//CSRStore
 }//MatLib
