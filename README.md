@@ -1,8 +1,8 @@
 # Sparse Matrix Library For Demonstration
-- **Environment**: Win10 15063.296
-- **Compiler**: g++ [-stl=c++11]
+- **Environment**: Windows 10 15063.296
+- **Compiler**: g++ [-std=c++11]
 - **IDE**: Codeblocks 16.01
-- **Status**: Under development
+- **Status**: Completed (not responsible for any bugs that mey remain)
 
 ## Current members:
 - Xie Li
@@ -26,8 +26,4 @@
 		* CrossList: finished
 
 ## Message Board
-Matrix transpose and matrix inversion are not implemented now, which will be added later.
-
-
-
-
+Matrix transpose and matrix inversion (iterative version) are not implemented now; will be added later.
