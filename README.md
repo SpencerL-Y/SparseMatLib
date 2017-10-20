@@ -2,7 +2,7 @@
 - **Environment**: Windows 10 15063.296
 - **Compiler**: g++ [-std=c++11]
 - **IDE**: Codeblocks 16.01
-- **Status**: Completed (not responsible for any bugs that mey remain)
+- **Status**: Completed (not responsible for any bugs that may remain)
 
 ## Current members:
 - Xie Li
